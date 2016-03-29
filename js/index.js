@@ -502,7 +502,7 @@ function updateOutput() {
     sortJotsByPosition();
     displayOutlineProgress();
     var output = convertSourceToOutput($("#txtSource").val(), false,0);
-    var outputWithPlayer = convertSourceToOutput($("#txtSource").val(), true, 300);
+    var outputWithPlayer = convertSourceToOutput($("#txtSource").val(), true, 0);
     $("#pnlNotes").html('');
     $("#pnlNotes").html(output);
     $("#viewoutput").html('');
