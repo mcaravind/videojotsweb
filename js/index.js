@@ -205,7 +205,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
     var style = clickableStyle+ $("#txtCSS").val();
     var endScopedStyle = '</style>';
-    var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://thesoonerdev.github.io/videojots/">VideoJots</a></span><br/>';
+    var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>';
     var htmlPost = '</span></div></div>';
     var htmlFromSource = '';
     $.each(lines, function (index, value) {
@@ -445,19 +445,19 @@ function keyPressEvent(e) {
         else if (command === COMMAND.NEWLINE) {
             
         }
-        else if (text.charAt(0) === '/' && text.charAt(text.length - 1) !== '/') {
-            var nonSlashFound = false;
+        else if (text.charAt(0) === '\'' && text.charAt(text.length - 1) !== '\'') {
+            var nonQuoteFound = false;
             sourceText = htmlEncode(text);
             var slashString = '';
             var numSlashes = 0;
             for (var i = 0; i < text.length; i++) {
-                if (text.charAt(i) === '/') {
-                    if (!nonSlashFound) {
+                if (text.charAt(i) === '\'') {
+                    if (!nonQuoteFound) {
                         slashString += '/n/';
                         numSlashes += 1;
                     }
                 } else {
-                    nonSlashFound = true;
+                    nonQuoteFound = true;
                 }
             }
             encodedText = slashString + htmlEncode(text.substring(numSlashes, text.length));
