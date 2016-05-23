@@ -199,8 +199,11 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
         var htmlInfo = '<br/><b>Click on text below to jump to specific point in the video</b>';
         playerHTML = scriptHTML+htmlInfo;
     }
+    if(sourceText === ''){
+        sourceText = '{}';
+    }
     var allText = sourceText;
-    var lines = allText.split("{|");
+    var lines = JSON.parse(allText);//allText.split("{|");
     var html = '';
     var htmlPre = '<div style="margin: 0 auto;width:70%" ><div style=""><span class="videojots">';
     var startScopedStyle = '<style scoped>';
@@ -210,53 +213,55 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
     var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>';
     var htmlPost = '</span></div></div>';
     var htmlFromSource = '';
-    $.each(lines, function (index, value) {
-        if (value.trim() !== '') {
-            var location = parseFloat(value.split("|#|")[0]);
-            var lineText = value.split("|#|")[1].split("|}")[0];
-            var htmlRaw = lineText;
-            if (lineText === '/n/') {
-                htmlRaw = '<br/>';
-            }
-            else if (lineText.charAt(0) === '/' && lineText.charAt(lineText.length - 1) === '/' && lineText.indexOf(' ') === -1) {
-                //starts and ends with /, no space means the whole line represents a tag
-                var insideText = lineText.substring(1, lineText.length - 1);
-                var tagName = insideText;
-                var tagValue = '';
-                if (insideText.indexOf('/') > -1) {
-                    tagName = insideText.split('/')[0];
-                    tagValue = insideText.split('/')[1];
-                    htmlRaw = '<span class="' + tagName + '">' + tagValue + '</span>';
-                } else {
-                    htmlRaw = '<span class="' + tagName + '">';
-                }
-            } else {
-                var boldRegexp = /\/b\/([^\/]*)\//g;
-                lineText = lineText.replace(boldRegexp, '<b>$1</b>');
-                var italicRegexp = /\/i\/([^\/]*)\//g;
-                lineText = lineText.replace(italicRegexp, '<i>$1</i>');
-                var underlineRegexp = /\/u\/([^\/]*)\//g;
-                lineText = lineText.replace(underlineRegexp, '<ins>$1</ins>');
-                var strikethroughRegexp = /\/s\/([^\/]*)\//g;
-                lineText = lineText.replace(strikethroughRegexp, '<del>$1</del>');
-                var allCssRules = getRulesFromText($("#txtCSS").val());
-                for (var x = 0; x < allCssRules.length; x++) {
-                    var className = allCssRules[x].selectorText;
-                    var classActualName = className.substring(1);
-                    var re = new RegExp("\/" + classActualName + "\/([^\/]*)\/", "g");
-                    lineText = lineText.replace(re, '<span class="' + classActualName + '">$1</span>');
-                }
-                htmlRaw = lineText;
-            }
-            htmlRaw = replaceAll(htmlRaw, '/n/', '<br/>');
-            var prefix = '<span class="clickable" id="' + (location / 1000) + '">';
-            var suffix = '</span>';
-            if (htmlRaw.startsWith('<span class=') && !htmlRaw.endsWith('</span>')) {
-                prefix = '';
-                suffix = '';
-            }
-            htmlFromSource += prefix + htmlRaw + suffix;
+    //$.each(lines, function (index, value) {
+    lines.forEach(function(item){
+        /*if (value.trim() !== '') {
+        }*/
+        var location = parseFloat(item.pos);//parseFloat(value.split("|#|")[0]);
+        var lineText = item.text;//value.split("|#|")[1].split("|}")[0];
+        var htmlRaw = lineText;
+        if (lineText === '/n/') {
+            htmlRaw = '<br/>';
         }
+        else if (lineText.charAt(0) === '/' && lineText.charAt(lineText.length - 1) === '/' && lineText.indexOf(' ') === -1) {
+            //starts and ends with /, no space means the whole line represents a tag
+            var insideText = lineText.substring(1, lineText.length - 1);
+            var tagName = insideText;
+            var tagValue = '';
+            if (insideText.indexOf('/') > -1) {
+                tagName = insideText.split('/')[0];
+                tagValue = insideText.split('/')[1];
+                htmlRaw = '<span class="' + tagName + '">' + tagValue + '</span>';
+            } else {
+                htmlRaw = '<span class="' + tagName + '">';
+            }
+        } else {
+            var boldRegexp = /\/b\/([^\/]*)\//g;
+            lineText = lineText.replace(boldRegexp, '<b>$1</b>');
+            var italicRegexp = /\/i\/([^\/]*)\//g;
+            lineText = lineText.replace(italicRegexp, '<i>$1</i>');
+            var underlineRegexp = /\/u\/([^\/]*)\//g;
+            lineText = lineText.replace(underlineRegexp, '<ins>$1</ins>');
+            var strikethroughRegexp = /\/s\/([^\/]*)\//g;
+            lineText = lineText.replace(strikethroughRegexp, '<del>$1</del>');
+            var allCssRules = getRulesFromText($("#txtCSS").val());
+            for (var x = 0; x < allCssRules.length; x++) {
+                var className = allCssRules[x].selectorText;
+                var classActualName = className.substring(1);
+                var re = new RegExp("\/" + classActualName + "\/([^\/]*)\/", "g");
+                lineText = lineText.replace(re, '<span class="' + classActualName + '">$1</span>');
+            }
+            htmlRaw = lineText;
+        }
+        htmlRaw = replaceAll(htmlRaw, '/n/', '<br/>');
+        var prefix = '<span class="clickable" id="' + (location / 1000) + '">';
+        var suffix = '</span>';
+        if (htmlRaw.startsWith('<span class=') && !htmlRaw.endsWith('</span>')) {
+            prefix = '';
+            suffix = '';
+        }
+        htmlFromSource += prefix + htmlRaw + suffix;
+
     });
     var styleAttr = '';
     if (window.outputFormat === 'bounded') {
@@ -356,29 +361,31 @@ function getCommand(text) {
 }
 
 function sortJotsByPosition() {
-    var sourceText = $("#txtSource").val();
+    //var sourceText = $("#txtSource").val();
+    var sourceText = $("#txtSource1").val();
     var allText = sourceText;
-    var lines = allText.split("{|");
+    //var lines = allText.split("{|");
+    var lines = JSON.parse(allText);
     var sorted = [];
-    $.each(lines, function (index, value) {
-        if (value !== '') {
-            var items = value.split('|#|');
-            var textVal = items[1].split('|}')[0];
-            var pos = parseFloat(items[0]);
-            var obj = {};
-            obj.pos = pos;
-            obj.text = textVal;
-            sorted.push(obj);
-        }
+    //$.each(lines, function (index, value) {
+    lines.forEach(function(item){
+        //var items = value.split('|#|');
+        var textVal = item.text;//items[1].split('|}')[0];
+        var pos = parseFloat(item.pos);
+        var obj = {};
+        obj.pos = pos;
+        obj.text = textVal;
+        sorted.push(obj);
     });
     sorted = _.sortBy(sorted, function (o) { return o.pos; });
-    var sortedText = '';
+    /*var sortedText = '';
     $.each(sorted, function (index, value) {
         var currObj = value;
         sortedText += '{|' + currObj.pos + '|#|' + currObj.text + '|}';
-    });
+    });*/
+    var sortedText = JSON.stringify(sorted);
     window.textSource = sortedText;
-    $("#txtSource").val(window.textSource);
+    $("#txtSource1").val(window.textSource);
 }
 
 function addToSource(text, position) {
@@ -432,7 +439,8 @@ function addToSource(text, position) {
 }
 
 function updateCurrentJot(text) {
-    var htmlJot = convertSourceToOutput('{|'+0+'|#|'+text+'|}',false,0);
+    //var htmlJot = convertSourceToOutput('{|'+0+'|#|'+text+'|}',false,0);
+    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0);
     $("#spnCurrentJot").html(htmlJot);
 }
 
@@ -517,8 +525,8 @@ function keyPressEvent(e) {
 function updateOutput() {
     sortJotsByPosition();
     displayOutlineProgress();
-    var output = convertSourceToOutput($("#txtSource").val(), false,0);
-    var outputWithPlayer = convertSourceToOutput($("#txtSource").val(), true, 0);
+    var output = convertSourceToOutput($("#txtSource1").val(), false,0);
+    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0);
     $("#pnlNotes").html('');
     $("#pnlNotes").html(output);
     $("#viewoutput").html('');
