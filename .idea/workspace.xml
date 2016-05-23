@@ -21,24 +21,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/create/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5824847">
-              <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.509091">
+              <caret line="91" column="46" selection-start-line="91" selection-start-column="46" selection-end-line="91" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.379311">
-              <caret line="112" column="1" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.30586082">
+              <caret line="413" column="1" selection-start-line="413" selection-start-column="1" selection-end-line="413" selection-end-column="1" />
               <folding>
-                <marker date="1463987967143" expanded="true" signature="7281:7305" placeholder="..." />
-                <marker date="1463987967143" expanded="true" signature="7624:7643" placeholder="..." />
+                <marker date="1464022092850" expanded="true" signature="7259:7283" placeholder="..." />
+                <marker date="1464022092850" expanded="true" signature="7602:7621" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -316,8 +316,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="878" column="1" selection-start-line="75" selection-start-column="0" selection-end-line="878" selection-end-column="1" />
           <folding>
-            <marker date="1463987967143" expanded="true" signature="7281:7305" placeholder="..." />
-            <marker date="1463987967143" expanded="true" signature="7624:7643" placeholder="..." />
+            <marker date="1464022092850" expanded="true" signature="7259:7283" placeholder="..." />
+            <marker date="1464022092850" expanded="true" signature="7602:7621" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -355,8 +355,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="878" column="1" selection-start-line="75" selection-start-column="0" selection-end-line="878" selection-end-column="1" />
           <folding>
-            <marker date="1463987967143" expanded="true" signature="7281:7305" placeholder="..." />
-            <marker date="1463987967143" expanded="true" signature="7624:7643" placeholder="..." />
+            <marker date="1464022092850" expanded="true" signature="7259:7283" placeholder="..." />
+            <marker date="1464022092850" expanded="true" signature="7602:7621" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -524,22 +524,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.js">
+    <entry file="file://$PROJECT_DIR$/create/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.379311">
-          <caret line="112" column="1" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
-          <folding>
-            <marker date="1463987967143" expanded="true" signature="7281:7305" placeholder="..." />
-            <marker date="1463987967143" expanded="true" signature="7624:7643" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-5.509091">
+          <caret line="91" column="46" selection-start-line="91" selection-start-column="46" selection-end-line="91" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/create/index.html">
+    <entry file="file://$PROJECT_DIR$/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5824847">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.30586082">
+          <caret line="413" column="1" selection-start-line="413" selection-start-column="1" selection-end-line="413" selection-end-column="1" />
+          <folding>
+            <marker date="1464022092850" expanded="true" signature="7259:7283" placeholder="..." />
+            <marker date="1464022092850" expanded="true" signature="7602:7621" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

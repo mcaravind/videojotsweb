@@ -203,7 +203,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
         sourceText = '{}';
     }
     var allText = sourceText;
-    var lines = JSON.parse(allText);//allText.split("{|");
+    var lines = JSON.parse(allText);
     var html = '';
     var htmlPre = '<div style="margin: 0 auto;width:70%" ><div style=""><span class="videojots">';
     var startScopedStyle = '<style scoped>';
@@ -401,13 +401,9 @@ function addToSource(text, position) {
     lastObj.text = text;
     sorted.push(lastObj);
     sorted = _.sortBy(sorted, function (o) { return o.pos; });
-    var sortedText = '';
-    $.each(sorted, function(index, value) {
-        var currObj = value;
-        sortedText += '{|' + currObj.pos + '|#|' + currObj.text + '|}';
-    });
+    var sortedText = JSON.stringify(sorted);
     window.textSource = sortedText;
-    $("#txtSource").val(window.textSource);
+    //$("#txtSource").val(window.textSource);
     $("#txtSource1").val(JSON.stringify(sorted));
     updateOutput();
 }
@@ -645,7 +641,6 @@ function renderSourceData() {
     $("#source").html('');
     var sourceText = $("#txtSource1").val();
     var allText = sourceText;
-    //var lines = allText.split("{|");
     var lines = JSON.parse(allText);
     var table = $('<table/>', {});
     $(table).css('width', '100%');
