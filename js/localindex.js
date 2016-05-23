@@ -1,4 +1,7 @@
-﻿var S_PAUSE = '/p/';
+/**
+ * Created by aravindmc on 5/2/2016.
+ */
+var S_PAUSE = '/p/';
 var S_RESUME = '/r/';
 var S_NEWLINE = '/n/';
 var S_POP = '//';
@@ -19,6 +22,8 @@ var COMMAND= {
 }
 
 $(function () {
+    window.player = document.getElementById('videoPlayer');
+
     //initialize globals
     window.tagArray = [];
     window.textSource = '';
@@ -70,8 +75,68 @@ $(function () {
         updateOutput();
     });
     document.getElementById('file-input')
-  .addEventListener('change', readSingleFile, false);
+        .addEventListener('change', readSingleFile, false);
+
+    (function localFileVideoPlayer() {
+        'use strict'
+        var URL = window.URL || window.webkitURL
+        var displayMessage = function (message, isError) {
+            var element = document.querySelector('#message')
+            element.innerHTML = message
+            element.className = isError ? 'error' : 'info'
+        }
+        var jumpToPos = function(event){
+            var videoNode = document.querySelector('video')
+            videoNode.currentTime = 300
+        }
+        var playSelectedFile = function (event) {
+            var file = this.files[0]
+            var type = file.type
+            //var player = document.querySelector('video')
+
+            var canPlay = player.canPlayType(type)
+            if (canPlay === '') canPlay = 'no'
+            var message = 'Can play type "' + type + '": ' + canPlay
+            var isError = canPlay === 'no'
+            displayMessage(message, isError)
+
+            if (isError) {
+                return
+            }
+
+            var fileURL = URL.createObjectURL(file)
+            player.src = fileURL
+        }
+        var inputNode = document.querySelector('#btnFileSelect');
+        inputNode.addEventListener('change', playSelectedFile, false);
+
+
+
+        /*Object.prototype.seekTo = function(pos){
+            video.currentTime = pos;
+        }
+
+        Object.prototype.playVideo = function(pos){
+            video.play();
+        }
+
+        Object.prototype.pauseVideo = function(pos){
+            video.pause();
+        }
+
+        Object.prototype.getCurrentTime = function(){
+            return video.currentTime;
+        }
+
+        Object.prototype.getDuration = function(){
+            return video.duration;
+        }*/
+
+    })()
+
+
 });
+
 
 function readSingleFile(e) {
     var file = e.target.files[0];
@@ -95,7 +160,7 @@ function loadFile(contents) {
         json = JSON.parse(contents);
         source = json.text;
         style = json.css;
-        videoid = json.videoid;
+        //videoid = json.videoid;
     } catch (e) {
         //when using old format
         //get videoid from filename
@@ -106,7 +171,7 @@ function loadFile(contents) {
             videoid = videoid.substring(0, videoid.lastIndexOf('.'));
         }
     }
-    loadVideoInPlayer(videoid);
+    //loadVideoInPlayer(videoid);
     $("#txtSource").val(source);
     $("#txtCSS").val(style);
     updateOutput();
@@ -181,10 +246,8 @@ function loadVideoInPlayer(videoid) {
 function clearPage() {
     $("#pnlNotes").html('');
     $("#txtSource").text('');
-    $("#txtSource1").text('');
     $("#tbNotes").html('');
     $("#txtSource").val('');
-    $("#txtSource1").val('');
     $("#txtCSS").val('');
     renderSourceData();
     isClear = true;
@@ -193,9 +256,10 @@ function clearPage() {
 function convertSourceToOutput(sourceText, includeVideo, divHeight) {
     var playerHTML = '';
     if (includeVideo) {
-        var videoID = window.currVideoID;
-        var playerID = videoID.replace(/-/g, "");
-        var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this.id);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(pos){player'+playerID+'.seekTo(parseFloat(pos))};</script>';
+        //var videoID = window.currVideoID;
+        //var playerID = videoID.replace(/-/g, "");
+        //var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this.id);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(pos){player'+playerID+'.seekTo(parseFloat(pos))};</script>';
+        var scriptHTML = '<style>#videoPlayer{object-fit: initial;width: 500px;height: 400px;}</style><script src="helper.js"></script><div id="message"></div><input type="file" value="Open local video file..." accept="video/*" id="btnFileSelect"/><video controls autoplay id="videoPlayer"></video>';
         var htmlInfo = '<br/><b>Click on text below to jump to specific point in the video</b>';
         playerHTML = scriptHTML+htmlInfo;
     }
@@ -276,15 +340,19 @@ function getRulesFromText(cssRulesText) {
     return styleElement.sheet.cssRules;
 }
 
+
+
 function keyUpEvent(e) {
     var tb = document.getElementById("tbNotes");
     var text = tb.value;
     if (text.endsWith('/p//')) {
-        player.pauseVideo();
+        //player.pauseVideo();
+        player.pause();
         tb.value = text.slice(0, -4);
     }
     if (text.endsWith('/r//')) {
-        player.playVideo();
+        //player.playVideo();
+        player.play();
         tb.value = text.slice(0, -4);
     }
     if (text.endsWith('//')) {
@@ -294,14 +362,17 @@ function keyUpEvent(e) {
             var inside = textBefore.substring(slashBefore + 1);
             var rewind = TryParseInt(inside, null);
             if (rewind) {
-                player.seekTo(player.getCurrentTime() + rewind);
+                //player.seekTo(player.getCurrentTime() + rewind);
+                //player.currentTime = player.getCurrentTime() + rewind;
+                player.currentTime = player.currentTime + rewind;
                 //remove markers from display
                 tb.value = text.substring(0, slashBefore);
             }
         }
     }
     if (text.length === 1 && isClear) {
-        window.currPosition = Math.ceil(player.getCurrentTime()*1000);
+        //window.currPosition = Math.ceil(player.getCurrentTime()*1000);
+        window.currPosition = Math.ceil(player.currentTime*1000);
         $("#spnNextJot").text('Next jot at position ' + window.currPosition + ' s');
         isClear = false;
     }
@@ -315,22 +386,22 @@ function keyUpEvent(e) {
     else if (command === COMMAND.NEWLINE) {
         $("#spnAlert").text(CMDTEXT[S_NEWLINE]);
     }
-        else if (command === COMMAND.POP) {
+    else if (command === COMMAND.POP) {
         $("#spnAlert").text(CMDTEXT[S_POP]);
     }
     else if (text.charAt(0) === '/' && text.charAt(text.length - 1) === '/') {
-            //rewind if - number
-            //forward if + number
-            var inside = text.substring(1, text.length - 1);
-            var rewind = TryParseInt(inside, null);
-            if (rewind) {
-                if (rewind > 0) {
-                    $("#spnAlert").text('Forward ' + rewind + ' seconds');
-                } else {
-                    $("#spnAlert").text('Back ' + Math.abs(rewind) + ' seconds');
-                }
-            } 
+        //rewind if - number
+        //forward if + number
+        var inside = text.substring(1, text.length - 1);
+        var rewind = TryParseInt(inside, null);
+        if (rewind) {
+            if (rewind > 0) {
+                $("#spnAlert").text('Forward ' + rewind + ' seconds');
+            } else {
+                $("#spnAlert").text('Back ' + Math.abs(rewind) + ' seconds');
+            }
         }
+    }
     else {
         $("#spnAlert").text('');
     }
@@ -382,10 +453,10 @@ function sortJotsByPosition() {
 }
 
 function addToSource(text, position) {
-    var sourceText = $("#txtSource1").val();
+    var sourceText = $("#txtSource").val();
     var allText = sourceText;
+    var lines = allText.split("{|");
     var sorted = [];
-    /*var lines = allText.split("{|");
     $.each(lines, function (index, value) {
         if (value !== '') {
             var items = value.split('|#|');
@@ -401,20 +472,7 @@ function addToSource(text, position) {
             obj.text = textVal;
             sorted.push(obj);
         }
-    });*/
-    if(allText !== ''){
-        var allJson = JSON.parse(allText);
-        allJson.forEach(function(item){
-            var pos = parseFloat(item.pos);
-            if(position === pos){
-                position+=1;
-            }
-            var obj = {};
-            obj.pos = item.pos;
-            obj.text = item.text;
-            sorted.push(obj);
-        });
-    }
+    });
     var lastObj = {};
     lastObj.pos = position;
     lastObj.text = text;
@@ -427,7 +485,6 @@ function addToSource(text, position) {
     });
     window.textSource = sortedText;
     $("#txtSource").val(window.textSource);
-    $("#txtSource1").val(JSON.stringify(sorted));
     updateOutput();
 }
 
@@ -451,15 +508,17 @@ function keyPressEvent(e) {
             encodedText = '</span>';
             displayTagArray();
         } else if (command === COMMAND.PAUSE) {
-            player.pauseVideo();
+            //player.pauseVideo();
+            player.pause();
             doNotDisplay = true;
         }
         else if (command === COMMAND.RESUME) {
-                player.playVideo();
-                doNotDisplay = true;
+            //player.playVideo();
+            player.play();
+            doNotDisplay = true;
         }
         else if (command === COMMAND.NEWLINE) {
-            
+
         }
         else if (text.charAt(0) === '\'' && text.charAt(text.length - 1) !== '\'') {
             var nonQuoteFound = false;
@@ -485,7 +544,8 @@ function keyPressEvent(e) {
                 var inside = text.substring(1, text.length - 1);
                 var rewind = TryParseInt(inside, null);
                 if (rewind) {
-                    player.seekTo(player.getCurrentTime() + rewind);
+                    //player.seekTo(player.getCurrentTime() + rewind);
+                    player.currentTime = player.currentTime + rewind;
                     doNotDisplay = true;
                 } else {
                     var tagName = inside;
@@ -575,7 +635,7 @@ function displayOutlineProgress() {
         if (value !== '') {
             var items = value.split('|#|');
             var pos = parseFloat(items[0]);
-            var videoLength = player.getDuration();
+            var videoLength = player.duration;
             var percent = Math.floor((pos / videoLength * (100 / 1000)));
             $('#cell_' + percent).css('background-color', 'green');
         }
@@ -599,19 +659,16 @@ function saveHtmlWithGA() {
 }
 
 function saveFile() {
-    var currTitle = player.getVideoData().title;
-    var currDuration = player.getDuration();
+    var currDuration = player.duration;
     var textToWrite = $("#txtSource").val();
     var cssToWrite = $("#txtCSS").val();
     var json = {
         "text": textToWrite,
         "css": cssToWrite,
-        "videoid": currVideoID,
-        "title": currTitle,
         "duration":currDuration
     };
     var blob = new Blob([JSON.stringify(json)], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, currVideoID+".txt");
+    saveAs(blob, "output.txt");
 }
 
 function renderSource() {
@@ -627,8 +684,10 @@ function renderSource() {
                 window.textAreaBeingEdited = 'txt_'+pos.toString();
                 this.textContent = 'Save';
                 var curPos = parseFloat(pos) / 1000;
-                player.seekTo(curPos);
-                player.pauseVideo();
+                //player.seekTo(curPos);
+                player.currentTime = curPos;
+                //player.pauseVideo();
+                player.pause();
                 $("#slider").show();
                 $("#slider").slider({
                     value: curPos,
@@ -637,7 +696,8 @@ function renderSource() {
                     step:0.1,
                     slide: function (event, ui) {
                         $('#txtEditPos_' + pos).val(ui.value);
-                        player.seekTo(ui.value);
+                        //player.seekTo(ui.value);
+                        player.currentTime = ui.value;
                     }
                 });
                 $("#sliderMessage").show();
@@ -745,7 +805,7 @@ function previewHtml() {
 }
 
 function generateHtmlFromSource() {
-    var currTitle = player.getVideoData().title;
+    var currTitle = 'Video';
     var title = '<title>' + htmlEncode(currTitle) + '</title>';
     var bootstrapScript = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
@@ -756,9 +816,9 @@ function generateHtmlFromSource() {
 }
 
 function generateHtmlFromSourceWithGA() {
-    var currTitle = player.getVideoData().title;
+    var currTitle = 'Video';
     var title = '<title>' + htmlEncode(currTitle) + '</title>';
-    var bootstrapScript = '<link rel="stylesheet" href="css/bootstrap.min.css"><link rel="stylesheet" href="css/jquery-ui.css"/><script src="js/jquery-2.1.1.min.js"></script><script src="js/bootstrap.min.js"></script>';
+    var bootstrapScript = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
     var gaScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', '" + $("#tbGA").val() + "', 'auto');ga('send', 'pageview');</script>";
     var head = '<head>'+title+bootstrapScript+mathjaxScript+gaScript+'</head>';
@@ -775,7 +835,7 @@ function get_selection(theId) {
         var l = e.selectionEnd - e.selectionStart;
         return { start: e.selectionStart, end: e.selectionEnd, length: l, text: e.value.substr(e.selectionStart, l) };
     }
-        //IE
+    //IE
     else if (document.selection) {
         e.focus();
         var r = document.selection.createRange();
@@ -789,7 +849,7 @@ function get_selection(theId) {
         var theStart = textWhole.indexOf(textPart, tr.text.length);
         return { start: theStart, end: theStart + textPart.length, length: textPart.length, text: r.text };
     }
-        //Browser not supported
+    //Browser not supported
     else return { start: e.value.length, end: e.value.length, length: 0, text: '' };
 }
 
@@ -812,7 +872,7 @@ function set_selection(theId, startPos, endPos) {
         e.selectionStart = startPos;
         e.selectionEnd = endPos;
     }
-        //IE
+    //IE
     else if (document.selection) {
         e.focus();
         var tr = e.createTextRange();

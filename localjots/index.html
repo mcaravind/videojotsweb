@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/jquery-ui.css"/>
     <script src="../js/jquery-2.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/localindex.js"></script>
     <script src="../js/jquery-ui.js"></script>
     <script src="../js/FileSaver.js"></script>
     <script src="../js/underscore.js"></script>
@@ -19,6 +19,11 @@
             bottom: -5px;
             right: -5px;
         }
+        #videoPlayer{
+            object-fit: initial;
+            width: 500px;
+            height: 400px;
+        }
     </style>
     <script>
     (function (i, s, o, g, r, a, m) {
@@ -30,6 +35,9 @@
 
     ga('create', 'UA-64522570-1', 'auto');
     ga('send', 'pageview');
+
+    </script>
+    <script>
 
     </script>
 </head>
@@ -61,15 +69,18 @@
                 <div class="col-md-8">
                     <br/>
                     <div id="playerBox" style="width: 800px; height: 600px;">
+                        <div id="message"></div>
                         <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
-                        <div id="player"></div>
+                        <!--<div id="player"></div>-->
+                        <input type="file" accept="video/*" id="btnFileSelect" />
+                        <video controls autoplay id="videoPlayer"></video>
                     </div>
                     <div id="sliderSpace" style="display: none;"><br /></div>
                     <div id="slider" style="display: none;"></div>
                     <div id="sliderMessage" style="display: none;">Move slider to adjust position of video</div>
                     <div style="width: 97%;" class="form-group">
                         <div id="tagArray">&nbsp;</div>
-                        <label for="comment">Notes:</label>
+                        <label>Notes:</label>
                         <input type="text" class="form-control" id="tbNotes" onkeypress=" return keyPressEvent(event) " onkeyup=" return keyUpEvent(event) ">
                         <span id="spnAlert" class="label label-danger"></span><br/>
                         <span id="spnNextJot" class="label label-warning"></span><br/>
@@ -109,7 +120,6 @@
                                 
                                 <div role="tabpanel" class="tab-pane" id="raw">
                                     <textarea id="txtSource" style="width: 90%; height: 90%"></textarea>
-                                    <textarea id="txtSource1" style="width: 90%; height: 90%"></textarea>
                                     <button onclick=" saveHtml() " id="saveHtml" class="btn btn-primary">Save as web page</button>&nbsp;&nbsp;
                                     <button onclick=" saveFile() " id="saveLink" class="btn btn-primary">Save source file</button><br/>
                                     <span class="label label-success">Load from local file:</span><br/>
@@ -118,7 +128,7 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="styling" style="height: 250px; overflow-y: auto;">
                                     Styles:
-                                    <textarea id="txtCSS" style="width: 95%;"></textarea><br/>
+                                    <textarea id="txtCSS" style="width: 95%;">.t{font-weight:bold;}.t:before{content:"\A";white-space: pre;}</textarea><br/>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="slashcode" style="height: 250px; overflow-y: auto;">
                                     <br />Formatting rules:<br />
@@ -165,60 +175,11 @@
             </style>
             <br/>
             <button class="btn btn-primary" onclick=" previewHtml() ">Preview</button>
+
             <br/><br/>
             <textarea rows="40" id="txtOutputHTML"></textarea>
         </div>
     </div>
 </div>
-
-<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-
-
-<script>
-    // 2. This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
-
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '600',
-            width: '800',
-            videoId: '81uKcXZoQ2A',
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-        //event.target.playVideo();
-
-    }
-
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-
-    function onPlayerStateChange(event) {
-        //if (event.data == YT.PlayerState.PLAYING && !done) {
-        //    setTimeout(stopVideo, 6000);
-        //    done = true;
-        //}
-    }
-
-    function stopVideo() {
-        player.stopVideo();
-    }
-</script>
 </body>
 </html>
