@@ -107,7 +107,7 @@ function loadFile(contents) {
         }
     }
     loadVideoInPlayer(videoid);
-    $("#txtSource").val(source);
+    $("#txtSource1").val(source);
     $("#txtCSS").val(style);
     updateOutput();
 }
@@ -124,35 +124,35 @@ function insertLineBreak() {
 
 function updateSentence(pos, newValue, newPos) {
     var sourceText = window.textSource;
-    var textToSearch = '{|' + pos + '|#|';
-    var indexOfItem = sourceText.indexOf(textToSearch);
-    var indexOfMiddlePipe = sourceText.indexOf('|#|', indexOfItem+2);
-    var indexOfEnd = sourceText.indexOf('|}', indexOfMiddlePipe+3);
-    var newString = sourceText.substr(0, indexOfMiddlePipe + 3) + newValue + sourceText.substr(indexOfEnd);
-    var newPosString = newString;
-    if (newPos !== pos) {
-        indexOfItem = newString.indexOf(textToSearch);
-        indexOfMiddlePipe = newString.indexOf('|#|', indexOfItem + 4);
-        newPosString = newString.substr(0, indexOfItem+2) + newPos + newString.substr(indexOfMiddlePipe);
-    }
-    window.textSource = newPosString;
-    $("#txtSource").val(window.textSource);
+    var json = JSON.parse(window.textSource);
+    findAndRemove(json,'pos',+pos);
+    var lastObj = {};
+    lastObj.pos = newPos;
+    lastObj.text = newValue;
+    json.push(lastObj);
+    $("#txtSource1").val(JSON.stringify(json));
+    sortJotsByPosition();
     updateOutput();
 }
 
 function deleteSentence(pos) {
     if (confirm('Confirm delete?')) {
-        var sourceText = window.textSource;
-        var textToSearch = '{|' + pos + '|#|';
-        var indexOfItem = sourceText.indexOf(textToSearch);
-        var indexOfMiddlePipe = sourceText.indexOf('|#|', indexOfItem + 2);
-        var indexOfEnd = sourceText.indexOf('|}', indexOfMiddlePipe + 3);
-        var newString = sourceText.substr(0, indexOfItem - 1) + sourceText.substr(indexOfEnd + 1);
-        window.textSource = newString;
-        $("#txtSource").val(window.textSource);
+        var json = JSON.parse(window.textSource);
+        findAndRemove(json,'pos',+pos);
+        window.textSource = JSON.stringify(json);
+        $("#txtSource1").val(window.textSource);
         updateOutput();
         renderSource();
     }
+}
+
+function findAndRemove(array, property, value) {
+    array.forEach(function(result, index) {
+        if(result[property] === value) {
+            //Remove from array
+            array.splice(index, 1);
+        }
+    });
 }
 
 function getVideoIDFromURL(url) {
@@ -579,7 +579,7 @@ function saveHtmlWithGA() {
 function saveFile() {
     var currTitle = player.getVideoData().title;
     var currDuration = player.getDuration();
-    var textToWrite = $("#txtSource").val();
+    var textToWrite = $("#txtSource1").val();
     var cssToWrite = $("#txtCSS").val();
     var json = {
         "text": textToWrite,
@@ -643,66 +643,66 @@ function renderSource() {
 
 function renderSourceData() {
     $("#source").html('');
-    var sourceText = $("#txtSource").val();
+    var sourceText = $("#txtSource1").val();
     var allText = sourceText;
-    var lines = allText.split("{|");
+    //var lines = allText.split("{|");
+    var lines = JSON.parse(allText);
     var table = $('<table/>', {});
     $(table).css('width', '100%');
     var tbody = $('<tbody/>', {});
     table.append(tbody);
-    $.each(lines, function (index, value) {
-        if (value !== '') {
-            var items = value.split('|#|');
-            var pos = parseFloat(items[0]);
-            var text = items[1].split('|}')[0];
-            var tr = $('<tr/>', {});
-            var textAreaPos = $('<textarea/>', {
-                id:'txtEditPos_'+pos.toString()
-            });
-            $(textAreaPos).prop('readonly', true);
-            $(textAreaPos).text(pos/1000);
-            var tdTextAreaPos = $('<td/>', {});
-            $(tdTextAreaPos).css('width', '10%');
-            $(tdTextAreaPos).append(textAreaPos);
+    //$.each(lines, function (index, value) {
+    lines.forEach(function(item){
+        //var items = value.split('|#|');
+        var pos = parseFloat(item.pos);
+        var text = item.text;
+        var tr = $('<tr/>', {});
+        var textAreaPos = $('<textarea/>', {
+            id:'txtEditPos_'+pos.toString()
+        });
+        $(textAreaPos).prop('readonly', true);
+        $(textAreaPos).text(pos/1000);
+        var tdTextAreaPos = $('<td/>', {});
+        $(tdTextAreaPos).css('width', '10%');
+        $(tdTextAreaPos).append(textAreaPos);
 
-            var textArea = $('<textarea/>', {
-                id: "txt_" + pos.toString()
-            });
-            $(textArea).text(text);
-            $(textArea).prop('readonly', true);
-            var tdTextArea = $('<td/>', {});
-            $(tdTextArea).css("width", '70%');
-            tdTextArea.append(textArea);
+        var textArea = $('<textarea/>', {
+            id: "txt_" + pos.toString()
+        });
+        $(textArea).text(text);
+        $(textArea).prop('readonly', true);
+        var tdTextArea = $('<td/>', {});
+        $(tdTextArea).css("width", '70%');
+        tdTextArea.append(textArea);
 
-            var editButton = $('<button/>', {
-                id: "btnEditText_" + pos.toString(),
-                text: 'Edit'
-            });
-            $(editButton).addClass('btn');
-            $(editButton).addClass('btn-primary');
-            $(editButton).addClass('btn-xs');
-            $(editButton).addClass('editable');
-            var tdEditButton = $('<td/>', {});
-            tdEditButton.append(editButton);
-            $(tdEditButton).css('width', '10%');
-            $(tdEditButton).css('text-align', 'center');
+        var editButton = $('<button/>', {
+            id: "btnEditText_" + pos.toString(),
+            text: 'Edit'
+        });
+        $(editButton).addClass('btn');
+        $(editButton).addClass('btn-primary');
+        $(editButton).addClass('btn-xs');
+        $(editButton).addClass('editable');
+        var tdEditButton = $('<td/>', {});
+        tdEditButton.append(editButton);
+        $(tdEditButton).css('width', '10%');
+        $(tdEditButton).css('text-align', 'center');
 
-            var deleteButton = $('<button/>', {
-                id: "btnDeleteText_" + pos.toString(),
-                text: 'Delete'
-            });
-            $(deleteButton).addClass('btn');
-            $(deleteButton).addClass('btn-primary');
-            $(deleteButton).addClass('btn-xs');
-            $(deleteButton).addClass('deletable');
-            var tdDeleteButton = $('<td/>', {});
-            tdDeleteButton.append(deleteButton);
-            $(tdDeleteButton).css('width', '10%');
-            $(tdDeleteButton).css('text-align', 'center');
+        var deleteButton = $('<button/>', {
+            id: "btnDeleteText_" + pos.toString(),
+            text: 'Delete'
+        });
+        $(deleteButton).addClass('btn');
+        $(deleteButton).addClass('btn-primary');
+        $(deleteButton).addClass('btn-xs');
+        $(deleteButton).addClass('deletable');
+        var tdDeleteButton = $('<td/>', {});
+        tdDeleteButton.append(deleteButton);
+        $(tdDeleteButton).css('width', '10%');
+        $(tdDeleteButton).css('text-align', 'center');
 
-            tr.append(tdTextAreaPos).append(tdTextArea).append(tdEditButton).append(tdDeleteButton);
-            tbody.append(tr);
-        }
+        tr.append(tdTextAreaPos).append(tdTextArea).append(tdEditButton).append(tdDeleteButton);
+        tbody.append(tr);
     });
     $("#source").html(table.html());
 }
