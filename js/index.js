@@ -361,16 +361,12 @@ function getCommand(text) {
 }
 
 function sortJotsByPosition() {
-    //var sourceText = $("#txtSource").val();
     var sourceText = $("#txtSource1").val();
     var allText = sourceText;
-    //var lines = allText.split("{|");
     var lines = JSON.parse(allText);
     var sorted = [];
-    //$.each(lines, function (index, value) {
     lines.forEach(function(item){
-        //var items = value.split('|#|');
-        var textVal = item.text;//items[1].split('|}')[0];
+        var textVal = item.text;
         var pos = parseFloat(item.pos);
         var obj = {};
         obj.pos = pos;
@@ -378,11 +374,6 @@ function sortJotsByPosition() {
         sorted.push(obj);
     });
     sorted = _.sortBy(sorted, function (o) { return o.pos; });
-    /*var sortedText = '';
-    $.each(sorted, function (index, value) {
-        var currObj = value;
-        sortedText += '{|' + currObj.pos + '|#|' + currObj.text + '|}';
-    });*/
     var sortedText = JSON.stringify(sorted);
     window.textSource = sortedText;
     $("#txtSource1").val(window.textSource);
@@ -392,23 +383,6 @@ function addToSource(text, position) {
     var sourceText = $("#txtSource1").val();
     var allText = sourceText;
     var sorted = [];
-    /*var lines = allText.split("{|");
-    $.each(lines, function (index, value) {
-        if (value !== '') {
-            var items = value.split('|#|');
-            var textVal = items[1].split('|}')[0];
-            var pos = parseFloat(items[0]);
-            if (position === pos) {
-                //avoid multiple lines having the same exact position,
-                //which can mess up parsing
-                position += 1;
-            }
-            var obj = {};
-            obj.pos = pos;
-            obj.text = textVal;
-            sorted.push(obj);
-        }
-    });*/
     if(allText !== ''){
         var allJson = JSON.parse(allText);
         allJson.forEach(function(item){
@@ -439,7 +413,6 @@ function addToSource(text, position) {
 }
 
 function updateCurrentJot(text) {
-    //var htmlJot = convertSourceToOutput('{|'+0+'|#|'+text+'|}',false,0);
     var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0);
     $("#spnCurrentJot").html(htmlJot);
 }
@@ -561,9 +534,9 @@ function getAllRules() {
 }
 
 function displayOutlineProgress() {
-    var sourceText = $("#txtSource").val();
+    var sourceText = $("#txtSource1").val();
     var allText = sourceText;
-    var lines = allText.split("{|");
+    var lines = JSON.parse(allText);
     $("#outlineProgress").html('');
     var table = $('<table/>', {});
     table.addClass('table');
@@ -579,14 +552,11 @@ function displayOutlineProgress() {
     }
     table.append(tr);
     $("#outlineProgress").append(table);
-    $.each(lines, function(index, value) {
-        if (value !== '') {
-            var items = value.split('|#|');
-            var pos = parseFloat(items[0]);
-            var videoLength = player.getDuration();
-            var percent = Math.floor((pos / videoLength * (100 / 1000)));
-            $('#cell_' + percent).css('background-color', 'green');
-        }
+    lines.forEach(function(item){
+        var pos = parseFloat(item.pos);
+        var videoLength = player.getDuration();
+        var percent = Math.floor((pos / videoLength * (100 / 1000)));
+        $('#cell_' + percent).css('background-color', 'green');
     });
 }
 
