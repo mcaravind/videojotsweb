@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ac9aeb3-9360-499a-be25-9a6efa0b03ef" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/localindex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/localjots/helper.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/localjots/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create/index.html" afterPath="$PROJECT_DIR$/create/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/kotlin/A2LukgT2mKc.html" afterPath="$PROJECT_DIR$/kotlin/A2LukgT2mKc.html" />
-    </list>
+    <list default="true" id="2ac9aeb3-9360-499a-be25-9a6efa0b03ef" name="Default" comment="" />
     <ignored path="videojotsweb.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
