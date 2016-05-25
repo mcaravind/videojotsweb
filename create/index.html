@@ -21,15 +21,13 @@
         }
     </style>
     <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-64522570-1', 'auto');
-    ga('send', 'pageview');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
 
     </script>
 </head>
@@ -120,6 +118,9 @@
                                 <div role="tabpanel" class="tab-pane" id="styling" style="height: 250px; overflow-y: auto;">
                                     Styles:
                                     <textarea id="txtCSS" style="width: 95%;"></textarea><br/>
+                                    Useful styles:<br/>
+                                    .t{font-weight:bold;}.t:before{content:"\A";white-space: pre;}.t:after{content:"\A";white-space: pre;}<br/>
+                                    .q{font-weight:bold;}.q:before{content:"\A";white-space: pre;}.q:after{content:"\A";white-space: pre;}
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="slashcode" style="height: 250px; overflow-y: auto;">
                                     <br />Formatting rules:<br />
