@@ -56,6 +56,18 @@ $(function () {
         window.textSource = $("#txtSource").val();
         updateOutput();
     });
+    $("#divFormatterText").click(function(){
+        var elem = window.formatSelection;
+        //elem.setFocus();
+        window.location.hash = elem.id;
+        $(elem).attr("tabindex","-1");
+        $(elem).focus();
+        $(elem).css("background-color","yellow");
+        setTimeout(function(){
+            $(elem).css("background-color","white");
+            $(elem).removeAttr("tabindex");
+        },2000);
+    });
     $("#playerBox").resizable({
         handles: {
             'se': '#segrip'
@@ -525,8 +537,8 @@ function updateOutput() {
     var elems = document.getElementsByClassName("editable");
     for (var i = 0; i < elems.length; i++) {
         elems[i].addEventListener("click",(function(i) {return function() {
-            //playVideoAt(this);
-            var pos = parseFloat(this.id)*1000;
+            window.formatSelection = this;
+            var pos = Math.floor(parseFloat(this.id)*1000);
             var fullJson = JSON.parse($("#txtSource1").val());
             var result = $.grep(fullJson,function(e){return e.pos === pos;});
             $("#divFormatterText").html(result[0].text);

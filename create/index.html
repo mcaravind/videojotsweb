@@ -151,11 +151,20 @@
         <div role="tabpanel" class="tab-pane" id="formatter">
             <div data-spy="affix" class="divMenu">
                 <!--<textarea style="resize:vertical;" class="form-control" id="txtFormatter"></textarea><br/>-->
-                <br/><div style="width:150px;border:1px solid black;border-radius:5px;" contenteditable="true" id="divFormatterText"></div><br/>
-                <button class="btn btn-primary btn-xs" id="btnInsertLineBreakBefore">Insert Line Break Before</button><br/><br/>
-                <button class="btn btn-primary btn-xs" id="btnInsertLineBreakAfter">Insert Line Break After</button><br/><br/>
-                <button class="btn btn-primary btn-xs" id="btnRemoveLineBreakBefore">Remove Line Break Before</button><br/><br/>
-                <button class="btn btn-primary btn-xs" id="btnRemoveLineBreakAfter">Remove Line Break After</button><br/><br/>
+                <br/>
+                <div style="width:150px;border:1px solid lightgrey;border-radius:5px;" contenteditable="true" id="divFormatterText"></div><br/>
+                <button class="btn btn-default" id="btnSaveFormatting">Save changes</button><br/><br/>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Line Breaks<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="">Insert Line Break Before</a></li>
+                        <li><a href="#">Insert Line Break After</a></li>
+                        <li><a href="#">Remove Line Break Before</a></li>
+                        <li><a href="#">Remove Line Break After</a></li>
+                    </ul>
+                </div>
             </div>
             <div id="divFormatter">
 
