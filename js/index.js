@@ -264,7 +264,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
             htmlRaw = lineText;
         }
         htmlRaw = replaceAll(htmlRaw, '/n/', '<br/>');
-        var prefix = '<span class="clickable" id="' + (location / 1000) + '">';
+        var prefix = '<span class="clickable editable" id="' + (location / 1000) + '">';
         var suffix = '</span>';
         if (htmlRaw.startsWith('<span class=') && !htmlRaw.endsWith('</span>')) {
             prefix = '';
@@ -510,6 +510,7 @@ function updateOutput() {
     $("#pnlNotes").html(output);
     $("#viewoutput").html('');
     $("#viewoutput").html(output);
+    $("#divFormatter").html(output);
     $("#txtOutputHTML").text('');
     $("#txtOutputHTML").text(outputWithPlayer);
     $("#pnlNotes").scrollTop($("#pnlNotes")[0].scrollHeight);
@@ -521,6 +522,17 @@ function updateOutput() {
             text:value
         }));
     });
+    var elems = document.getElementsByClassName("editable");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].addEventListener("click",(function(i) {return function() {
+            //playVideoAt(this);
+            var pos = parseFloat(this.id)*1000;
+            var fullJson = JSON.parse($("#txtSource1").val());
+            var result = $.grep(fullJson,function(e){return e.pos === pos;});
+            $("#divFormatterText").html(result[0].text);
+        }
+        })(i),false);
+    }
     renderSource();
 }
 

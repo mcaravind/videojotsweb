@@ -37,6 +37,7 @@
 <div role="tabpanel" style="width: 97%;">
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#editor" aria-controls="editor" role="tab" data-toggle="tab">Editor</a></li>
+        <li role="presentation"><a href="#formatter" aria-controls="editor" role="tab" data-toggle="tab">Formatter</a></li>
         <li role="presentation"><a href="#copyoutput" aria-controls="copyoutput" role="tab" data-toggle="tab">Copy Output</a></li>
     </ul>
     <div class="tab-content">
@@ -69,7 +70,7 @@
                     <div id="sliderMessage" style="display: none;">Move slider to adjust position of video</div>
                     <div style="width: 97%;" class="form-group">
                         <div id="tagArray">&nbsp;</div>
-                        <label for="comment">Notes:</label>
+                        <label>Notes:</label>
                         <input type="text" class="form-control" id="tbNotes" onkeypress=" return keyPressEvent(event) " onkeyup=" return keyUpEvent(event) ">
                         <span id="spnAlert" class="label label-danger"></span><br/>
                         <span id="spnNextJot" class="label label-warning"></span><br/>
@@ -145,6 +146,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="formatter">
+            <div data-spy="affix" class="divMenu">
+                <!--<textarea style="resize:vertical;" class="form-control" id="txtFormatter"></textarea><br/>-->
+                <br/><div style="width:150px;border:1px solid black;border-radius:5px;" contenteditable="true" id="divFormatterText"></div><br/>
+                <button class="btn btn-primary btn-xs" id="btnInsertLineBreakBefore">Insert Line Break Before</button><br/><br/>
+                <button class="btn btn-primary btn-xs" id="btnInsertLineBreakAfter">Insert Line Break After</button><br/><br/>
+                <button class="btn btn-primary btn-xs" id="btnRemoveLineBreakBefore">Remove Line Break Before</button><br/><br/>
+                <button class="btn btn-primary btn-xs" id="btnRemoveLineBreakAfter">Remove Line Break After</button><br/><br/>
+            </div>
+            <div id="divFormatter">
+
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="viewoutput">
