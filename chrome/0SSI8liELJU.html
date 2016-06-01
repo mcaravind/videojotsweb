@@ -1,0 +1,203 @@
+<html>
+<head><title>The Mobile Web: State of the Union - Google I/O 2016</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-78294929-1', 'auto');
+    ga('send', 'pageview');</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="0SSI8liELJU"></div>
+    </div><script>var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player0SSI8liELJU;
+    function onYouTubeIframeAPIReady() {
+        player0SSI8liELJU = new YT.Player("0SSI8liELJU", {
+            height: "390",
+            width: "640",
+            videoId: "0SSI8liELJU",
+            playerVars: {autostart: 0, autoplay: 0, controls: 1},
+            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
+        })
+    }
+    function onPlayerReady(a) {
+        var elems = document.getElementsByClassName("clickable");
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].addEventListener("click", (function (i) {
+                return function () {
+                    playVideoAt(this);
+                    document.getElementById("control").scrollIntoView();
+                }
+            })(i), false);
+        }
+    }
+    var done = !1;
+    function onPlayerStateChange(a) {
+    }
+    function playVideo() {
+        player0SSI8liELJU.playVideo()
+    }
+    function pauseVideo() {
+        player0SSI8liELJU.pauseVideo()
+    }
+    function stopVideo() {
+        player0SSI8liELJU.stopVideo()
+    }
+    function loadVideoById(a) {
+        player0SSI8liELJU.loadVideoById(a, 0, "large")
+    }
+    function playVideoAt(item) {
+        var pos = item.id;
+        player0SSI8liELJU.seekTo(parseFloat(pos));
+        var innerText = item.innerText;
+        try {
+            ga("send", "event", "chrome", "JotClick", innerText);
+        } catch (ex) {
+        }
+    }
+    ;</script><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="5.369">Rahul from the Chrome team. Welcome to the mobile web state of the union.</span><span
+            class="clickable" id="55.43"><br/>Web features: Easy discovery. Low friction. Broad reach. Open and decentralized. </span><span
+            class="clickable" id="144.2">Our mission is to move the web platform forward.</span><span class="clickable"
+                                                                                                      id="169.718"><br/>Chrome grew to 1 billion active users on mobile last month. </span><span
+            class="clickable" id="239.912"><br/>We had to go back to first principles to figure out what would make the mobile web awesome. </span><span
+            class="clickable" id="251.801"><br/>We believe this mobile experience depends on 4 pillars:</span><span
+            class="clickable" id="258.094"><br/>1. Accelerate the experience</span><span class="clickable" id="264.572"><br/>2. Provide an engaging experience</span><span
+            class="clickable" id="275.091"><br/>3.Convert visitors into loyal users</span><span class="clickable"
+                                                                                                id="298.491"><br/>4. Once you have users, retain and reengage them</span><span
+            class="clickable" id="319.25"><br/>This required many changes to mobile browsers, but this transformation is now largely complete. </span><span
+            class="clickable" id="341.494"><br/>These experiences are known as progressive web apps. </span><span
+            class="clickable" id="382.277"><br/>Speed is the killer feature. If the page does not respond to your finger press, it is a painful experience. </span><span
+            class="clickable" id="435.334"><br/>We recently launched passive event listeners. </span><span
+            class="clickable" id="441.511">This lets you give hints to the browser about why you are listening for touch events. </span><span
+            class="clickable"
+            id="450.45">Using this API, the browser can do a better job of responding to scroll. </span><span
+            class="clickable" id="465.032"><br/>Two phones - comparison. </span><span class="clickable" id="493.036">There is a huge difference in responsiveness. </span><span
+            class="clickable" id="513.051"><br/>40% of users will abandon a website that takes more than 3 seconds to load. </span><span
+            class="clickable" id="522.873">We created AMP - accelerated mobile pages - AMP pages load 4 times faster and use 10x less data. </span><span
+            class="clickable" id="558.888">There are over 125 millions AMP documents out there, from 600+ thousand unique domains. </span><span
+            class="clickable" id="584.221"><br/>The second pillar is to deepen the engagement by creating polished app experiences. </span><span
+            class="clickable" id="603.934"><b>Service workers</b> provide full client side control over fetching and caching. </span><span
+            class="clickable" id="619.783"><br/>Jalan Tikus - tech review site in Indonesia example. </span><span
+            class="clickable" id="662.531"><br/>Progressive web apps and service workers also enable your app to work well offline. </span><span
+            class="clickable" id="668.313">Example - Flipkart. </span><span class="clickable" id="710.318"><br/>Washington Post has created a cool integration as well. </span><span
+            class="clickable" id="712.359"><span
+            class="t">David Merrell - senior product manager from Washington Post</span></span><span class="clickable"
+                                                                                                     id="734">We are making some new investments in the mobile web space. </span><span
+            class="clickable" id="736.229">AMP has lived up to its name - on average the pages load in 400ms, which is a huge gain over the traditional mobile web. </span><span
+            class="clickable" id="771.25">Users love the speed. </span><span class="clickable" id="802.271"><br/>The question facing publishers today: how can we build engaging and fast experiences that will build relationships with users beyond the search carousel. </span><span
+            class="clickable" id="847.388"><br/>We will go to a Washington post story from web search. </span><span
+            class="clickable" id="860.6">It loads really fast. </span><span class="clickable" id="860.652">We are using a service worker to install a very small piece of web app behind the scenes. </span><span
+            class="clickable" id="878.461">This will upgrade the user to a richer mobile experience. </span><span
+            class="clickable" id="905.443">Load times under a second when coming from AMP page. </span><span
+            class="clickable" id="917.192">The scrolling experience feels very smooth. </span><span class="clickable"
+                                                                                                    id="924.891">We used ideas and principles of AMP to make the pages very light and we added caching ability of service workers to precache pieces of the article before you even get there. </span><span
+            class="clickable"
+            id="945.022">Thanks to that, we have brought load times down to 80ms for each article. </span><span
+            class="clickable" id="961.88">The precaching also lets us tackle an important issue everyone with a smartphone faces - what happens when you go offline?</span><span
+            class="clickable" id="974.372"><br/>The DC metro goes in and out of cell service. </span><span
+            class="clickable" id="990.859">Because of the pre-caching, I can keep reading new articles even if I go offline. </span><span
+            class="clickable" id="1040.34">I invite all of you to check it out. </span><span class="clickable"
+                                                                                             id="1066.347"><br/><br/>Rahul: I hope you are convinced that you can create a mobile web experience which is fast and engaging. </span><span
+            class="clickable" id="1080.186">Third pillar: converting the visitors into loyal users. </span><span
+            class="clickable" id="1092.191"><br/>Typing on mobile is hard. </span><span class="clickable" id="1104.938">Asking users to sign in is hard. </span><span
+            class="clickable" id="1112.717">92% of users give up rather than retype credentials again. </span><span
+            class="clickable" id="1126.51">We have the password manager feature to help. </span><span class="clickable"
+                                                                                                      id="1145.759">What if we could do it better?</span><span
+            class="clickable" id="1156.43"><br/>Introducing <b>Credential Management
+        API</b> which does just that. </span><span class="clickable" id="1174.75">Kayak is a travel company using this API. </span><span
+            class="clickable" id="1195.764">A user who goes to Kayak and taps the sign in button, will see a prompt for which credential they want to use, and they are signed in. </span><span
+            class="clickable" id="1212.274">One tap sign in. </span><span class="clickable" id="1232.011">Kayak can also remember and sign the user in automatically. </span><span
+            class="clickable"
+            id="1263.52"><br/>We also want to help users complete transactions on the web. </span><span
+            class="clickable" id="1271.81">66% of mobile commerce happens on the web. </span><span class="clickable"
+                                                                                                   id="1288.296">On the other hand, conversions are at a rate 66% lower than desktop web. </span><span
+            class="clickable" id="1324.565">We have autofill to help with this. </span><span class="clickable"
+                                                                                             id="1336.57">25% more form submissions on Android using Chrome's autofill feature. </span><span
+            class="clickable" id="1344.209">But what if we could do it better?</span><span class="clickable"
+                                                                                           id="1357.956"><br/>Introducing the <b>Web
+        Payments API</b> </span><span class="clickable" id="1379.202"><br/>Shopify is using this. </span><span
+            class="clickable" id="1387.714">One tap check out process with Shopify. </span><span class="clickable"
+                                                                                                 id="1417.714">When the user hits Pay, the transaction is done. </span><span
+            class="clickable" id="1436.452">This API also works with Android Pay. </span><span class="clickable"
+                                                                                               id="1445.462">The flow is exactly the same. </span><span
+            class="clickable" id="1472.954"><br/>Let us look at the fourth pillar - retain and reengage. </span><span
+            class="clickable" id="1487.443">Push based interactions is an important thing which happened because of mobile. </span><span
+            class="clickable" id="1500.302"><br/><b>Push notifications</b> - once a user opts in, websites can send notifications, even if browser isn't open. </span><span
+            class="clickable" id="1531.347">Jumia has seen success with push notifications. </span><span
+            class="clickable" id="1545.604">They used them to reengage users who abandoned shopping carts. </span><span
+            class="clickable"
+            id="1556.099">Jumia reports 9x increase in conversions on previously abandoned carts. </span><span
+            class="clickable"
+            id="1592.717"><br/>We send out 10 billion push notifications every single day. </span><span
+            class="clickable" id="1629.73"><span
+            class="t">Hannes Schwager - head of mobile at airberlin</span></span><span class="clickable" id="1651">airberlin is Germany's second largest airline. </span><span
+            class="clickable" id="1662.47">We served over 30 million passengers in 2015.</span><span class="clickable"
+                                                                                                     id="1683.949">We have been building a progressive web app to improve the customer check-in experience. </span><span
+            class="clickable" id="1696.023"><br/>Not all customers will download the app. </span><span class="clickable"
+                                                                                                       id="1714.529">A lot of people check in via mobile web. </span><span
+            class="clickable" id="1760.017"><br/>Push notification from airberlin. </span><span class="clickable"
+                                                                                                id="1762.938">Tapping on push notification takes me directly to a page with access to flight details, and we can check in with one click. </span><span
+            class="clickable" id="1828.255">It is not just a convenient experience with push notifications - its about being there for the customer for the whole journey. </span><span
+            class="clickable" id="1845.253"><br/>The internet is often poor at airports. </span><span class="clickable"
+                                                                                                      id="1878.736">All critical details are available in offline mode. </span><span
+            class="clickable" id="1891.994">Including access to the boarding pass. </span><span class="clickable"
+                                                                                                id="1918.744"><br/>Thanks to progressive web apps and service workers, we have been able to improve the journey for our customers. </span><span
+            class="clickable" id="1932.699">We are already thinking of rolling out this technology to other critical parts of the travel journey. </span><span
+            class="clickable"
+            id="1956.383"><br/><br/>Rahul: Suumo delivering faster speed and better re-engagement. </span><span
+            class="clickable" id="1986.36">They were able to improve page load times by 75%. </span><span
+            class="clickable" id="1990.844">Push notifications saw a 31% open rate on the notifications. </span><span
+            class="clickable" id="2015.341"><br/>AliExpress is seeing increased engagement across browsers. </span><span
+            class="clickable" id="2028.93">The time spent in their app went up by 74%. </span><span class="clickable"
+                                                                                                    id="2034.503">They saw an 82% increase conversions on iOS. </span><span
+            class="clickable" id="2064.041"><span class="t">Looking ahead</span></span><span class="clickable"
+                                                                                             id="2088.283">Two examples: </span><span
+            class="clickable" id="2094.273"><br/><i>Physical
+        web</i> - nearby objects and places broadcast sites</span><span class="clickable" id="2124.274"><br/><i>Web
+        Assembly</i> - define a new low level language runs at native speed, but securely and on the web</span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>

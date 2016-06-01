@@ -195,7 +195,8 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
     if (includeVideo) {
         var videoID = window.currVideoID;
         var playerID = videoID.replace(/-/g, "");
-        var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this.id);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(pos){player'+playerID+'.seekTo(parseFloat(pos))};</script>';
+        var category = $("#txtCategory").val();
+        var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
         var htmlInfo = '<br/><i>Click on text below to jump to specific point in the video</i><br/><br/>';
         playerHTML = scriptHTML+htmlInfo;
     }
@@ -720,9 +721,11 @@ function previewHtml() {
 function generateHtmlFromSource() {
     var currTitle = player.getVideoData().title;
     var title = '<title>' + htmlEncode(currTitle) + '</title>';
+    var playerScript = '<script src="../js/player.js"></script>';
     var bootstrapScript = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
-    var head = '<head>' + title + bootstrapScript + mathjaxScript + '</head>';
+    var analyticsScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-78294929-1', 'auto');ga('send', 'pageview');</script>";
+    var head = '<head>' + title + bootstrapScript + mathjaxScript + playerScript+ analyticsScript+'</head>';
     var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
     var fullHtml = '<html>' + head + body + '</html>';
     return fullHtml;
@@ -733,8 +736,8 @@ function generateHtmlFromSourceWithGA() {
     var title = '<title>' + htmlEncode(currTitle) + '</title>';
     var bootstrapScript = '<link rel="stylesheet" href="css/bootstrap.min.css"><link rel="stylesheet" href="css/jquery-ui.css"/><script src="js/jquery-2.1.1.min.js"></script><script src="js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
-    var gaScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', '" + $("#tbGA").val() + "', 'auto');ga('send', 'pageview');</script>";
-    var head = '<head>'+title+bootstrapScript+mathjaxScript+gaScript+'</head>';
+    var analyticsScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '" + $("#tbGA").val() + "', 'auto');ga('send', 'pageview');</script>";
+    var head = '<head>'+title+bootstrapScript+mathjaxScript+analyticsScript+'</head>';
     var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
     var fullHtml = '<html>' + head + body + '</html>';
     return fullHtml;
