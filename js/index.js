@@ -52,6 +52,10 @@ $(function () {
         window.textSource = $("#txtSource").val();
         updateOutput();
     });
+    $('#txtCategoryName').bind('input propertychange', function () {
+        window.textSource = $("#txtSource").val();
+        updateOutput();
+    });
     $("#playerBox").resizable({
         handles: {
             'se': '#segrip'
@@ -96,6 +100,7 @@ function loadFile(contents) {
         source = json.text;
         style = json.css;
         videoid = json.videoid;
+        title = json.title;
     } catch (e) {
         //when using old format
         //get videoid from filename
@@ -109,6 +114,7 @@ function loadFile(contents) {
     loadVideoInPlayer(videoid);
     $("#txtSource1").val(source);
     $("#txtCSS").val(style);
+    $("#divTitle").html(title);
     updateOutput();
 }
 
@@ -206,7 +212,10 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
     var allText = sourceText;
     var lines = JSON.parse(allText);
     var html = '';
-    var htmlPre = '<div style="margin: 0 auto;width:70%" ><div style=""><span class="videojots">';
+    var sCategoryName = $("#txtCategoryName").val();
+    var currTitle = $("#divTitle").html();
+    var sTitle = htmlEncode(currTitle);
+    var htmlPre = '<div style="margin: 0 auto;width:70%" ><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./">'+sCategoryName+'</a></li><li class="active">'+sTitle+'</li></ol><div style=""><span class="videojots">';
     var startScopedStyle = '<style scoped>';
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
     var style = clickableStyle+ $("#txtCSS").val();
