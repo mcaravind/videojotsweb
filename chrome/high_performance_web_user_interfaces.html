@@ -1,0 +1,217 @@
+<html>
+<head><title>High performance web user interfaces - Google I/O 2016</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-78294929-1', 'auto');
+    ga('send', 'pageview');</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%"><br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./">Google Chrome Developers</a></li>
+        <li class="active">High performance web user interfaces - Google I/O 2016</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="thNyy5eYfbc"></div>
+    </div><script>var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var playerthNyy5eYfbc;
+    function onYouTubeIframeAPIReady() {
+        playerthNyy5eYfbc = new YT.Player("thNyy5eYfbc", {
+            height: "390",
+            width: "640",
+            videoId: "thNyy5eYfbc",
+            playerVars: {autostart: 0, autoplay: 0, controls: 1},
+            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
+        })
+    }
+    function onPlayerReady(a) {
+        var elems = document.getElementsByClassName("clickable");
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].addEventListener("click", (function (i) {
+                return function () {
+                    playVideoAt(this);
+                    document.getElementById("control").scrollIntoView();
+                }
+            })(i), false);
+        }
+    }
+    var done = !1;
+    function onPlayerStateChange(a) {
+    }
+    function playVideo() {
+        playerthNyy5eYfbc.playVideo()
+    }
+    function pauseVideo() {
+        playerthNyy5eYfbc.pauseVideo()
+    }
+    function stopVideo() {
+        playerthNyy5eYfbc.stopVideo()
+    }
+    function loadVideoById(a) {
+        playerthNyy5eYfbc.loadVideoById(a, 0, "large")
+    }
+    function playVideoAt(item) {
+        var pos = item.id;
+        playerthNyy5eYfbc.seekTo(parseFloat(pos));
+        var innerText = item.innerText;
+        try {
+            ga("send", "event", "undefined", "JotClick", innerText);
+        } catch (ex) {
+        }
+    }
+    ;</script><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="35.161">I am Paul, I work on the web developer relations team. </span><span
+            class="clickable" id="43.341">I typically talk about performance. </span><span class="clickable"
+                                                                                           id="60.601">Today I want to talk about building stuff. </span><span
+            class="clickable" id="74.601">I will tell you the overall story about how this fits. </span><span
+            class="clickable"
+            id="83.861"><br/><br/>We have mentioned a bunch of things about progressive web apps. </span><span
+            class="clickable" id="94.741">You need https for a bunch of features. </span><span class="clickable"
+                                                                                               id="106.241">Like push messaging. </span><span
+            class="clickable"
+            id="117.741">Service workers, which help you with the offline story, require https. </span><span
+            class="clickable" id="131.121"><br/><br/>I love the stuff about poor connectivity. </span><span
+            class="clickable" id="158.621">Service workers help with poor connectivity. </span><span class="clickable"
+                                                                                                     id="177.881"><br/><br/>Closer look at the home screen reveals an interesting challenge for us. </span><span
+            class="clickable"
+            id="186.841">Which of these are progressive web apps, which are the native apps?</span><span
+            class="clickable" id="197.64"><br/>User is thinking: "that app looks like native, I hope it behaves like that"</span><span
+            class="clickable" id="225.361"><span class="t">Performance</span></span><span class="clickable"
+                                                                                          id="234.861">We have talked in terms of a model called RAIL - Response, Animation, Idle, Load. </span><span
+            class="clickable" id="244.101"><br/>Response = 0.1 seconds</span><span class="clickable" id="256.341"><br/>Animation = 16 milliseconds</span><span
+            class="clickable" id="264.841"><br/>Idle = 50 milliseconds</span><span class="clickable" id="281.101"><br/>Load = 1 second</span><span
+            class="clickable" id="297.581"><br/>Often people think we are saying all of it is top priority and must do. </span><span
+            class="clickable" id="305.861">Reality tells us something else. </span><span class="clickable" id="339.121">If we are on a home screen, the priority changes a bit. </span><span
+            class="clickable" id="356.861"><br/>Assume app has been added to the homescreen. </span><span
+            class="clickable" id="362.941">User was probably prompted. </span><span class="clickable" id="370.681">It is probably because you satisfied some criteria - e.g. you have a service worker. </span><span
+            class="clickable" id="390.581">So for home screen, the importance graph changes. </span><span
+            class="clickable" id="445.081"><span class="t">Three components</span></span><span class="clickable"
+                                                                                               id="468.321">1. SideNav</span><span
+            class="clickable" id="471.801"><br/>2. Dismissable card system</span><span class="clickable"
+                                                                                       id="471.802"><br/>3. Expanding and collapsing view</span><span
+            class="clickable" id="476.701"><span class="t">Side Navigation</span></span><span class="clickable"
+                                                                                              id="492.501">Let us consider some theory. </span><span
+            class="clickable" id="502.501">We have a containing element. </span><span class="clickable" id="507.241">We place a black background.</span><span
+            class="clickable" id="517.741">We have a side nav content, which we slide in and out. </span><span
+            class="clickable" id="527.901">I make position: fixed. </span><span class="clickable" id="541.641">I make overflow: hidden. </span><span
+            class="clickable" id="550.901">I also have pointer-events: none. </span><span class="clickable"
+                                                                                          id="559.141">We want the sidenav ready to come and go, we don't want it out of the render tree. </span><span
+            class="clickable" id="581.241">So clicks will pass through to underlying content. </span><span
+            class="clickable"
+            id="585.741">When we bring the side nav up, we switch it to pointer-events: auto. </span><span
+            class="clickable" id="594.381">So consider pointer-event set to none for such elements. </span><span
+            class="clickable" id="599.101"><br/>Promote it to its own layer. </span><span class="clickable"
+                                                                                          id="628.581">Easiest way is to use will-change: transform. </span><span
+            class="clickable" id="657.721">When the layer is separated from the page, we can use transform and move it around. </span><span
+            class="clickable" id="662.801">We don't have to repaint the page content behind it. </span><span
+            class="clickable" id="674.661"><br/><br/>Should I promote every element? </span><span class="clickable"
+                                                                                                  id="682.921">Don't do it. </span><span
+            class="clickable" id="688.661"><br/>1. Keep your memory usage down</span><span class="clickable"
+                                                                                           id="701.421"><br/>2. Keep time spent in compositing to a minimum</span><span
+            class="clickable" id="720.321"><br/><br/>So we will translate the side-nav out of the view. </span><span
+            class="clickable" id="759.821">Add class to side-nav to remove the transform. </span><span class="clickable"
+                                                                                                       id="785.321"><br/>We also use opacity.</span><span
+            class="clickable" id="789.321">Dismissing the side-nav: similar but in reverse. </span><span
+            class="clickable" id="828.821">Add a cancel to stop propagation of event. </span><span class="clickable"
+                                                                                                   id="834.481"><br/>Behavior expectation: gesture to get rid of side-nav. </span><span
+            class="clickable" id="877.721">Visually update every frame with requestAnimationFrame. </span><span
+            class="clickable" id="915.481"><br/>The onTouchMove method. </span><span class="clickable" id="926.221">We want to use preventDefault. </span><span
+            class="clickable" id="945.981"><br/>update method. </span><span class="clickable" id="947.961">Make sure we don't go past 0, and apply a translation to the container. </span><span
+            class="clickable" id="958.441"><br/>onTouchEnd: remove transform. </span><span class="clickable"
+                                                                                           id="999.301"><br/>Looking at the dev tools timeline: The fps is a steady 60fps. We are doing really well on fps. </span><span
+            class="clickable" id="1043.801"><span class="t">Swipeable cards</span></span><span class="clickable"
+                                                                                               id="1052.061">They are not primed, we don't know which card will be used. </span><span
+            class="clickable" id="1065.741">Theory: promote to layer, but at the last minute. </span><span
+            class="clickable" id="1083.481">Transform + opacity are our two best friends when it comes to animating performantly. </span><span
+            class="clickable" id="1097.321"><br/>Decoupling touch input from the visual update - pretty much what game developers do as well. </span><span
+            class="clickable" id="1117.281">Imagine every frame, we call requestAnimationFrame for every frame and if we get a touchmove event we will incorporate that into the frame. </span><span
+            class="clickable"
+            id="1175.321"><br/>An aside about bind: copying from the prototype into the instance. </span><span
+            class="clickable" id="1194.481">And binding it in the process. </span><span class="clickable" id="1199.741">The key benefits: this refers to instance, and not event target. </span><span
+            class="clickable" id="1210.601">Also they are named - I can remove event listeners more easily. </span><span
+            class="clickable" id="1226.701"><br/>onStart: we will use javascript to manually promote the card we are interacting with. </span><span
+            class="clickable" id="1262.601"><br/>onMove: pretty straightforward. </span><span class="clickable"
+                                                                                              id="1277.361"><br/>update: if you are dragging the card, the translateX is currentX - startX. </span><span
+            class="clickable" id="1285.661">We use a transform to just move it. </span><span class="clickable"
+                                                                                             id="1315.521"><br/>I put thresholds to decide when to dismiss cards. </span><span
+            class="clickable" id="1358.801"><br/><br/><i>Formula for value.</i></span><span class="clickable"
+                                                                                            id="1397.041"><br/>It basically slows down as we get closer and closer to the target. </span><span
+            class="clickable" id="1419.881"><span class="t">Detecting done-ness</span></span><span class="clickable"
+                                                                                                   id="1436.621">Ask if translation is small enough. </span><span
+            class="clickable" id="1461.381">Check if it is invisible. </span><span class="clickable" id="1474.381">Slide all the other cards into place. </span><span
+            class="clickable" id="1543.881"><br/>Dev-tools: very green. </span><span class="clickable" id="1568.621">There is a little dip in fps at the start of the slide cards. </span><span
+            class="clickable" id="1601.521"><span class="t">Expand and Collapse</span></span><span class="clickable"
+                                                                                                   id="1607.781">It is the most challenging - we don't know where we are starting and where we are finishing. </span><span
+            class="clickable" id="1659.241">The size is changing. </span><span class="clickable" id="1671.761">Look up csstriggers.com. </span><span
+            class="clickable" id="1706.261">You will trigger layout and trigger paint. </span><span class="clickable"
+                                                                                                    id="1717.001">Not a good idea for every story of animation. </span><span
+            class="clickable" id="1733.261">Again, transforms are useful here. </span><span class="clickable"
+                                                                                            id="1744.261">So can we do that effect with transforms? </span><span
+            class="clickable" id="1758.501">We can use the scaled transforms. </span><span class="clickable"
+                                                                                           id="1768.761">The approach I take is FLIP it. </span><span
+            class="clickable" id="1773.741"><br/>First - where the thing starts on screen. </span><span
+            class="clickable" id="1788.741">We can use getBoundingClientRect. </span><span class="clickable"
+                                                                                           id="1813.461">We can then immediately snap animation. </span><span
+            class="clickable" id="1830.461"><br/>Last - call getBoundingClientRect again. </span><span class="clickable"
+                                                                                                       id="1848.221">We know where we started, and where we finished. </span><span
+            class="clickable" id="1861.761"><br/>Layout is not as bad here: 1. We only do it once. 2. RAIL to the rescue!</span><span
+            class="clickable" id="1905.261"><span class="t">RAIL + FLIP</span></span><span class="clickable"
+                                                                                           id="1917.761">You can typically afford to do a styles + layout pass. You should do it once. It needs to complete in &lt; 100ms. </span><span
+            class="clickable" id="1929.101"><br/>We can now introduce the transform to this. </span><span
+            class="clickable" id="2003.101"><span class="t">FLIP caveats</span></span><span class="clickable"
+                                                                                            id="2010.841">Scales change child elements; you may need to use siblings</span><span
+            class="clickable" id="2039.481"><br/>First to Last involves forcing styles &amp; layout; be careful. </span><span
+            class="clickable" id="2068.621"><span class="t">FLIP is responsive web design friendly</span></span><span
+            class="clickable" id="2090.621">Dev-tools inspection. </span><span class="clickable" id="2162.301"><span
+            class="t">Closing thoughts</span></span><span class="clickable" id="2167.561">Promote elements that you intend to animate; use sparingly</span><span
+            class="clickable" id="2183.021"><br/>Stick to transform and opacity changes wherever possible</span><span
+            class="clickable" id="2200.781"><br/>Use FLIP to remap expensive properties to transforms</span><span
+            class="clickable" id="2238.021"><br/><br/>We have a section on google web fundamentals if you are new to this stuff. </span><span
+            class="clickable"
+            id="2263.001"><br/><br/>Link to source code: http://bit.ly/supercharged-ui</span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>
