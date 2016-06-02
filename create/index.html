@@ -55,7 +55,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
 
                 <div class="col-md-8">
@@ -153,16 +152,16 @@
                 <!--<textarea style="resize:vertical;" class="form-control" id="txtFormatter"></textarea><br/>-->
                 <br/>
                 <div style="width:150px;border:1px solid lightgrey;border-radius:5px;" contenteditable="true" id="divFormatterText"></div><br/>
-                <button class="btn btn-default" id="btnSaveFormatting">Save changes</button><br/><br/>
+                <button class="btn btn-default" id="btnSaveFormatting" onclick="saveChanges()">Save changes</button><br/><br/>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Line Breaks<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="">Insert Line Break Before</a></li>
-                        <li><a href="#">Insert Line Break After</a></li>
-                        <li><a href="#">Remove Line Break Before</a></li>
-                        <li><a href="#">Remove Line Break After</a></li>
+                        <li><a onclick="insertLineBreakBefore()">Insert Line Break Before</a></li>
+                        <li><a onclick="insertLineBreakAfter()">Insert Line Break After</a></li>
+                        <li><a onclick="removeLineBreakBefore()">Remove Line Break Before</a></li>
+                        <li><a onclick="removeLineBreakAfter()">Remove Line Break After</a></li>
                     </ul>
                 </div>
             </div>

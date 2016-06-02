@@ -57,16 +57,7 @@ $(function () {
         updateOutput();
     });
     $("#divFormatterText").click(function(){
-        var elem = window.formatSelection;
-        //elem.setFocus();
-        window.location.hash = elem.id;
-        $(elem).attr("tabindex","-1");
-        $(elem).focus();
-        $(elem).css("background-color","yellow");
-        setTimeout(function(){
-            $(elem).css("background-color","white");
-            $(elem).removeAttr("tabindex");
-        },2000);
+        highlightCurrentSelection();
     });
     $("#playerBox").resizable({
         handles: {
@@ -88,6 +79,61 @@ $(function () {
     document.getElementById('file-input')
   .addEventListener('change', readSingleFile, false);
 });
+
+function highlightCurrentSelection(){
+    var elem = window.formatSelection;
+    $(elem).attr("tabindex","-1");
+    $(elem).focus();
+    $(elem).css("background-color","yellow");
+    setTimeout(function(){
+        $(elem).css("background-color","white");
+        $(elem).removeAttr("tabindex");
+    },2000);
+}
+
+function saveChanges(){
+    var elem = window.formatSelection;
+    var pos = Math.floor(parseFloat(elem.id)*1000);
+    var fullJson = JSON.parse($("#txtSource1").val());
+    fullJson.forEach(function(item){
+        if (item.pos === pos){
+            item.text = $("#divFormatterText").html();
+        }
+    });
+    highlightCurrentSelection();
+    $("#txtSource1").val(JSON.stringify(fullJson));
+    updateOutput();
+}
+
+function insertLineBreakBefore(){
+    var str = $("#divFormatterText").html();
+    str = '/n/'+str;
+    $("#divFormatterText").html(str);
+}
+
+function insertLineBreakAfter(){
+    var str = $("#divFormatterText").html();
+    str = str+'/n/';
+    $("#divFormatterText").html(str);
+}
+
+function removeLineBreakBefore(){
+    var str = $("#divFormatterText").html();
+    str = str.trim();
+    if(str.startsWith('/n/')){
+        str = str.replace('/n/','');
+    }
+    $("#divFormatterText").html(str);
+}
+
+function removeLineBreakAfter(){
+    var str = $("#divFormatterText").html();
+    str = str.trim();
+    if(str.endsWith('/n/')){
+        str = str.slice(0,-3);
+    }
+    $("#divFormatterText").html(str);
+}
 
 function readSingleFile(e) {
     var file = e.target.files[0];
@@ -208,7 +254,7 @@ function clearPage() {
     isClear = true;
 }
 
-function convertSourceToOutput(sourceText, includeVideo, divHeight) {
+function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEditable) {
     var playerHTML = '';
     if (includeVideo) {
         var videoID = window.currVideoID;
@@ -276,7 +322,12 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
             htmlRaw = lineText;
         }
         htmlRaw = replaceAll(htmlRaw, '/n/', '<br/>');
-        var prefix = '<span class="clickable editable" id="' + (location / 1000) + '">';
+        if(includeEditable===1){
+            var prefix = '<span class="clickable editable" id="' + (location / 1000) + '">';
+        }
+        else{
+            var prefix = '<span class="clickable" id="' + (location / 1000) + '">';
+        }
         var suffix = '</span>';
         if (htmlRaw.startsWith('<span class=') && !htmlRaw.endsWith('</span>')) {
             prefix = '';
@@ -431,7 +482,7 @@ function addToSource(text, position) {
 }
 
 function updateCurrentJot(text) {
-    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0);
+    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0,1);
     $("#spnCurrentJot").html(htmlJot);
 }
 
@@ -516,8 +567,8 @@ function keyPressEvent(e) {
 function updateOutput() {
     sortJotsByPosition();
     displayOutlineProgress();
-    var output = convertSourceToOutput($("#txtSource1").val(), false,0);
-    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0);
+    var output = convertSourceToOutput($("#txtSource1").val(), false,0,1);
+    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0,0);
     $("#pnlNotes").html('');
     $("#pnlNotes").html(output);
     $("#viewoutput").html('');
@@ -538,7 +589,7 @@ function updateOutput() {
     for (var i = 0; i < elems.length; i++) {
         elems[i].addEventListener("click",(function(i) {return function() {
             window.formatSelection = this;
-            var pos = Math.floor(parseFloat(this.id)*1000);
+            var pos = Math.round(parseFloat(this.id)*1000);
             var fullJson = JSON.parse($("#txtSource1").val());
             var result = $.grep(fullJson,function(e){return e.pos === pos;});
             $("#divFormatterText").html(result[0].text);
