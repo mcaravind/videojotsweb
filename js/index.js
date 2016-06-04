@@ -152,6 +152,8 @@ function loadFile(contents) {
     var json = null;
     var source = '';
     var style = '';
+    var category = '';
+    var title = '';
     var videoid = null;
     try {
         json = JSON.parse(contents);
@@ -159,6 +161,7 @@ function loadFile(contents) {
         style = json.css;
         videoid = json.videoid;
         title = json.title;
+        category = json.category;
     } catch (e) {
         //when using old format
         //get videoid from filename
@@ -173,6 +176,7 @@ function loadFile(contents) {
     $("#txtSource1").val(source);
     $("#txtCSS").val(style);
     $("#divTitle").html(title);
+    $("#txtCategoryName").val(category);
     updateOutput();
 }
 
@@ -662,12 +666,14 @@ function saveFile() {
     var currDuration = player.getDuration();
     var textToWrite = $("#txtSource1").val();
     var cssToWrite = $("#txtCSS").val();
+    var category = $("#txtCategoryName").val();
     var json = {
         "text": textToWrite,
         "css": cssToWrite,
         "videoid": currVideoID,
         "title": currTitle,
-        "duration":currDuration
+        "duration":currDuration,
+        "category":category
     };
     var blob = new Blob([JSON.stringify(json)], { type: "text/plain;charset=utf-8" });
     saveAs(blob, currVideoID+".txt");
