@@ -55,6 +55,11 @@
                 }
             })(i), false);
         }
+        if(window.location.hash){
+            var location = window.location.hash;
+            document.getElementById("control").scrollIntoView();
+            playerUnNs2MYVQoE.seekTo(parseFloat(location.slice(1)));
+        }
     }
     var done = !1;
     function onPlayerStateChange(a) {
@@ -74,9 +79,10 @@
     function playVideoAt(item) {
         var pos = item.id;
         playerUnNs2MYVQoE.seekTo(parseFloat(pos));
+        window.location.hash = '#'+pos;
         var innerText = item.innerText;
         try {
-            ga("send", "event", "undefined", "JotClick", innerText);
+            ga("send", "event", "Davos", "JotClick", innerText);
         } catch (ex) {
         }
     }
