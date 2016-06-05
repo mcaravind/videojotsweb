@@ -60,6 +60,22 @@
             document.getElementById("control").scrollIntoView();
             player0SSI8liELJU.seekTo(parseFloat(location.slice(1)));
         }
+        window.setTimeout(highlight,1000);
+    }
+    function highlight(){
+        var currTime = player0SSI8liELJU.getCurrentTime();
+        var maxPoint = 0;
+        var maxElement = null;
+        $(".clickable").each(function(index,element){
+            $(element).css("background-color","white");
+            var elpos = parseFloat(element.id);
+            if(elpos > maxPoint && elpos < currTime){
+                maxPoint = elpos;
+                maxElement = element;
+            }
+        });
+        $(maxElement).css("background-color","yellow");
+        window.setTimeout(highlight, 1000);
     }
     var done = !1;
     function onPlayerStateChange(a) {
