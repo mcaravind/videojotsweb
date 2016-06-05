@@ -55,6 +55,11 @@
                 }
             })(i), false);
         }
+        if(window.location.hash){
+            var location = window.location.hash;
+            document.getElementById("control").scrollIntoView();
+            playerU8uLmN97t0o.seekTo(parseFloat(location.slice(1)));
+        }
     }
     var done = !1;
     function onPlayerStateChange(a) {
@@ -74,6 +79,7 @@
     function playVideoAt(item) {
         var pos = item.id;
         playerU8uLmN97t0o.seekTo(parseFloat(pos));
+        window.location.hash = '#'+pos;
         var innerText = item.innerText;
         try {
             ga("send", "event", "undefined", "JotClick", innerText);
