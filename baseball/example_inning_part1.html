@@ -8,6 +8,7 @@
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,56 +22,16 @@
 </head>
 <body>
 <div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden;">qeFoqF5sSd8</div>
     <br/>
     <ol class="breadcrumb">
         <li><a href="../">Home</a></li>
         <li><a href="./">Baseball rules</a></li>
         <li class="active">Example Inning (Part One)</li>
     </ol>
-    <div style=""><span class="videojots"><br/><div id="control"><div id="qeFoqF5sSd8"></div></div><script>var tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var playerqeFoqF5sSd8;
-    function onYouTubeIframeAPIReady() {
-        playerqeFoqF5sSd8 = new YT.Player("qeFoqF5sSd8", {
-            height: "390",
-            width: "640",
-            videoId: "qeFoqF5sSd8",
-            playerVars: {autostart: 0, autoplay: 0, controls: 1},
-            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
-        })
-    }
-    function onPlayerReady(a) {
-        var elems = document.getElementsByClassName("clickable");
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].addEventListener("click", (function (i) {
-                return function () {
-                    playVideoAt(this.id);
-                    document.getElementById("control").scrollIntoView();
-                }
-            })(i), false);
-        }
-    }
-    var done = !1;
-    function onPlayerStateChange(a) {
-    }
-    function playVideo() {
-        playerqeFoqF5sSd8.playVideo()
-    }
-    function pauseVideo() {
-        playerqeFoqF5sSd8.pauseVideo()
-    }
-    function stopVideo() {
-        playerqeFoqF5sSd8.stopVideo()
-    }
-    function loadVideoById(a) {
-        playerqeFoqF5sSd8.loadVideoById(a, 0, "large")
-    }
-    function playVideoAt(pos) {
-        playerqeFoqF5sSd8.seekTo(parseFloat(pos))
-    }
-    ;</script><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+    <div style=""><span class="videojots"><br/><div id="control"><div id="videoPlayer"></div></div>
+
+        <br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
         cursor: pointer;
         cursor: hand;
     }
