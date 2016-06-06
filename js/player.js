@@ -1,49 +1,146 @@
-/**
+/*
+/!**
  * Created by aravindmc on 5/31/2016.
- */
-$(function () {
-    var playerControl;
-    function onYouTubeIframeAPIReady() {
-        var videoID = window.currVideoID;
-        playerControl = new YT.Player("videoPlayer", {
-            height: "390",
-            width: "640",
-            videoId: videoID,
-            playerVars: {autostart: 0, autoplay: 0, controls: 1},
-            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
-        })
+ *!/
+
+var tag = document.createElement("script");
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName("script")[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var playerControl;
+function onYouTubeIframeAPIReady() {
+    var videoID = window.currVideoID;
+    playerControl = new YT.Player("videoPlayer", {
+        height: "390",
+        width: "640",
+        videoId: videoID,
+        playerVars: {autostart: 0, autoplay: 0, controls: 1},
+        events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
+    })
+}
+window.onPlayerReady = function() {
+    var elems = document.getElementsByClassName("clickable");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].addEventListener("click", (function (i) {
+            return function () {
+                playVideoAt(this);
+                document.getElementById("control").scrollIntoView();
+            }
+        })(i), false);
     }
-    function onPlayerReady(a) {
-        var elems = document.getElementsByClassName("clickable");
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].addEventListener("click", (function (i) {
-                return function () {
-                    playVideoAt(this);
-                    document.getElementById("control").scrollIntoView();
-                }
-            })(i), false);
+    if(window.location.hash){
+        var location = window.location.hash;
+        document.getElementById("control").scrollIntoView();
+        playerControl.seekTo(parseFloat(location.slice(1)));
+    }
+    window.setTimeout(highlight,1000);
+}
+function highlight(){
+    var currTime = playerControl.getCurrentTime();
+    var maxPoint = 0;
+    var maxElement = null;
+    $(".clickable").each(function(index,element){
+        $(element).css("background-color","white");
+        var elpos = parseFloat(element.id);
+        if(elpos > maxPoint && elpos < currTime){
+            maxPoint = elpos;
+            maxElement = element;
         }
+    });
+    $(maxElement).css("background-color","yellow");
+    window.setTimeout(highlight, 1000);
+}
+var done = !1;
+function onPlayerStateChange(a) {
+}
+function playVideo() {
+    playerControl.playVideo()
+}
+function pauseVideo() {
+    playerControl.pauseVideo()
+}
+function stopVideo() {
+    playerControl.stopVideo()
+}
+function loadVideoById(a) {
+    playerControl.loadVideoById(a, 0, "large")
+}
+function playVideoAt(item) {
+    var pos = item.id;
+    playerControl.seekTo(parseFloat(pos));
+    window.location.hash = '#'+pos;
+    var innerText = item.innerText;
+    try {
+        ga("send", "event", "Google Chrome Developers", "JotClick", innerText);
+    } catch (ex) {
     }
-    var done = !1;
-    function onPlayerStateChange(a) {
+}
+;*/
+var tag = document.createElement('script');
+tag.src = "http://www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var playerControl;
+window.onYouTubePlayerAPIReady = function () {
+    var id = $("#videoid").html();
+    playerControl = new YT.Player('videoPlayer', {
+        height: '315',
+        width: '560',
+        videoId: id,
+        events: {onReady: onPlayerReady}
+    });
+    $('#resume').click(function() {
+        playerControl.playVideo();
+    });
+    $('#pause').click(function() {
+        playerControl.pauseVideo();
+    });
+}
+
+window.onPlayerReady = function() {
+    var elems = document.getElementsByClassName("clickable");
+    for (var i = 0; i < elems.length; i++) {
+        elems[i].addEventListener("click", (function (i) {
+            return function () {
+                playVideoAt(this);
+                document.getElementById("control").scrollIntoView();
+            }
+        })(i), false);
     }
-    function playVideo() {
-        playerControl.playVideo()
+    if(window.location.hash){
+        var location = window.location.hash;
+        document.getElementById("control").scrollIntoView();
+        playerControl.seekTo(parseFloat(location.slice(1)));
     }
-    function pauseVideo() {
-        playerControl.pauseVideo()
+    window.setTimeout(highlight,1000);
+}
+
+function highlight(){
+    var currTime = playerControl.getCurrentTime();
+    var maxPoint = 0;
+    var maxElement = null;
+    $(".clickable").each(function(index,element){
+        $(element).css("background-color","white");
+        var elpos = parseFloat(element.id);
+        if(elpos > maxPoint && elpos < currTime){
+            maxPoint = elpos;
+            maxElement = element;
+        }
+    });
+    $(maxElement).css("background-color","yellow");
+    window.setTimeout(highlight, 1000);
+}
+
+function playVideoAt(item) {
+    var pos = item.id;
+    var category = $(".category").first().html();
+    playerControl.seekTo(parseFloat(pos));
+    window.location.hash = '#'+pos;
+    var innerText = item.innerText;
+    try {
+        ga("send", "event", category, "JotClick", innerText);
+    } catch (ex) {
     }
-    function stopVideo() {
-        playerControl.stopVideo()
-    }
-    function loadVideoById(a) {
-        playerControl.loadVideoById(a, 0, "large")
-    }
-    function playVideoAt(item) {
-        var pos = item.id;
-        playerControl.seekTo(parseFloat(pos))
-        var innerText = item.innerText;
-        ga('send','event','Category','Click',innerText,Math.floor(parseFloat(pos)));
-    }
-    ;
-});
+}
