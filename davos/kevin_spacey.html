@@ -8,6 +8,7 @@
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../js/player.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -22,57 +23,17 @@
 <body>
 <div style="margin: 0 auto;width:70%">
     <br/>
+    <div id="videoid" style="visibility: hidden;">qNTIo45bOu0</div>
     <ol class="breadcrumb">
         <li><a href="../">Home</a></li>
         <li><a href="./">Davos</a></li>
         <li class="active">Davos 2016 - An Insight, An Idea with Kevin Spacey</li>
     </ol>
     <div style=""><span class="videojots"><br/><div id="control">
-        <div id="qNTIo45bOu0"></div>
-    </div><script>var tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var playerqNTIo45bOu0;
-    function onYouTubeIframeAPIReady() {
-        playerqNTIo45bOu0 = new YT.Player("qNTIo45bOu0", {
-            height: "390",
-            width: "640",
-            videoId: "qNTIo45bOu0",
-            playerVars: {autostart: 0, autoplay: 0, controls: 1},
-            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
-        })
-    }
-    function onPlayerReady(a) {
-        var elems = document.getElementsByClassName("clickable");
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].addEventListener("click", (function (i) {
-                return function () {
-                    playVideoAt(this.id);
-                    document.getElementById("control").scrollIntoView();
-                }
-            })(i), false);
-        }
-    }
-    var done = !1;
-    function onPlayerStateChange(a) {
-    }
-    function playVideo() {
-        playerqNTIo45bOu0.playVideo()
-    }
-    function pauseVideo() {
-        playerqNTIo45bOu0.pauseVideo()
-    }
-    function stopVideo() {
-        playerqNTIo45bOu0.stopVideo()
-    }
-    function loadVideoById(a) {
-        playerqNTIo45bOu0.loadVideoById(a, 0, "large")
-    }
-    function playVideoAt(pos) {
-        playerqNTIo45bOu0.seekTo(parseFloat(pos))
-    }
-    ;</script><br/><i>Click on text below to jump to specific point in the video</i><style scoped>.clickable {
+        <div id="videoPlayer"></div>
+    </div>
+
+        <br/><i>Click on text below to jump to specific point in the video</i><style scoped>.clickable {
         cursor: pointer;
         cursor: hand;
     }
