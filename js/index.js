@@ -258,19 +258,14 @@ function clearPage() {
     isClear = true;
 }
 
-function convertSourceToOutput(sourceText, includeVideo, divHeight, forPageSave) {
+function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEditable, forSave) {
     var playerHTML = '';
+    var videoID = window.currVideoID;
     if (includeVideo) {
-        var videoID = window.currVideoID;
         var playerID = videoID.replace(/-/g, "");
         var category = $("#txtCategory").val();
-        if(forPageSave === '1'){
-            var scriptHTML = '<br/><div id="control"><div id="videoPlayer"></div></div>';
-        }
-        else{
-            var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
-        }
-
+        var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
+        var videoPlayerHTML = '<br/><div id="control"><div id="videoPlayer"></div></div>';
         var htmlInfo = '<br/><i>Click on text below to jump to specific point in the video</i><br/><br/>';
         playerHTML = scriptHTML+htmlInfo;
     }
@@ -283,7 +278,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, forPageSave)
     var sCategoryName = $("#txtCategoryName").val();
     var currTitle = $("#divTitle").html();
     var sTitle = htmlEncode(currTitle);
-    var htmlPre = '<div style="margin: 0 auto;width:70%" ><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./">'+sCategoryName+'</a></li><li class="active">'+sTitle+'</li></ol><div style=""><span class="videojots">';
+    var htmlPre = '<div style="margin: 0 auto;width:70%" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./" class="category">'+sCategoryName+'</a></li><li class="active">'+sTitle+'</li></ol><div style=""><span class="videojots">';
     var startScopedStyle = '<style scoped>';
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
     var style = clickableStyle+ $("#txtCSS").val();
@@ -332,7 +327,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, forPageSave)
             htmlRaw = lineText;
         }
         htmlRaw = replaceAll(htmlRaw, '/n/', '<br/>');
-        if(forPageSave===1){
+        if(includeEditable===1){
             var prefix = '<span class="clickable editable" id="' + (location / 1000) + '">';
         }
         else{
@@ -353,7 +348,12 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, forPageSave)
         }
     }
     htmlFromSource = '<div ' + styleAttr + ' class="resizable"><br/>' + htmlFromSource + footer + '</div>';
-    html = htmlPre + playerHTML+ startScopedStyle + style + endScopedStyle + htmlFromSource + htmlPost;
+    if(forSave == '1'){
+        html = htmlPre + videoPlayerHTML+ startScopedStyle + style + endScopedStyle + htmlFromSource + htmlPost;
+    }
+    else{
+        html = htmlPre + playerHTML+ startScopedStyle + style + endScopedStyle + htmlFromSource + htmlPost;
+    }
     return html;
 }
 
@@ -492,7 +492,7 @@ function addToSource(text, position) {
 }
 
 function updateCurrentJot(text) {
-    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0,1);
+    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0,1,0);
     $("#spnCurrentJot").html(htmlJot);
 }
 
@@ -577,8 +577,10 @@ function keyPressEvent(e) {
 function updateOutput() {
     sortJotsByPosition();
     displayOutlineProgress();
-    var output = convertSourceToOutput($("#txtSource1").val(), false,0,1);
-    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0,0);
+    var output = convertSourceToOutput($("#txtSource1").val(), false,0,1,0);
+    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0,0,0);
+    var outputForSave = convertSourceToOutput($("#txtSource1").val(), true, 0,0,1);
+    $("#txtSavedOutput").text(outputForSave);
     $("#pnlNotes").html('');
     $("#pnlNotes").html(output);
     $("#viewoutput").html('');
@@ -822,7 +824,8 @@ function generateHtmlFromSource() {
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
     var analyticsScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-78294929-1', 'auto');ga('send', 'pageview');</script>";
     var head = '<head>' + title + bootstrapScript + mathjaxScript + playerScript+ analyticsScript+'</head>';
-    var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
+    //var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
+    var body = '<body>' + $("#txtSavedOutput").val()+'</body>';
     var fullHtml = '<html>' + head + body + '</html>';
     return fullHtml;
 }
