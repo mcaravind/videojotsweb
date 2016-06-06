@@ -7,7 +7,10 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
     <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>\<script>
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../js/player.js"></script>
+    <script>
+
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -20,6 +23,7 @@
 </head>
 <body>
 <div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden;">blN2ZjklC2E</div>
     <br/>
     <ol class="breadcrumb">
         <li><a href="../">Home</a></li>
@@ -27,51 +31,10 @@
         <li class="active">Excellent Excel hints and tips</li>
     </ol>
     <div style=""><span class="videojots"><br/><div id="control">
-        <div id="blN2ZjklC2E"></div>
-    </div><script>var tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var playerblN2ZjklC2E;
-    function onYouTubeIframeAPIReady() {
-        playerblN2ZjklC2E = new YT.Player("blN2ZjklC2E", {
-            height: "390",
-            width: "640",
-            videoId: "blN2ZjklC2E",
-            playerVars: {autostart: 0, autoplay: 0, controls: 1},
-            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
-        })
-    }
-    function onPlayerReady(a) {
-        var elems = document.getElementsByClassName("clickable");
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].addEventListener("click", (function (i) {
-                return function () {
-                    playVideoAt(this.id);
-                    document.getElementById("control").scrollIntoView();
-                }
-            })(i), false);
-        }
-    }
-    var done = !1;
-    function onPlayerStateChange(a) {
-    }
-    function playVideo() {
-        playerblN2ZjklC2E.playVideo()
-    }
-    function pauseVideo() {
-        playerblN2ZjklC2E.pauseVideo()
-    }
-    function stopVideo() {
-        playerblN2ZjklC2E.stopVideo()
-    }
-    function loadVideoById(a) {
-        playerblN2ZjklC2E.loadVideoById(a, 0, "large")
-    }
-    function playVideoAt(pos) {
-        playerblN2ZjklC2E.seekTo(parseFloat(pos))
-    }
-    ;</script><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        <div id="videoPlayer"></div>
+    </div>
+
+        <br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
         cursor: pointer;
         cursor: hand;
     }
