@@ -24,69 +24,17 @@
 </head>
 <body>
 <div style="margin: 0 auto;width:70%"><br/>
+    <div id="videoid" style="visibility: hidden;">VBceREwF7SA</div>
     <ol class="breadcrumb">
         <li><a href="../">Home</a></li>
         <li><a href="./">Davos</a></li>
         <li class="active">Davos 2016 - The State of Artificial Intelligence</li>
     </ol>
     <div style=""><span class="videojots"><br/><div id="control">
-        <div id="VBceREwF7SA"></div>
-    </div><script>var tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var playerVBceREwF7SA;
-    function onYouTubeIframeAPIReady() {
-        playerVBceREwF7SA = new YT.Player("VBceREwF7SA", {
-            height: "390",
-            width: "640",
-            videoId: "VBceREwF7SA",
-            playerVars: {autostart: 0, autoplay: 0, controls: 1},
-            events: {onReady: onPlayerReady, onStateChange: onPlayerStateChange}
-        })
-    }
-    function onPlayerReady(a) {
-        var elems = document.getElementsByClassName("clickable");
-        for (var i = 0; i < elems.length; i++) {
-            elems[i].addEventListener("click", (function (i) {
-                return function () {
-                    playVideoAt(this);
-                    document.getElementById("control").scrollIntoView();
-                }
-            })(i), false);
-        }
-        if(window.location.hash){
-            var location = window.location.hash;
-            document.getElementById("control").scrollIntoView();
-            playerVBceREwF7SA.seekTo(parseFloat(location.slice(1)));
-        }
-    }
-    var done = !1;
-    function onPlayerStateChange(a) {
-    }
-    function playVideo() {
-        playerVBceREwF7SA.playVideo()
-    }
-    function pauseVideo() {
-        playerVBceREwF7SA.pauseVideo()
-    }
-    function stopVideo() {
-        playerVBceREwF7SA.stopVideo()
-    }
-    function loadVideoById(a) {
-        playerVBceREwF7SA.loadVideoById(a, 0, "large")
-    }
-    function playVideoAt(item) {
-        var pos = item.id;
-        playerVBceREwF7SA.seekTo(parseFloat(pos));
-        window.location.hash = '#'+pos;
-        var innerText = item.innerText;
-        try {
-            ga("send", "event", "Davos", "JotClick", innerText);
-        } catch (ex) {
-        }
-    }
-    ;</script><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        <div id="videoPlayer"></div>
+    </div>
+
+        <br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
         cursor: pointer;
         cursor: hand;
     }
