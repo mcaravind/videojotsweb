@@ -1,0 +1,188 @@
+<html>
+<head><title>Webcast - Undo, Redo &amp; Rebase Your Git History - May 2014</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-78294929-1', 'auto');
+    ga('send', 'pageview');</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">W39CfI3-JFc</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">GitHub Training</a></li>
+        <li class="active">Webcast - Undo, Redo &amp; Rebase Your Git History - May 2014</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="videoPlayer"></div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .co {
+        background-color: #d9534f;
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        vertical-align: baseline;
+        border-radius: .25em;
+        box-sizing: border-box;
+        margin-right: 5px;
+    }</style><div class="resizable"><br/><span class="clickable" id="0.641">My name is Jordan McCullough and I am part of the GitHub training team. </span><span
+            class="clickable" id="35.66">Lets get things started by creating a repository.</span><span class="clickable"
+                                                                                                       id="75.4">Go to account and create a brand new repository. </span><span
+            class="clickable" id="87.66">I am going to call this a free class. </span><span class="clickable"
+                                                                                            id="109.06">Provide a description </span><span
+            class="clickable" id="135.82">The other thing is to keep this repo public. </span><span class="clickable"
+                                                                                                    id="153.32">Initialize with README. </span><span
+            class="clickable" id="212.56">Apply a license. </span><span class="clickable" id="261.56">Update the README title. </span><span
+            class="clickable" id="282.06">Add a subtitle. </span><span class="clickable" id="321.3">Commit with commit message. </span><span
+            class="clickable"
+            id="329.56">On the GitHub platform, any text file that ends with .md uses MarkDown format. </span><span
+            class="clickable" id="361.54">Add a couple of edits to generate some history. </span><span class="clickable"
+                                                                                                       id="390.081"><br/><br/><i>A
+        bullet list of topics to be reviewed.</i></span><span class="clickable" id="468.321"><br/><br/>Now I am ready to bring it down locally. </span><span
+            class="clickable" id="543.841">Easiest way is to use "Clone in Desktop" button. </span><span
+            class="clickable" id="566.341">Specify a path to save the repo on local. </span><span class="clickable"
+                                                                                                  id="602.341">When I performed a clone, GitHub's client made a copy of everything going on in the project. </span><span
+            class="clickable"
+            id="629.961">The commits, the history, all versions of the file which live in this. </span><span
+            class="clickable"
+            id="653.941">I can confirm that by taking a look at the history in the GitHub client. </span><span
+            class="clickable" id="814.561"><br/><br/>I have these local repos, the one of interest being the free class. </span><span
+            class="clickable" id="844.401">I want to show this to you in the Finder. </span><span class="clickable"
+                                                                                                  id="861.641">I go to terminal and do some stuff with git.</span><span
+            class="clickable" id="885.281">Change directory to a git repo project. </span><span class="clickable"
+                                                                                                id="895.601"><br/><br/><span
+            class="co">git status</span></span><span class="clickable" id="902.881">Confirms the repo and if I have any existing modifications. </span><span
+            class="clickable" id="911.801"><br/><br/>I edit the readme.md file.</span><span class="clickable"
+                                                                                            id="935.541">I will save the file with the modifications. </span><span
+            class="clickable" id="955.981"><br/><br/><span class="co">git diff</span></span><span class="clickable"
+                                                                                                  id="962.481">Git shows what is missing. </span><span
+            class="clickable" id="975.161"><br/><br/><span class="co">git add .</span></span><span class="clickable"
+                                                                                                   id="977.041">Stage the file. </span><span
+            class="clickable" id="977.981"><br/><br/><span class="co">git commit -m 'Remove extra content'</span></span><span
+            class="clickable" id="980.602">Commit the file. </span><span class="clickable" id="1033.102"><br/><br/><span
+            class="co">git commit --amend -m "Remove extra text and divider line"</span></span><span class="clickable"
+                                                                                                     id="1066.102">Revise the last commit. </span><span
+            class="clickable" id="1100.602"><br/>Now I introduce some other change. </span><span class="clickable"
+                                                                                                 id="1107.102">But I don't want the change. </span><span
+            class="clickable" id="1133.842">I can recover it in a couple of ways. </span><span class="clickable"
+                                                                                               id="1172.601"><br/><br/><span
+            class="co">git log --oneline</span></span><span class="clickable" id="1177.121">Will show same commit history as on graphical client but just on the terminal instead. </span><span
+            class="clickable" id="1188.181">Hit Q to leave or drop out of this. </span><span class="clickable"
+                                                                                             id="1189.521">Notice that commits are identified by commit refs - hexadecimal values. </span><span
+            class="clickable" id="1205.221">I wish the last commit never happened at all. </span><span class="clickable"
+                                                                                                       id="1210.201">Let me identify the place to go back to - where I would like to recover to. </span><span
+            class="clickable" id="1234.361">Copy the commit ref. </span><span class="clickable" id="1240.861"><br/><span
+            class="co">git reset commitid</span></span><span class="clickable"
+                                                             id="1251.381">Reset's the history.&nbsp;</span><span
+            class="clickable" id="1262.861">I have now thrown away the commits. </span><span class="clickable"
+                                                                                             id="1286.981"><br/>Say I did not want to lose the changes, I just wanted to destroy the commits themselves. </span><span
+            class="clickable" id="1311.661"><br/>The changes now appear in the graphical client as if they had just occurred. </span><span
+            class="clickable" id="1331.121">And as if I have never versioned those modifications. </span><span
+            class="clickable" id="1393.021"><br/><br/><span
+            class="co">git log --all --decorate --oneline</span></span><span class="clickable" id="1406.521">I want to see what history is on GitHub. </span><span
+            class="clickable" id="1413.301">And what history do I have just local and specific to my machine keeping in mind git is distributed in nature, and that unless we tell git to communicate with a remote repository (github.com in this case) these commits are only sitting on hard drive. </span><span
+            class="clickable" id="1446.561">Also these commit refs are not the most friendly thing to refer to - they are verbose. </span><span
+            class="clickable" id="1482.361">Let us discard any commit made locally. </span><span class="clickable"
+                                                                                                 id="1512.141"><br/><br/><span
+            class="co">git reset --hard origin/master</span></span><span class="clickable" id="1535.262">Reset back to branch that represents the last time we communicated with github for this repository. </span><span
+            class="clickable" id="1574.102"><br/>Maybe you accidentally ran the hard reset and lost more changes than you wanted. </span><span
+            class="clickable" id="1620.882"><br/><br/><span class="co">git reflog</span></span><span class="clickable"
+                                                                                                     id="1627.882">git keeps a history of your interaction with the repo for your local copy only. </span><span
+            class="clickable" id="1635.002">This is never transmitted to the repo on github.com. </span><span
+            class="clickable"
+            id="1645.763">I can see the last 7 commits, the 7 interactions with my repo locally. </span><span
+            class="clickable" id="1685.983">Even though my git log doesn't show all those other commits, git has actually stored them in the background for us. </span><span
+            class="clickable" id="1700.523">We can get back to them if we really need to recover. </span><span
+            class="clickable" id="1708.483"><br/>I am going to generate some random changes. </span><span
+            class="clickable" id="1760.483">I would like to bundle them into one commit. </span><span class="clickable"
+                                                                                                      id="1764.723"><br/>git reset origin/master</span><span
+            class="clickable" id="1827.463"><br/>Now you see the 5 files changed. </span><span class="clickable"
+                                                                                               id="1840.203">Now you can commit all at once. </span><span
+            class="clickable" id="1859.203">Now I will publish it to github. </span><span class="clickable"
+                                                                                          id="1894.463"><br/>You shouldn't have committed those files - don't reset any history which has been shared with others. </span><span
+            class="clickable" id="1910.383">Other developers may rely upon this commit. </span><span class="clickable"
+                                                                                                     id="1923.743">There is a unspoken rule, once you publish the repo, you never use the reset command on that commit. </span><span
+            class="clickable" id="1949.123"><br/>How would I create a new commit which removes them? </span><span
+            class="clickable" id="1957.323"><br/><br/><span class="co">git revert commitref</span></span><span
+            class="clickable" id="1991.823">Why is that bad? </span><span class="clickable" id="1993.643">Revert creates a new commit marker which simply does the inverse of what happened. </span><span
+            class="clickable" id="2028.983">In my file system I don't have the files in my working tree. </span><span
+            class="clickable" id="2093.243"><br/>I will bring up reflog again. </span><span class="clickable"
+                                                                                            id="2129.903"><br/>Imagine we want 7 more commits. </span><span
+            class="clickable" id="2162.643">They are not on GitHub yet. </span><span class="clickable"
+                                                                                     id="2175.643"><br/><br/><span
+            class="co">git rebase -i origin/master</span></span><span class="clickable" id="2191.044">You need to revise what happened to a safe point in time. </span><span
+            class="clickable" id="2205.544">I want to go back to a point in which I do not override or rewrite history that has been shared with others. </span><span
+            class="clickable" id="2282.664">Rebase shows oldest at top and newest at bottom. </span><span
+            class="clickable"
+            id="2305.664"><br/>Maybe I don't want any commits that have even numbered files. </span><span
+            class="clickable" id="2317.684">I will delete the lines representing even numbered files. </span><span
+            class="clickable" id="2321.824">I save that. It says rebase updated master. </span><span class="clickable"
+                                                                                                     id="2370.064">If you rebase interactive again, now my history since I last interacted with github.com - I only have commits with odd numbered files. </span><span
+            class="clickable"
+            id="2384.264"><br/>I don't want them as individual commits - I want one commit. </span><span
+            class="clickable" id="2399.524">We can achieve this using the letter s (for squash). </span><span
+            class="clickable" id="2563.603"><br/><br/><span class="co">git config --global alias.lol "log --graph --all --decorate --oneline"</span></span><span
+            class="clickable" id="2587.444">This creates an alias command called lol for command specified in quotes globally. </span><span
+            class="clickable" id="2604.423"><br/><span class="co">git lol</span></span><span class="clickable"
+                                                                                             id="2615.164"><br/><br/><span
+            class="co">git lol --stat</span></span><span class="clickable" id="2623.164">Additional commands can be supplied after the alias. </span><span
+            class="clickable" id="2658.224"><br/><span class="t">What is the difference between reset origin master and reset hard origin master?</span></span><span
+            class="clickable" id="2698.203">reset origin/master is saying throw away all commits but retain the files that were introduced. </span><span
+            class="clickable" id="2771.284">reset hard - you don't care about what the changes are, what you are rewinding to. You don't even care to keep what's modified. </span><span
+            class="clickable" id="2803.324">It is a stringent command and wipes everything clean. </span><span
+            class="clickable" id="2904.564"><br/><span class="t">Can you only revert head commit?</span></span><span
+            class="clickable" id="2915.08">It is good to be careful what you are reverting. </span><span
+            class="clickable" id="2921.68">Revert is the safest way you can undo a change and continue to have history moving forward. </span><span
+            class="clickable" id="2946.503">I can grab a specific commitref and revert to that. </span><span
+            class="clickable" id="3020.003"><br/><span class="t">Would you show us how to commit a single change through the command line?</span></span><span
+            class="clickable" id="3098.743"><span class="co">git commit -m "message"</span></span><span
+            class="clickable" id="3112.483">Add a single commit. </span><span class="clickable" id="3175.983"><br/>Thank you.</span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>
