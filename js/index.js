@@ -241,6 +241,10 @@ function loadVideoURL() {
     clearPage();
 }
 
+function updateCategory(){
+    $("#tbxCategorySelection").text($("#selectCategory").val());
+}
+
 function loadVideoInPlayer(videoid) {
     player.loadVideoById(videoid);
     window.currVideoID = videoid;

@@ -78,10 +78,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div style="height: 350px; width: 95%" class="panel panel-default">
+                    <div style="height: 420px; width: 95%" class="panel panel-default">
                         <div class="panel-heading">Source</div>
                         <div role="tabpanel">
-
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#sourcetab" aria-controls="sourcetab" role="tab" data-toggle="tab">Source</a></li>
@@ -110,14 +109,20 @@
                                 
                                 <div role="tabpanel" class="tab-pane" id="raw">
                                     <div id="divTitle"></div>
-                                    <!--<textarea id="txtSource" style="width: 90%; height: 90%"></textarea>-->
                                     <textarea id="txtSource1" style="width: 90%; height: 90%"></textarea>
                                     <textarea id="txtCategoryName" style="width: 90%; height: 90%">Google Chrome Developers</textarea>
                                     <button onclick=" saveHtml() " id="saveHtml" class="btn btn-primary">Save as web page</button>&nbsp;&nbsp;
                                     <button onclick=" saveFile() " id="saveLink" class="btn btn-primary">Save source file</button><br/>
                                     <span class="label label-success">Load from local file:</span><br/>
                                     <input type="file" id="file-input"/><br/>
-                                    <!--Enter Google Analytics ID: <input id="tbGA"/><button onclick=" saveHtmlWithGA() " id="saveHtmlWithGA" class="btn btn-primary">Save as web page with GA</button>-->
+                                    <select class="form-control" id="selectCategory" onchange="updateCategory()">
+                                        <option value="Google Chrome Developers">Google Chrome Developers</option>
+                                        <option value="Davos">Davos</option>
+                                        <option value="Microsoft Excel">Microsoft Excel</option>
+                                        <option value="Baseball Rules">Baseball Rules</option>
+                                    </select>
+                                    Category:
+                                    <textarea id="tbxCategorySelection" class="form-control"></textarea>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="styling" style="height: 250px; overflow-y: auto;">
                                     Styles:
