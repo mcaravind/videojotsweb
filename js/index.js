@@ -242,7 +242,7 @@ function loadVideoURL() {
 }
 
 function updateCategory(){
-    $("#tbxCategorySelection").text($("#selectCategory").val());
+    $("#txtCategoryName").text($("#selectCategory").val());
 }
 
 function loadVideoInPlayer(videoid) {
@@ -264,13 +264,14 @@ function clearPage() {
 
 function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEditable, forSave) {
     var playerHTML = '';
+    var videoPlayerHTML = '';
     var videoID = window.currVideoID;
     if (includeVideo) {
         var playerID = videoID.replace(/-/g, "");
         var category = $("#txtCategory").val();
         var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
-        var videoPlayerHTML = '<br/><div id="control"><div id="videoPlayer"></div></div>';
         var htmlInfo = '<br/><i>Click on text below to jump to specific point in the video</i><br/><br/>';
+        videoPlayerHTML = '<br/><div id="control"><div id="videoPlayer"></div></div>'+htmlInfo;
         playerHTML = scriptHTML+htmlInfo;
     }
     if(sourceText === ''){

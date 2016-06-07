@@ -1,0 +1,213 @@
+<html>
+<head><title>Webcast - The Basics of Git and GitHub - July 2013</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>(function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-78294929-1', 'auto');
+    ga('send', 'pageview');</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">U8GBXvdmHT4</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">GitHub Training</a></li>
+        <li class="active">Webcast - The Basics of Git and GitHub - July 2013</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="videoPlayer"></div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .co {
+        background-color: #d9534f;
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        vertical-align: baseline;
+        border-radius: .25em;
+        box-sizing: border-box;
+        margin-right: 5px;
+    }</style><div class="resizable"><br/><span class="clickable" id="11.681">Thanks for joining. I am Matthew McCullogh and I have Brent Beer with me offering tons of advice as we go through these materials. </span><span
+            class="clickable" id="31.721">I am going to demonstrate a lot of the things which makes Git and GitHub such a useful tool. </span><span
+            class="clickable" id="37.941">I am a developer by trade, and have worked in Java and Objective-C and MFC and assorted things. </span><span
+            class="clickable" id="47.281">I say from my own experience as a developer and not just a teacher that this is an amazing transformation for me. </span><span
+            class="clickable" id="70.661"><br/><i>Reaching Matt and Brent.</i></span><span class="clickable"
+                                                                                           id="106.761"><br/><i>Matt's
+        background</i></span><span class="clickable" id="131.761"><br/><i>Brent's background</i></span><span
+            class="clickable" id="160.261"><br/>We are here for talking about git and GitHub today. </span><span
+            class="clickable" id="189.58"><br/><i>Roadmap for this presentation</i></span><span class="clickable"
+                                                                                                id="217.84"><br/><span
+            class="t">Why Git?</span></span><span class="clickable"
+                                                  id="244.84">Why invest time in learning a new tool?</span><span
+            class="clickable" id="256.08">Someone has already paved the way - BitKeeper story. </span><span
+            class="clickable" id="298.34">Git adds all of the attributes of distributed version control systems. </span><span
+            class="clickable" id="309.54">It works in both on-machine as well as a centralized repo model. </span><span
+            class="clickable" id="333.602"><br/>Git is one of the version control systems that has been developed in the internet era - it works very well with high latency and constrained bandwidth networks. </span><span
+            class="clickable" id="380.742">Git has a very <b>small footprint.</b> </span><span class="clickable"
+                                                                                               id="389.742"><br/>Git is also <b>simple</b>.</span><span
+            class="clickable" id="407.742">It means it is simple to <i>get started.</i></span><span class="clickable"
+                                                                                                    id="410.682">But there is a massive amount of stuff to learn. </span><span
+            class="clickable"
+            id="437.683"><br/>From its Unix and Linux roots - it is also <b>composable.</b></span><span
+            class="clickable" id="444.584">Git is built of very small programs that work very well together to give the appearance of a suite of tools. </span><span
+            class="clickable" id="456.663">Since the little pieces are still exposed to you, you can compose these with scripts and write your own new git instructions. </span><span
+            class="clickable" id="478.023"><br/><span class="t">Setting up Git</span></span><span class="clickable"
+                                                                                                  id="497.283">It is just running an installer. An even more raw way to do that is to just copy the binaries to your $PATH variable. </span><span
+            class="clickable" id="518.723">No admin privileges required. </span><span class="clickable" id="525.763">We have a page that we maintain at GitHub that shows you how to set up Git for different platforms. </span><span
+            class="clickable" id="554.164"><br/>I have got it already set up on my machine. </span><span
+            class="clickable" id="568.023"><br/>Type git --version for showing version. </span><span class="clickable"
+                                                                                                     id="609.783"><br/><span
+            class="t">Using Git</span></span><span class="clickable" id="634.283">I want to start by emphasizing that this is a command line tool. </span><span
+            class="clickable" id="647.583">This is important as you work more towards continuous integration and continuous delivery model of shipping your software. </span><span
+            class="clickable" id="679.903"><br/><span class="t">Create a Git repository</span></span><span
+            class="clickable" id="681.963">This is an absolute inversion of the usual way of thinking about version control. </span><span
+            class="clickable" id="719.423">I will create the repository locally, and push it to the network later. In the centralized VCS systems, you need to fetch the repository from the network, and usually only after getting sufficient privileges. </span><span
+            class="clickable" id="753.723"><br/><span class="t">Some instructions</span></span><span class="clickable"
+                                                                                                     id="755.283"><span
+            class="co">git init project1</span></span><span class="clickable" id="765.184">Instantaneously create a local repository but with no server or any daemon running in the background. </span><span
+            class="clickable" id="801.244"><br/><span
+            class="co">tree .git</span> Poke inside the .git file. </span><span class="clickable" id="820.824">I have .git a folder, with some files in it. Those are lifecycle management and instructions that I can hook into with Ruby, Perl, Python or shell scripts. </span><span
+            class="clickable" id="847.104">I have a series of directories info, objects and refs - those are where the actual data for the commits - the version control timestamped copies of the repository are stored. </span><span
+            class="clickable" id="867.224">There is one and only one .git folder per repository and it is at the top level of the project. </span><span
+            class="clickable" id="877.364">It does not repeat .git directories down all of your other folders and in fact, if you ever wanted to ungit version, just delete the .git folder. </span><span
+            class="clickable" id="905.505"><br/><span class="co">git status</span></span><span class="clickable"
+                                                                                               id="915.505">Initial commit on a default branch called master. </span><span
+            class="clickable" id="919.745">Nothing to commit yet. </span><span class="clickable" id="921.244">Lets open up a text editor and create a file first.txt. </span><span
+            class="clickable" id="945.004">I have added some lorem ipsum text into the file. </span><span
+            class="clickable" id="954.725"><br/>Do a git status again. </span><span class="clickable" id="966.225">git tracks content - it is examining current working directory and all directories beneath it to see if any file has been modified or appears like it has never seen before. </span><span
+            class="clickable" id="985.865"><br/><span class="co">git add first.txt</span></span><span class="clickable"
+                                                                                                      id="992.185">But adding this file to version control is still is different than version control today. </span><span
+            class="clickable" id="1002.925">Adding it is merely indicating that we want it to participate in the next transactional changeset. </span><span
+            class="clickable" id="1011.045">git add is a suggestion to have this participate but not yet a permanent record of that file. </span><span
+            class="clickable" id="1029.985"><br/><span class="co">git commit -m "My first commit"</span></span><span
+            class="clickable" id="1048.745">It says I have made a commit to the master branch (m), it is the root commit, it has a globally unique identifier (on screen) and it is my first commit as the commit message. </span><span
+            class="clickable" id="1089.185">This file is now a permanent part of version control and git status will report I have nothing to commit and the working directory is clean. </span><span
+            class="clickable" id="1097.725">I emphasize that nothing is running in the background. </span><span
+            class="clickable" id="1138.985"><br/><span class="t">Graphical user interface</span></span><span
+            class="clickable" id="1177.225">There is absolute symmetry - everything is committed to disk in the .git folder from GUIs to the command line. </span><span
+            class="clickable"
+            id="1187.885">Everything about the git repository is stored in that single .git folder. </span><span
+            class="clickable" id="1222.305"><br/><i>Pro Git book - link</i></span><span class="clickable" id="1263.565"><br/><i>For
+        other class notes and instructions - teach.github.com</i></span><span class="clickable" id="1299.565"><br/><i>To
+        get help help.github.com</i></span><span class="clickable" id="1332.725"><br/><span
+            class="t">Create a repo</span></span><span class="clickable" id="1340.985">Using FireFox and Chrome - two browsers. </span><span
+            class="clickable" id="1362.725">They are signed in as different accounts. </span><span class="clickable"
+                                                                                                   id="1372.985">This will show real world use case where I am manipulating two different repositories. </span><span
+            class="clickable" id="1450.705"><br/>Click a create a new repository. </span><span class="clickable"
+                                                                                               id="1475.205">Call it project1. </span><span
+            class="clickable" id="1482.205">Make it a public repo. </span><span class="clickable" id="1491.205">Create the repository. </span><span
+            class="clickable" id="1495.845">The instructions show how you push and preserve local work up to centralized repository. </span><span
+            class="clickable" id="1514.325"><br/><span class="co">git remote add origin  https://github.com/githubstudent/project1.git</span></span><span
+            class="clickable" id="1517.726"><br/><span class="co">git push -u origin master</span></span><span
+            class="clickable" id="1518.647">It added a remote - registering a bookmark for that long address that represents the github destination. </span><span
+            class="clickable" id="1527.507">And then it pushes - git's verb for transmitting the contents of the local repository to some other place. </span><span
+            class="clickable" id="1549.927">And that repository has been transmitted and you now see that it says a new branch has been transmitted. </span><span
+            class="clickable"
+            id="1577.307">It preserves and maintains the work done on the local work when you pushed. </span><span
+            class="clickable" id="1593.947">When you push, it simply is synchronizing the local activities up to a central repository. </span><span
+            class="clickable" id="1612.387"><br/><span class="t">Joining and participating in a project that already exists</span></span><span
+            class="clickable" id="1638.727">Read-only access to the repo is sufficient. You simply begin helping and later ask for the permission for your code to be folded in once you made a meaningful contribution. </span><span
+            class="clickable" id="1668.327"><br/>Click fork - makes a copy to your personal namespace (my personal account). </span><span
+            class="clickable"
+            id="1703.327">When we make changes to the fork, you can offer it back to the project. </span><span
+            class="clickable" id="1720.087"><br/><span class="co">git clone &lt;address&gt;</span></span><span
+            class="clickable" id="1746.087">Change directory to repo. </span><span class="clickable" id="1754.587">You can do git status and get info on all history and all branches from local disk. </span><span
+            class="clickable" id="1756.227"><br/><span class="co">git branch -a</span></span><span class="clickable"
+                                                                                                   id="1762.727">Show me all branch names</span><span
+            class="clickable" id="1781.167"><br/><span class="co">git branch &lt;name&gt;</span> Creates a branch</span><span
+            class="clickable" id="1795.427"><br/><span class="co">git checkout &lt;name&gt;</span></span><span
+            class="clickable" id="1797.607">Instruction for toggling to a branch. </span><span class="clickable"
+                                                                                               id="1809.347">That switches the entire contents of my local directory to represent, to be and to have the state of the &lt;name&gt; branch. </span><span
+            class="clickable" id="1825.008">No difference between master and newly created branch at this point. </span><span
+            class="clickable" id="1888.068"><br/>I am going to create a file while on the new branch. </span><span
+            class="clickable" id="1916.188">You see the new file in Finder view.</span><span class="clickable"
+                                                                                             id="1928.568"><br/>Ask git status. </span><span
+            class="clickable" id="1935.828">Do a git add of brand new file. </span><span class="clickable"
+                                                                                         id="1944.068">Then do a git commit with a new commit message. </span><span
+            class="clickable" id="1957.568">Its not yet up on github.com. </span><span class="clickable" id="1964.068">You still need to push. </span><span
+            class="clickable" id="1965.788"><br/><span
+            class="co">git push -u origin &lt;branchname&gt;</span></span><span class="clickable" id="1974.209">I am deciding to publish, for the very first time, this new branch. </span><span
+            class="clickable" id="1978.069">This is an opt-in process. </span><span class="clickable" id="1991.569">Why opt-in? </span><span
+            class="clickable" id="1992.029">The idea is to create branches for just about any small thing you want to do. </span><span
+            class="clickable" id="1999.609">Bug fix, long lived feature branch - and then contain the work. </span><span
+            class="clickable" id="2016.369"><br/><span class="co">git checkout master</span></span><span
+            class="clickable" id="2028.889">Watch the new file disappear from Finder view. </span><span
+            class="clickable" id="2040.649">This helps get the mental model - when you checkout a branch, it is updating the file system to reflect the state of that branch. </span><span
+            class="clickable" id="2054.129">When you checkout a branch, all files become up to date with that exact branch that you checked out. </span><span
+            class="clickable" id="2084.909"><br/>On GitHub you can see the new branch created. </span><span
+            class="clickable" id="2094.489">It is 1 commit ahead of everything else done in the project. </span><span
+            class="clickable" id="2117.729">I will offer the new file to the central project maintainer. Click on the pull request button. </span><span
+            class="clickable"
+            id="2124.529">The pull request is a fundamental unit of work on the GitHub side of things. </span><span
+            class="clickable"
+            id="2152.529">This pull request is offering my change into the core project maintainer. </span><span
+            class="clickable" id="2167.228"><br/><span class="t">Note the phrase: Why is it a pull request and not a push request?</span></span><span
+            class="clickable" id="2177.709">The permissions model is inverted. </span><span class="clickable"
+                                                                                            id="2185.209">I can make whatever change I wish to the project without asking for the right to contribute. But, those changes are not folded in until the core maintainers decide to bring them in. </span><span
+            class="clickable"
+            id="2203.609">I will add a comment describing why this code should be brought in. </span><span
+            class="clickable" id="2227.229">The commits tab shows which units of work I am offering in. </span><span
+            class="clickable" id="2233.569">On the files change, I can see the summary of the code. </span><span
+            class="clickable" id="2240.009">With the pull request I am going to send this in and queue it up for the project maintainer to potentially act on. </span><span
+            class="clickable" id="2256.649"><br/>I am going to the list of pull requests, as a maintainer. </span><span
+            class="clickable" id="2286.689">I am going to merge this pull request and fold it into the core of the project. </span><span
+            class="clickable" id="2323.149"><br/>Give everyone privilege to issue pull requests. </span><span
+            class="clickable" id="2343.149">You can reject them, you can approve them, you can also debate with the contributors. </span><span
+            class="clickable" id="2376.649">Rather than outright rejecting change, I can fire a message to author of pull request. </span><span
+            class="clickable"
+            id="2465.789"><br/>Close a request without accepting the changes - with comment. </span><span
+            class="clickable" id="2510.75"><br/><span class="t">Git GUIs</span></span><span class="clickable"
+                                                                                            id="2519.75">A lot of GUI choices are available. </span><span
+            class="clickable" id="2712.63"><br/><span class="t">GitHub social coding</span></span><span
+            class="clickable" id="2724.13">Social coding</span><span class="clickable" id="2730.13"><br/>Fork and pull model</span><span
+            class="clickable" id="2752.99"><br/>A picture to visualize the way social coding works</span><span
+            class="clickable" id="2846.49"><br/>Web based image diff.&nbsp;</span><span class="clickable" id="2925.11">A difference engine to highlight small things.</span><span
+            class="clickable"
+            id="2972.61"><br/>GitHub enterprise: run your own copy of GitHub inside your firewall. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>
