@@ -1,0 +1,96 @@
+<html>
+<head><title>Higher-order functions - Part 1 of Functional Programming in JavaScript</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">BMUiFMZr7vk</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Functional Programming in JavaScript</a></li>
+        <li class="active">Higher-order functions - Part 1 of Functional Programming in JavaScript</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="videoPlayer"></div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="0.691">In this video series, I will teach you how to do functional programming in Javascript. </span><span
+            class="clickable" id="13.356">I will begin by telling you about one of the most important concepts in functional programming, higher order functions. </span><span
+            class="clickable" id="30.133">Before I do that, I will tell you why. </span><span class="clickable"
+                                                                                              id="56.134">I love functional programming and it has made programming so much more fun to me. </span><span
+            class="clickable"
+            id="88.506">You will be able to write your programs with less bugs in less time. </span><span
+            class="clickable" id="95.661"><br/><span class="t">Higher order functions</span></span><span
+            class="clickable" id="120.911">In JavaScript, functions are values. </span><span class="clickable"
+                                                                                             id="136.664"><br/>We will see the basic function in its natural habitat. </span><span
+            class="clickable" id="148.74">This is a simple function. </span><span class="clickable" id="167.988">Not all programs can do this: create an anonymous function and assign it to a variable. </span><span
+            class="clickable" id="173.599">We can pass it around like any other value. </span><span class="clickable"
+                                                                                                    id="198.029"><br/><span
+            class="t">What are higher order functions good for?</span></span><span class="clickable" id="206.874">For composition. </span><span
+            class="clickable" id="210.874">Since you can take a function and put it into another function, it allows us to compose a lot of small functions into bigger functions. </span><span
+            class="clickable" id="222.402">Let us look at an example. </span><span class="clickable" id="223.56"><br/>Probably the most basic and useful higher order function is the filter function. </span><span
+            class="clickable" id="233.95">It is a function on the array that accepts another function as its argument, which you can use to return a new filtered version of the array. </span><span
+            class="clickable" id="246.172"><br/>We see a list of animals. </span><span class="clickable" id="256.923">We want to filter out the dogs. </span><span
+            class="clickable" id="279.106"><br/><i>Normal way of for loop to do this</i></span><span class="clickable"
+                                                                                                     id="310.107"><br/><span
+            class="t">Lets rewrite using filter function</span></span><span class="clickable" id="345.706">Lets have a look at this. </span><span
+            class="clickable" id="350.209">Filter accepts one argument, another function. </span><span class="clickable"
+                                                                                                       id="358.526">Functions you send into other functions are called <i>callback
+        functions.</i></span><span class="clickable" id="365.34">Filter will loop through each item in the array and for each item, it will apply the callback function. </span><span
+            class="clickable" id="382.024">It will expect the filter function to return either true or false to decide whether or not the new item should be in the array. </span><span
+            class="clickable" id="392.325">Once done, it will return the filtered array. </span><span class="clickable"
+                                                                                                      id="402.995"><br/><br/>Notice that the sample using filter is a lot less code than for loop. </span><span
+            class="clickable" id="421.995">Its because we are actually writing less code, less logic. </span><span
+            class="clickable" id="456.745"><br/>Creating a new array is handled inside the filter function. </span><span
+            class="clickable" id="474.245">The callback function and the filter function lock into each other - they are <i>composable.</i></span><span
+            class="clickable" id="491.227"><br/><br/>Lets break out the callback into a variable. </span><span
+            class="clickable" id="507.229">By defining the isDog function. </span><span class="clickable" id="523.729">We can use it for other things. </span><span
+            class="clickable" id="532.729">We could pass it to reject (not in JS natively, but is there in other libraries like underscore). </span><span
+            class="clickable" id="631.71"><br/><br/>Next time I will talk about map and reduce. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>

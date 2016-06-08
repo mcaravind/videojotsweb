@@ -40,20 +40,20 @@ $(function () {
         }
         replace_selection(window.textAreaBeingEdited, replaceStr);
     });
-    $('#txtSource').bind('input propertychange', function () {
-        window.textSource = $("#txtSource").val();
+    $('#txtSource1').bind('input propertychange', function () {
+        window.textSource = $("#txtSource1").val();
         updateOutput();
     });
     $('#txtCSS').bind('input propertychange', function () {
-        window.textSource = $("#txtSource").val();
+        window.textSource = $("#txtSource1").val();
         updateOutput();
     });
     $('#txtReplace').bind('input propertychange', function () {
-        window.textSource = $("#txtSource").val();
+        window.textSource = $("#txtSource1").val();
         updateOutput();
     });
     $('#txtCategoryName').bind('input propertychange', function () {
-        window.textSource = $("#txtSource").val();
+        window.textSource = $("#txtSource1").val();
         updateOutput();
     });
     $("#divFormatterText").click(function(){
@@ -69,7 +69,7 @@ $(function () {
         $("#player").width($("#playerBox").width());
     });
     $("#slider").slider();
-    $("#saveLink").attr("href", "data:text/plain;charset=utf-8," + $("#txtSource").val()).attr("download", window.currVideoID + ".txt");
+    $("#saveLink").attr("href", "data:text/plain;charset=utf-8," + $("#txtSource1").val()).attr("download", window.currVideoID + ".txt");
     $('#selector button').click(function () {
         $(this).addClass('active').siblings().removeClass('active');
         var selectedName = $(this).attr('name');
@@ -242,7 +242,7 @@ function loadVideoURL() {
 }
 
 function updateCategory(){
-    $("#txtCategoryName").text($("#selectCategory").val());
+    $("#txtCategoryName").val($("#selectCategory").val());
 }
 
 function loadVideoInPlayer(videoid) {
@@ -252,10 +252,10 @@ function loadVideoInPlayer(videoid) {
 
 function clearPage() {
     $("#pnlNotes").html('');
-    $("#txtSource").text('');
+    $("#txtSource1").text('');
     $("#txtSource1").text('');
     $("#tbNotes").html('');
-    $("#txtSource").val('');
+    $("#txtSource1").val('');
     $("#txtSource1").val('');
     $("#txtCSS").val('');
     renderSourceData();
@@ -827,7 +827,7 @@ function generateHtmlFromSource() {
     var playerScript = '<script src="../js/player.js"></script>';
     var bootstrapScript = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
-    var analyticsScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-78294929-1', 'auto');ga('send', 'pageview');</script>";
+    var analyticsScript = "<script>if (document.location.hostname.search('videojots.com') !== -1) {(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-78294929-1', 'auto');ga('send', 'pageview');}</script>";
     var head = '<head>' + title + bootstrapScript + mathjaxScript + playerScript+ analyticsScript+'</head>';
     //var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
     var body = '<body>' + $("#txtSavedOutput").val()+'</body>';
@@ -840,7 +840,7 @@ function generateHtmlFromSourceWithGA() {
     var title = '<title>' + htmlEncode(currTitle) + '</title>';
     var bootstrapScript = '<link rel="stylesheet" href="css/bootstrap.min.css"><link rel="stylesheet" href="css/jquery-ui.css"/><script src="js/jquery-2.1.1.min.js"></script><script src="js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
-    var analyticsScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '" + $("#tbGA").val() + "', 'auto');ga('send', 'pageview');</script>";
+    var analyticsScript = "<script>if (document.location.hostname.search('videojots.com') !== -1) {(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '" + $("#tbGA").val() + "', 'auto');ga('send', 'pageview');}</script>";
     var head = '<head>'+title+bootstrapScript+mathjaxScript+analyticsScript+'</head>';
     var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
     var fullHtml = '<html>' + head + body + '</html>';
