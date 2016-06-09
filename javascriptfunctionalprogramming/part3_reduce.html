@@ -1,0 +1,90 @@
+<html>
+<head><title>Reduce basics - Part 3 of Functional Programming in JavaScript</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">Wl98eZpkp-c</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Functional Programming in JavaScript</a></li>
+        <li class="active">Reduce basics - Part 3 of Functional Programming in JavaScript</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="videoPlayer"></div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="19.886">In this episode we will learn about yet another higher order function, reduce. </span><span
+            class="clickable" id="26.029"><br/><span class="t">Why should you learn reduce?</span></span><span
+            class="clickable" id="58.196"><span class="t">What is reduce?</span></span><span class="clickable"
+                                                                                             id="66.445">Recap - map, filter - they transformed a list into something else. </span><span
+            class="clickable" id="101.695">Another example is find (not mentioned before). </span><span
+            class="clickable"
+            id="120.945">What to do if you cannot find one that fits? That is where reduce comes in. </span><span
+            class="clickable" id="134.347"><br/>Reduce is not specific - it is a multi-tool of list transformations. It can be used to express any list transformation. </span><span
+            class="clickable" id="160.827">Reduce is the super list transformation that you can fall back on if you can't find a prebuilt one. </span><span
+            class="clickable" id="188.339"><br/><span class="t">Start demo</span></span><span class="clickable"
+                                                                                              id="195.839">We want to summarize all the amounts. </span><span
+            class="clickable" id="201.173"><br/><i>With a for loop</i></span><span class="clickable"
+                                                                                   id="232.408"><br/><span class="t">Using reduce</span></span><span
+            class="clickable" id="251.158">Just like map or filter, reduce is a function on the array object and takes a callback function. </span><span
+            class="clickable" id="266.464">But unlike map and filter, it wants an object. </span><span class="clickable"
+                                                                                                       id="278.214">The object can be thought of as a starting point. </span><span
+            class="clickable" id="285.692">The sum can be passed as the first argument. </span><span class="clickable"
+                                                                                                     id="295.833">The iterated item will be the second argument. </span><span
+            class="clickable"
+            id="317.413">This return value will in turn be passed as the sum in the next iteration. </span><span
+            class="clickable" id="326.41">Which in turn will do the same operation and so on... </span><span
+            class="clickable" id="362.132"><br/><i>Inspecting the output in the console</i></span><span
+            class="clickable" id="421.382"><br/><br/>Let us compare this with the for loop. </span><span
+            class="clickable" id="448.632">The difference in code size is not as dramatic as before. </span><span
+            class="clickable" id="485.632">With arrow functions, we can make the code size even smaller. </span><span
+            class="clickable" id="525.654"><br/><br/>The example was extremely basic and doesn't showcase the extreme power of reduce. </span><span
+            class="clickable" id="537.648">So I spend the next episode on reduce as well. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>

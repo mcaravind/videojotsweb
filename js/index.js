@@ -243,11 +243,17 @@ function loadVideoURL() {
 
 function updateCategory(){
     $("#txtCategoryName").val($("#selectCategory").val());
+    updateOutput();
 }
 
 function loadVideoInPlayer(videoid) {
     player.loadVideoById(videoid);
     window.currVideoID = videoid;
+    player.addEventListener(onYouTubePlayerReady, updateVideoData);
+}
+
+function updateVideoData(){
+    $("#divTitle").html(player.getVideoData().title);
 }
 
 function clearPage() {
@@ -582,6 +588,10 @@ function keyPressEvent(e) {
 function updateOutput() {
     sortJotsByPosition();
     displayOutlineProgress();
+    try{
+        $("#divTitle").html(player.getVideoData().title);
+    }
+    catch(ex){}
     var output = convertSourceToOutput($("#txtSource1").val(), false,0,1,0);
     var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0,0,0);
     var outputForSave = convertSourceToOutput($("#txtSource1").val(), true, 0,0,1);
