@@ -1,0 +1,100 @@
+<html>
+<head><title>Reduce Advanced - Part 4 of Functional Programming in JavaScript</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">1DMolJ2FrNY</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Functional Programming in JavaScript</a></li>
+        <li class="active">Reduce Advanced - Part 4 of Functional Programming in JavaScript</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="videoPlayer"></div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="37.033">Last time I showed you a basic example of reduce, where we used it to sum the property of a series of objects. </span><span
+            class="clickable" id="49.836">It is not limited to reducing a list to a number. </span><span
+            class="clickable" id="52.407">It can reduce it to anything - such as an array or an object. </span><span
+            class="clickable" id="61.841">I am also going to throw a couple of other higher order functions into the mix. </span><span
+            class="clickable" id="73.079"><br/><span class="t">Start of demo</span></span><span class="clickable"
+                                                                                                id="83.662">This is a tab separated file. </span><span
+            class="clickable" id="102.667">We are going to turn it into a object literal. </span><span class="clickable"
+                                                                                                       id="117.912">The key will be the name. </span><span
+            class="clickable" id="127.661">The order items goes in an array. </span><span class="clickable"
+                                                                                          id="169.784">Because we are dealing with a file, we need to import fs namespace from node. </span><span
+            class="clickable" id="200.784">To read from file, we use fs.readFileSync. </span><span class="clickable"
+                                                                                                   id="241.417"><br/>We get a buffer as output. </span><span
+            class="clickable" id="249.668">We expect the contents of the file. </span><span class="clickable"
+                                                                                            id="262.03">To show the text, it needs a mapping - an encoding table. </span><span
+            class="clickable" id="273.847">The most common is utf-8. </span><span class="clickable"
+                                                                                  id="283.78"><br/><span class="t">Splitting into an array</span></span><span
+            class="clickable" id="293.031">Splits the string into an array. </span><span class="clickable" id="306.031">We see an array of strings. </span><span
+            class="clickable" id="306.804">The extra line is due to the final break, we get rid of that by calling trim()</span><span
+            class="clickable" id="332.665"><br/>Before we start using reduce on these lines, I would like to convert them into a more manageable object for using a map. </span><span
+            class="clickable" id="350.636">I am going to map every line and split on tab characters. </span><span
+            class="clickable" id="366.436">We now have an array of arrays. </span><span class="clickable"
+                                                                                        id="376.686"><br/><span
+            class="t">Lets reduce it</span></span><span class="clickable" id="381.186">Reduce takes two arguments - first, a function and then a starting object. </span><span
+            class="clickable" id="394.186">Last time we used a number as starting object. </span><span class="clickable"
+                                                                                                       id="395.208">This time we will use an object literal. </span><span
+            class="clickable" id="406.42"><br/><br/>Reduce needs two arguments - the first one is the object we are constructing. </span><span
+            class="clickable"
+            id="421.531">The second argument is the thing we are iterating, in this case the line. </span><span
+            class="clickable" id="473.113">Let me console.log the line out. </span><span class="clickable" id="503.573">Lets get rid of console.log and rename to customers. </span><span
+            class="clickable"
+            id="515.824">For every customer, we are going to make a property with their name. </span><span
+            class="clickable" id="559.588">Now we want to append order id.</span><span class="clickable" id="582.589">We want the price, the third part of the line. </span><span
+            class="clickable" id="591.838">The quantity is the fourth part of the line. </span><span class="clickable"
+                                                                                                     id="603.166"><br/><br/>Use JSON.stringify to print the output nicely. </span><span
+            class="clickable" id="658.31">Let us reuse the existing array to avoid overwriting. </span><span
+            class="clickable" id="682.559">We are done. </span><span class="clickable" id="687.059">We looked at a more advanced reduce example.</span><span
+            class="clickable" id="695.723">We also see some chaining. </span><span class="clickable" id="717.309">The chainability is something you will see a lot of in functional programming. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>

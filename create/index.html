@@ -110,8 +110,7 @@
                                 
                                 <div role="tabpanel" class="tab-pane" id="raw">
                                     <div id="divTitle"></div>
-                                    <textarea id="txtSource1" style="width: 90%; height: 90%"></textarea>
-
+                                    <textarea id="txtPageName"></textarea>
                                     <button onclick=" saveHtml() " id="saveHtml" class="btn btn-primary">Save as web page</button>&nbsp;&nbsp;
                                     <button onclick=" saveFile() " id="saveLink" class="btn btn-primary">Save source file</button><br/>
                                     <span class="label label-success">Load from local file:</span><br/>
@@ -133,8 +132,9 @@
                                     Useful styles:<br/>
                                     .t{font-weight:bold;}.t:before{content:"\A";white-space: pre;}.t:after{content:"\A";white-space: pre;}<br/>
                                     .q{font-weight:bold;}.q:before{content:"\A";white-space: pre;}.q:after{content:"\A";white-space: pre;}
+
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="slashcode" style="height: 250px; overflow-y: auto;">
+                                <div role="tabpanel" class="tab-pane" id="slashcode" style="height: 300px; overflow-y: auto;">
                                     <br />Formatting rules:<br />
                                     /p/-pause<br />
                                     /r/-resume<br />
@@ -144,6 +144,8 @@
                                     //-close currently open tag<br />
                                     /name/text/-creates a new element with value name and content text. Equivalent to &lt;name&gt;text&lt;/name&gt;<br />
                                     / -creates a time placeholder which will be used for the next note<br />
+                                    <textarea id="txtKey"></textarea>
+                                    <textarea id="txtSource1" style="width: 90%; height: 90%"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +181,8 @@
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="save">
-<textarea id="txtSavedOutput"></textarea>
+            <textarea id="txtSavedOutput"></textarea>
+            <textarea id="txtOutputForIndex"></textarea>
         </div>
         <div role="tabpanel" class="tab-pane" id="viewoutput">
             

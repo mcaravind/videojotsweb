@@ -1,4 +1,4 @@
-﻿var S_PAUSE = '/p/';
+var S_PAUSE = '/p/';
 var S_RESUME = '/r/';
 var S_NEWLINE = '/n/';
 var S_POP = '//';
@@ -27,6 +27,8 @@ $(function () {
     window.textAreaBeingEdited = null;
     //initialize controls
     $("#btnInsertLineBreak").prop('disabled', true);
+    $("#saveLink").prop('disabled',true);
+    $("#saveHtml").prop('disabled',true);
     //create event handlers
     $('#selectClasses').change(function () {
         var predefined = ['b', 'i', 's', 'u'];
@@ -47,6 +49,12 @@ $(function () {
     $('#txtCSS').bind('input propertychange', function () {
         window.textSource = $("#txtSource1").val();
         updateOutput();
+    });
+    $('#txtPageName').bind('input propertychange', function () {
+        toggleSavePageButtonState();
+    });
+    $('#txtKey').change(function () {
+        toggleSavePageButtonState();
     });
     $('#txtReplace').bind('input propertychange', function () {
         window.textSource = $("#txtSource1").val();
@@ -79,6 +87,20 @@ $(function () {
     document.getElementById('file-input')
   .addEventListener('change', readSingleFile, false);
 });
+
+function toggleSavePageButtonState(){
+    window.pageName = $("#txtPageName").val();
+    var key = $("#txtKey").val();
+    if(window.pageName.trim()==='' || key.trim()===''){
+        $("#saveHtml").prop('disabled',true);
+        $("#saveLink").prop('disabled',true);
+    }
+    else{
+        $("#saveHtml").prop('disabled',false);
+        $("#saveLink").prop('disabled',false);
+    }
+    updateOutput();
+}
 
 function highlightCurrentSelection(){
     var elem = window.formatSelection;
@@ -155,6 +177,7 @@ function loadFile(contents) {
     var category = '';
     var title = '';
     var videoid = null;
+    var pageName = null;
     try {
         json = JSON.parse(contents);
         source = json.text;
@@ -162,6 +185,7 @@ function loadFile(contents) {
         videoid = json.videoid;
         title = json.title;
         category = json.category;
+        pageName = json.pageName;
     } catch (e) {
         //when using old format
         //get videoid from filename
@@ -177,6 +201,7 @@ function loadFile(contents) {
     $("#txtCSS").val(style);
     $("#divTitle").html(title);
     $("#txtCategoryName").val(category);
+    $("#txtPageName").val(pageName);
     updateOutput();
 }
 
@@ -249,11 +274,15 @@ function updateCategory(){
 function loadVideoInPlayer(videoid) {
     player.loadVideoById(videoid);
     window.currVideoID = videoid;
-    player.addEventListener(onYouTubePlayerReady, updateVideoData);
 }
 
 function updateVideoData(){
     $("#divTitle").html(player.getVideoData().title);
+    var key=$("#txtKey").val();
+    var url = 'https://www.googleapis.com/youtube/v3/videos?id='+currVideoID+'&key='+key+'&part=snippet,contentDetails,statistics,status';
+    $.getJSON(url,function(data){
+        updateOutputForIndexPage(data);
+    });
 }
 
 function clearPage() {
@@ -585,11 +614,61 @@ function keyPressEvent(e) {
     }
 }
 
+function updateOutputForIndexPage(data){
+    var fileName = $("#txtPageName").val();
+    var divRow = $('<div>').addClass("row");
+    var divCol = $('<div>').addClass("col-md-7");
+    var aLink = $('<a>').attr('href',fileName);
+    var imgURL = 'http://img.youtube.com/vi/'+currVideoID+'/0.jpg';
+    var imageLink = $('<img>').addClass('img-responsive').attr('src',imgURL);
+    aLink.append(imageLink);
+    divCol.append(aLink);
+    var divCol5 = $('<div>').addClass("col-md-5");
+    var h3 = $('<h3>').append(player.getVideoData().title);
+    var publishedAt = null;
+    var description = null;
+    publishedAt = data.items[0].snippet.publishedAt;
+    description = data.items[0].snippet.description;
+    var h4 = $('<h4>');
+    if(publishedAt !==null){
+        h4.append(new Date(publishedAt).toLocaleDateString());
+    }
+    var p = $('<p>');
+    if(description !== null){
+        p.append(htmlEncode(description));
+    }
+    var a2 = $('<a>').addClass('btn btn-primary').attr('href',$("#txtPageName").val());
+    a2.append('View Outline');
+    var span = $('<span>').addClass('glyphicon glyphicon-chevron-right');
+    a2.append(span);
+    divCol5.append(h3).append(h4).append(p).append(a2);
+    divRow.append(divCol);
+    divRow.append(divCol5);
+    $("#txtOutputForIndex").val($(divRow)[0].outerHTML+'<hr>');
+}
+
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.responseType = 'jsonp';
+    xhr.onload = function() {
+        var status = xhr.status;
+        if (status == 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status);
+        }
+    };
+    xhr.send();
+};
+
 function updateOutput() {
+
     sortJotsByPosition();
     displayOutlineProgress();
     try{
         $("#divTitle").html(player.getVideoData().title);
+
     }
     catch(ex){}
     var output = convertSourceToOutput($("#txtSource1").val(), false,0,1,0);
@@ -671,7 +750,8 @@ function displayOutlineProgress() {
 function saveHtml() {
     var fullHtml = generateHtmlFromSource();
     var blob = new Blob([fullHtml], { type: "text/plain;charset=utf-8" });
-    saveAs(blob, currVideoID + ".html");
+    saveAs(blob, $("#txtPageName").val());
+    updateVideoData();
 }
 
 function saveHtmlWithGA() {
@@ -696,7 +776,8 @@ function saveFile() {
         "videoid": currVideoID,
         "title": currTitle,
         "duration":currDuration,
-        "category":category
+        "category":category,
+        "pageName":$("#txtPageName").val()
     };
     var blob = new Blob([JSON.stringify(json)], { type: "text/plain;charset=utf-8" });
     saveAs(blob, currVideoID+".txt");
