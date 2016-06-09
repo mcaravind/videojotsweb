@@ -1,0 +1,86 @@
+<html>
+<head><title>Map - Part 2 of Functional Programming in JavaScript</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">bCqtb-Z5YGQ</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Functional Programming in JavaScript</a></li>
+        <li class="active">Map - Part 2 of Functional Programming in JavaScript</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="videoPlayer"></div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="1.66">In this series we are learning how to do functional programming in JavaScript. </span><span
+            class="clickable" id="31.934">We learnt about filter last episode. </span><span class="clickable"
+                                                                                            id="49.934">In this episode, we will learn about map - which is another higher order function like filter. </span><span
+            class="clickable" id="62.264">Also like filter, it goes through an array, but unlike filter it does not throw the objects away, it transforms them.</span><span
+            class="clickable" id="76.713"><br/><span class="t">Start demo</span></span><span class="clickable"
+                                                                                             id="96.741">We want to get an array of all the names of all the animals. </span><span
+            class="clickable" id="111.443"><br/><i>Doing it with a for loop</i></span><span class="clickable"
+                                                                                            id="150.188"><br/><br/>Let us do it with map instead.</span><span
+            class="clickable" id="173.188">Remember that map is a function on the array object. </span><span
+            class="clickable" id="182.239">It takes a callback function. The callback function will be passed each item in the animals array. </span><span
+            class="clickable" id="201.641">Here is where it differs from filter - filter expects the callback function to return a true or false value - map will include all items in the array but instead expect the callback function to return a transformed object that it will put into the new array instead of the original item. </span><span
+            class="clickable" id="234.687">In this case that will be the name. </span><span class="clickable"
+                                                                                            id="256.437"><br/>Using a map to return a subset of the object is a very common usage. </span><span
+            class="clickable" id="268.033">However, since map just expects the callback to return any object we can use it to create completely new objects. </span><span
+            class="clickable" id="275.927"><br/><span
+            class="t">Example of creating new object with map</span></span><span class="clickable" id="349.678">We need to use much less code.</span><span
+            class="clickable" id="366.178">Which almost always means less bugs. </span><span class="clickable"
+                                                                                             id="369.747"><br/>In ECMAScript 6, we are getting arrow functions. </span><span
+            class="clickable" id="374.621"><br/><span class="t">Rewrite code using arrow function</span></span><span
+            class="clickable" id="394.121">If your function logic fits in one line, you can also get rid of the return statement and the curly brackets. </span><span
+            class="clickable" id="434.037"><br/><br/>Arrow functions are part of ECMAScript 6 standard. </span><span
+            class="clickable" id="447.656">You can use the harmony_arrow_functions flag. </span><span class="clickable"
+                                                                                                      id="466.619">You can go even shorter and shorten the variable name to x. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>
