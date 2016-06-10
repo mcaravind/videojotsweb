@@ -81,13 +81,14 @@ var tag = document.createElement('script');
 tag.src = "http://www.youtube.com/player_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+var videoHeight = 315;
+var videoWidth = 560;
 var playerControl;
 window.onYouTubePlayerAPIReady = function () {
     var id = $("#videoid").html();
     playerControl = new YT.Player('videoPlayer', {
-        height: '315',
-        width: '560',
+        height: videoHeight,
+        width: videoWidth,
         videoId: id,
         events: {onReady: onPlayerReady}
     });
@@ -116,6 +117,20 @@ window.onPlayerReady = function() {
     }
     window.setTimeout(highlight,1000);
 }
+
+$(function(){
+    $("#playerBox").height(videoHeight);
+    $("#playerBox").width(videoWidth);
+    $("#playerBox").resizable({
+        handles: {
+            'se': '#segrip'
+        }
+    });
+    $("#playerBox").resize(function () {
+        $("#videoPlayer").height($("#playerBox").height());
+        $("#videoPlayer").width($("#playerBox").width());
+    });
+});
 
 function highlight(){
     var currTime = playerControl.getCurrentTime();
