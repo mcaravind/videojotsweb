@@ -130,6 +130,11 @@ $(function(){
         $("#videoPlayer").height($("#playerBox").height());
         $("#videoPlayer").width($("#playerBox").width());
     });
+    $("#shareRoundIcons").jsSocials({
+        showLabel: false,
+        showCount: false,
+        shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+    });
 });
 
 function highlight(){
@@ -158,7 +163,8 @@ function playVideoAt(item) {
     var minutes = Math.floor(seconds/60);
     var time = "#t="+minutes+"m"+(seconds - (minutes * 60))+"s";
     var aLink = "https://www.youtube.com/watch?v="+$("#videoid").html()+time;
-    $("#divShare").html(innerText+'&nbsp;'+window.location+'&nbsp;<a href="'+aLink+'">YouTube</a>')
+
+    jsSocials.Socials.prototype.text = $("#divShare").innerText;
     try {
         ga("send", "event", category, "JotClick", innerText);
     } catch (ex) {
