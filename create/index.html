@@ -61,7 +61,7 @@
 
                 <div class="col-md-8">
                     <br/>
-                    <div id="playerBox" style="width: 800px; height: 600px;">
+                    <div id="playerBox" style="width: 560px; height: 315px;">
                         <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
                         <div id="player"></div>
                     </div>
@@ -230,8 +230,8 @@
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '600',
-            width: '800',
+            height: '315',
+            width: '560',
             videoId: '81uKcXZoQ2A',
             events: {
                 'onReady': onPlayerReady,

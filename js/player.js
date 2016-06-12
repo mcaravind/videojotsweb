@@ -154,6 +154,11 @@ function playVideoAt(item) {
     playerControl.seekTo(parseFloat(pos));
     window.location.hash = '#'+pos;
     var innerText = item.innerText;
+    var seconds = Math.floor(parseFloat(pos));
+    var minutes = Math.floor(seconds/60);
+    var time = "#t="+minutes+"m"+(seconds - (minutes * 60))+"s";
+    var aLink = "https://www.youtube.com/watch?v="+$("#videoid").html()+time;
+    $("#divShare").html(innerText+'&nbsp;'+window.location+'&nbsp;<a href="'+aLink+'">YouTube</a>')
     try {
         ga("send", "event", category, "JotClick", innerText);
     } catch (ex) {
