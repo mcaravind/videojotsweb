@@ -155,20 +155,23 @@ function highlight(){
 
 function playVideoAt(item) {
     var pos = item.id;
-    var category = $(".category").first().html();
-    playerControl.seekTo(parseFloat(pos));
-    window.location.hash = '#'+pos;
     var innerText = item.innerText;
+    window.location.hash = '#'+pos;
+    $("#shareRoundIcons").jsSocials("option","text",innerText);
+    $("#shareRoundIcons").jsSocials("option","url",window.location.href);
+    var category = $(".category").first().html();
     var seconds = Math.floor(parseFloat(pos));
     var minutes = Math.floor(seconds/60);
     var time = "#t="+minutes+"m"+(seconds - (minutes * 60))+"s";
     var aLink = "https://www.youtube.com/watch?v="+$("#videoid").html()+time;
     var aHref = "<a href='"+aLink+"'>"+innerText+"</a>";
-    jsSocials.Socials.prototype.text = $("#divShare").innerText;
+    try{
+        //iOS devices don't execute this
+        playerControl.seekTo(parseFloat(pos));
+    }
+    catch(ex){}
     $("#linkText").html(aHref);
     try {
-        $("#shareRoundIcons").jsSocials("option","text",innerText);
-        $("#shareRoundIcons").jsSocials("option","url",window.location.href);
         ga("send", "event", category, "JotClick", innerText);
     } catch (ex) {
     }
