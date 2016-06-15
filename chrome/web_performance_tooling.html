@@ -1,1 +1,178 @@
-<html><head><title>Web Performance Tooling  - Google I/O 2016</title><script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script><link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.css" /><link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-classic.css" /><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="../js/jquery-ui.js"></script><script src="../js/player.js"></script><script src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script><script>if (document.location.hostname.search('videojots.com') !== -1) {(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-78294929-1', 'auto');ga('send', 'pageview');}</script><style>#segrip {width: 10px;height: 10px;background-color: #ffffff;border: 1px solid #000000;bottom: -5px;right: -5px;}.jssocials-share-link { border-radius: 50%; }</style></head><body><div style="margin: 0 auto;width:70%" ><div id="videoid" style="visibility: hidden">iMqi55rcR00</div><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./" class="category">Google Chrome Developers</a></li><li class="active">Web Performance Tooling  - Google I/O 2016</li></ol><div style=""><span class="videojots"><br/><div id="control"><div id="linkText"></div><div id="shareRoundIcons"></div><div class="Google Chrome Developers" id="adiMqi55rcR00"></div><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div id="videoPlayer"></div></div></div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} .t{font-weight:bold;}.t:before{content:"\A";white-space: pre;}.t:after{content:"\A";white-space: pre;}</style><div  class="resizable"><br/><span class="clickable" id="11.158">We want the page to load quickly. Somewhere along the process things start to get slower, and they don't realize it right away and then all of a sudden "my app is slow". </span><span class="clickable" id="77.419">We will tell you about tools, techniques, approaches and workflows on making measurable improvements in performance. </span><span class="clickable" id="100.435"><br/><span class="t">Performance is the art of avoiding work.. and making any work you do as efficient as possible</span></span><span class="clickable" id="124.327">I will touch on the effective workflow for diagnosing and improving performance. </span><span class="clickable" id="131.366"><br/><span class="t">The basic performance workflow</span></span><span class="clickable" id="159.116">Measure with a profile</span><span class="clickable" id="177.866"><br/>Interpret costs</span><span class="clickable" id="183.657"><br/>Identify the bottleneck</span><span class="clickable" id="190.866"><br/>Try a fix</span><span class="clickable" id="222.615"><br/>Back to measure and repeat</span><span class="clickable" id="272.116"><br/><span class="t">Perf Case Studies</span></span><span class="clickable" id="279.366">Android auto website</span><span class="clickable" id="298.116"><br/>Let us look at the timeline</span><span class="clickable" id="351.866">The header is painting in right away.</span><span class="clickable" id="373.116">Frames per second, see what took a while to paint. </span><span class="clickable" id="400.116">3 seconds of spinning. </span><span class="clickable" id="416.866">The car image is about 2MB. </span><span class="clickable" id="430.866"><br/><br/>What to do next? </span><span class="clickable" id="437.117"><br/>Click on the checkbox called network. </span><span class="clickable" id="448.366">We have the same the exact network waterfall we see in the network payload but now integrated into this view.</span><span class="clickable" id="456.726"><br/>The colors match the rest of the plan chart. </span><span class="clickable" id="466.072">But we can begin to coordinate what is happening on the network side of things and the actual execution of what is happening on the main thread. </span><span class="clickable" id="471.51"><br/><br/>Let us find that image load. </span><span class="clickable" id="486.535">It is a 1MB image. </span><span class="clickable" id="492.535">We have 2 seconds of nothing. </span><span class="clickable" id="501.784"><br/><br/>Let us see the last thing to load. </span><span class="clickable" id="532.785">We are a bit confused why this happens.</span><span class="clickable" id="557.603">Let us look at the image. </span><span class="clickable" id="571.603">See the data-breakpoints? </span><span class="clickable" id="622.853"><br/><br/>Now what do I do? </span><span class="clickable" id="628.852"><br/>CMD + SHIFT + P</span><span class="clickable" id="639.103"><br/>Type search</span><span class="clickable" id="653.361"><br/>Search across all files for js-header-animate-image</span><span class="clickable" id="660.344"><br/>Code is minified. Let us pretty print that. </span><span class="clickable" id="683.844"><br/>function loadContent</span><span class="clickable" id="731.148"><br/>We set interval every 1000ms and we check if the class has loaded. </span><span class="clickable" id="777.67">We are adding a delay for 1 second.</span><span class="clickable" id="821.92">So there are some opportunities where we can improve this.</span><span class="clickable" id="848.255"><br/>I want to take a look at the interaction stuff. </span><span class="clickable" id="855.205">I come back to the timeline. </span><span class="clickable" id="861.957">I look at the interactions once I start using the page. </span><span class="clickable" id="874.955">I will capture a new recording. </span><span class="clickable" id="882.705">I will scroll, fling, sign up. And stop the recording. </span><span class="clickable" id="908.205">We have identified what interactions are happening. </span><span class="clickable" id="924.266">We can magnify and see the response. </span><span class="clickable" id="950.695"><br/>The browser is handling the gesture under the hood to handle this input. </span><span class="clickable" id="957.096"><br/><span class="t">What is that red line?</span></span><span class="clickable" id="964.216">Time waiting for main thread. </span><span class="clickable" id="968.347">The browser receives the Tap. </span><span class="clickable" id="973.387">And browser needs a second - to evaluate on the main thread and run event handlers. </span><span class="clickable" id="1009.346"><br/><br/>The other nice thing here - I hit that sign up form - if I bring back network we can also see a little bit of what is happening. </span><span class="clickable" id="1027.119"><br/>Here we can see it on the mini-map. </span><span class="clickable" id="1031.988">The blue bar is the mini view of the network which we can open up to see the details of all that. </span><span class="clickable" id="1039.638">It is nice to get the interaction between the main thread, network activity and back in a single view. </span><span class="clickable" id="1056.493"><br/><span class="t">Case study: modern-web.org</span></span><span class="clickable" id="1096.97">Let us reload this page and look at the timeline. </span><span class="clickable" id="1118.914">This is on my laptop with good wifi. </span><span class="clickable" id="1125.94">It took over 10s to load, for all stuff to finish. </span><span class="clickable" id="1143.068">I see this crazy amount of yellow. </span><span class="clickable" id="1161.568">The colors are by file. </span><span class="clickable" id="1189.318"><br/><br/>We want to get an aggregate view. </span><span class="clickable" id="1196.818">Click on Bottom-Up. </span><span class="clickable" id="1205.318">This is a summary of all the costs.</span><span class="clickable" id="1238.307">So this tells me that we are executing a lot of JavaScript.</span><span class="clickable" id="1260.66">This is a bit higher level than diving in. </span><span class="clickable" id="1268.159">Switch dropdown back to group by domain. </span><span class="clickable" id="1281.159">We have this ytimg. </span><span class="clickable" id="1288.659">We spend 2 seconds for addthis code. </span><span class="clickable" id="1313.41">There is a share button you can get behind the click on the audio player. </span><span class="clickable" id="1346.56"><br/><br/>What if we disable the podcast stuff and see what it looks like? </span><span class="clickable" id="1359.191">Let us try that. </span><span class="clickable" id="1362.281"><br/>There is an experimental feature called request blocking where we can just say - block these requests from going out completely. </span><span class="clickable" id="1373.243">Go to Network. </span><span class="clickable" id="1380.993">Right click - click on Block Request Domain. </span><span class="clickable" id="1411.74"><br/><br/>This is a responsive site - on the phone it will take longer.&nbsp;</span><span class="clickable" id="1425.741">There is a new feature called CPU throttline. </span><span class="clickable" id="1429.333">We can slow down everything from JavaScript to layout takes to evaluate inside the page - to sort of emulate on what it would be like on a phone. </span><span class="clickable" id="1472.7">We dropped down to 7 seconds now. </span><span class="clickable" id="1486.896"><br/><br/>We are still paying the YouTube cost. </span><span class="clickable" id="1500.399">It is all iframe embeds. </span><span class="clickable" id="1536.147">We can loop over video objects and load them lazily. </span><span class="clickable" id="1602.139"><br/><i>Before and after image</i></span><span class="clickable" id="1627.39"><br/>We are doing less work. </span><span class="clickable" id="1660.64">We are down to about 4 seconds. </span><span class="clickable" id="1667.889"><br/><span class="t">Performance everywhere</span></span><span class="clickable" id="1676.889">Let us discuss performance on the server side. </span><span class="clickable" id="1764.389"><br/><span class="t">Case study: eslint</span></span><span class="clickable" id="1823.889">Let us measure with a profiler to see what is going on. </span><span class="clickable" id="1847.964"><br/>What we have here is the modern chrome dev tools inside of chrome and we are talking directly to nodejs. </span><span class="clickable" id="1864.713">There are no elements tab. </span><span class="clickable" id="1873.713">We go to the profiles tab. </span><span class="clickable" id="1884.172">Let us run the program. </span><span class="clickable" id="1892.673">Use CMD + E to start and stop these </span><span class="clickable" id="1908.672">We see a blame chart. </span><span class="clickable" id="1987.172"><br/>We clicked from profile and go to source. </span><span class="clickable" id="2005.833">The colors are line level annotations of all the performance work. </span><span class="clickable" id="2014.808">Chrome shows perf info not just per function, but even per line - showing where in the function I am doing CPU work. </span><span class="clickable" id="2093.386">So it looks like all the work is happening in the GlobSync. </span><span class="clickable" id="2116.885">Zooming out, we see that is starts in the listFilesToProcess function. </span><span class="clickable" id="2146.668"><br/><i>Explanation figure</i></span><span class="clickable" id="2186.667"><br/>How to improve it? </span><span class="clickable" id="2210.668"><br/>We call eslint with eslint ignore - it constructs this filter object - passes it to glob.sync and we get 30 files. </span><span class="clickable" id="2240.183">Let us try it out and measure it. </span><span class="clickable" id="2252.18">Lets rerun our profile. </span><span class="clickable" id="2358.93"><br/><span class="t">In Review</span></span><span class="clickable" id="2391.68">Let us know what you think. </span><br/><span style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/></div></span></div></div></body></html>
+<html>
+<head><title>Web Performance Tooling - Google I/O 2016</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.css"/>
+    <link type="text/css" rel="stylesheet"
+          href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-classic.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }
+    .jssocials-share-link {
+        border-radius: 50%;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">iMqi55rcR00</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Google Chrome Developers</a></li>
+        <li class="active">Web Performance Tooling - Google I/O 2016</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control">
+        <div id="linkText"></div>
+        <div id="shareRoundIcons"></div>
+        <div class="Google Chrome Developers" id="adiMqi55rcR00"></div>
+        <div id="playerBox">
+            <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+            <div id="videoPlayer"></div>
+        </div>
+    </div><br/><i>Click on text below to jump to specific point in the video</i><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="11.158">We want the page to load quickly. Somewhere along the process things start to get slower, and they don't realize it right away and then all of a sudden "my app is slow". </span><span
+            class="clickable" id="77.419">We will tell you about tools, techniques, approaches and workflows on making measurable improvements in performance. </span><span
+            class="clickable" id="100.435"><br/><span class="t">Performance is the art of avoiding work.. and making any work you do as efficient as possible</span></span><span
+            class="clickable" id="124.327">I will touch on the effective workflow for diagnosing and improving performance. </span><span
+            class="clickable" id="131.366"><br/><span class="t">The basic performance workflow</span></span><span
+            class="clickable" id="159.116">Measure with a profile</span><span class="clickable" id="177.866"><br/>Interpret costs</span><span
+            class="clickable" id="183.657"><br/>Identify the bottleneck</span><span class="clickable" id="190.866"><br/>Try a fix</span><span
+            class="clickable" id="222.615"><br/>Back to measure and repeat</span><span class="clickable"
+                                                                                       id="272.116"><br/><span
+            class="t">Perf Case Studies</span></span><span class="clickable"
+                                                           id="279.366">Android auto website</span><span
+            class="clickable" id="298.116"><br/>Let us look at the timeline</span><span class="clickable" id="351.866">The header is painting in right away.</span><span
+            class="clickable" id="373.116">Frames per second, see what took a while to paint. </span><span
+            class="clickable" id="400.116">3 seconds of spinning. </span><span class="clickable" id="416.866">The car image is about 2MB. </span><span
+            class="clickable" id="430.866"><br/><br/>What to do next? </span><span class="clickable" id="437.117"><br/>Click on the checkbox called network. </span><span
+            class="clickable" id="448.366">We have the same the exact network waterfall we see in the network payload but now integrated into this view.</span><span
+            class="clickable" id="456.726"><br/>The colors match the rest of the plan chart. </span><span
+            class="clickable" id="466.072">But we can begin to coordinate what is happening on the network side of things and the actual execution of what is happening on the main thread. </span><span
+            class="clickable" id="471.51"><br/><br/>Let us find that image load. </span><span class="clickable"
+                                                                                              id="486.535">It is a 1MB image. </span><span
+            class="clickable" id="492.535">We have 2 seconds of nothing. </span><span class="clickable"
+                                                                                      id="501.784"><br/><br/>Let us see the last thing to load. </span><span
+            class="clickable" id="532.785">We are a bit confused why this happens.</span><span class="clickable"
+                                                                                               id="557.603">Let us look at the image. </span><span
+            class="clickable" id="571.603">See the data-breakpoints? </span><span class="clickable"
+                                                                                  id="622.853"><br/><br/>Now what do I do? </span><span
+            class="clickable" id="628.852"><br/>CMD + SHIFT + P</span><span class="clickable" id="639.103"><br/>Type search</span><span
+            class="clickable" id="653.361"><br/>Search across all files for js-header-animate-image</span><span
+            class="clickable" id="660.344"><br/>Code is minified. Let us pretty print that. </span><span
+            class="clickable" id="683.844"><br/>function loadContent</span><span class="clickable" id="731.148"><br/>We set interval every 1000ms and we check if the class has loaded. </span><span
+            class="clickable" id="777.67">We are adding a delay for 1 second.</span><span class="clickable" id="821.92">So there are some opportunities where we can improve this.</span><span
+            class="clickable" id="848.255"><br/>I want to take a look at the interaction stuff. </span><span
+            class="clickable" id="855.205">I come back to the timeline. </span><span class="clickable" id="861.957">I look at the interactions once I start using the page. </span><span
+            class="clickable" id="874.955">I will capture a new recording. </span><span class="clickable" id="882.705">I will scroll, fling, sign up. And stop the recording. </span><span
+            class="clickable" id="908.205">We have identified what interactions are happening. </span><span
+            class="clickable" id="924.266">We can magnify and see the response. </span><span class="clickable"
+                                                                                             id="950.695"><br/>The browser is handling the gesture under the hood to handle this input. </span><span
+            class="clickable" id="957.096"><br/><span class="t">What is that red line?</span></span><span
+            class="clickable" id="964.216">Time waiting for main thread. </span><span class="clickable" id="968.347">The browser receives the Tap. </span><span
+            class="clickable" id="973.387">And browser needs a second - to evaluate on the main thread and run event handlers. </span><span
+            class="clickable" id="1009.346"><br/><br/>The other nice thing here - I hit that sign up form - if I bring back network we can also see a little bit of what is happening. </span><span
+            class="clickable" id="1027.119"><br/>Here we can see it on the mini-map. </span><span class="clickable"
+                                                                                                  id="1031.988">The blue bar is the mini view of the network which we can open up to see the details of all that. </span><span
+            class="clickable" id="1039.638">It is nice to get the interaction between the main thread, network activity and back in a single view. </span><span
+            class="clickable" id="1056.493"><br/><span class="t">Case study: modern-web.org</span></span><span
+            class="clickable" id="1096.97">Let us reload this page and look at the timeline. </span><span
+            class="clickable" id="1118.914">This is on my laptop with good wifi. </span><span class="clickable"
+                                                                                              id="1125.94">It took over 10s to load, for all stuff to finish. </span><span
+            class="clickable" id="1143.068">I see this crazy amount of yellow. </span><span class="clickable"
+                                                                                            id="1161.568">The colors are by file. </span><span
+            class="clickable" id="1189.318"><br/><br/>We want to get an aggregate view. </span><span class="clickable"
+                                                                                                     id="1196.818">Click on Bottom-Up. </span><span
+            class="clickable" id="1205.318">This is a summary of all the costs.</span><span class="clickable"
+                                                                                            id="1238.307">So this tells me that we are executing a lot of JavaScript.</span><span
+            class="clickable" id="1260.66">This is a bit higher level than diving in. </span><span class="clickable"
+                                                                                                   id="1268.159">Switch dropdown back to group by domain. </span><span
+            class="clickable" id="1281.159">We have this ytimg. </span><span class="clickable" id="1288.659">We spend 2 seconds for addthis code. </span><span
+            class="clickable"
+            id="1313.41">There is a share button you can get behind the click on the audio player. </span><span
+            class="clickable"
+            id="1346.56"><br/><br/>What if we disable the podcast stuff and see what it looks like? </span><span
+            class="clickable" id="1359.191">Let us try that. </span><span class="clickable" id="1362.281"><br/>There is an experimental feature called request blocking where we can just say - block these requests from going out completely. </span><span
+            class="clickable" id="1373.243">Go to Network. </span><span class="clickable" id="1380.993">Right click - click on Block Request Domain. </span><span
+            class="clickable" id="1411.74"><br/><br/>This is a responsive site - on the phone it will take longer.&nbsp;</span><span
+            class="clickable" id="1425.741">There is a new feature called CPU throttline. </span><span class="clickable"
+                                                                                                       id="1429.333">We can slow down everything from JavaScript to layout takes to evaluate inside the page - to sort of emulate on what it would be like on a phone. </span><span
+            class="clickable" id="1472.7">We dropped down to 7 seconds now. </span><span class="clickable"
+                                                                                         id="1486.896"><br/><br/>We are still paying the YouTube cost. </span><span
+            class="clickable" id="1500.399">It is all iframe embeds. </span><span class="clickable" id="1536.147">We can loop over video objects and load them lazily. </span><span
+            class="clickable" id="1602.139"><br/><i>Before and after image</i></span><span class="clickable"
+                                                                                           id="1627.39"><br/>We are doing less work. </span><span
+            class="clickable" id="1660.64">We are down to about 4 seconds. </span><span class="clickable" id="1667.889"><br/><span
+            class="t">Performance everywhere</span></span><span class="clickable" id="1676.889">Let us discuss performance on the server side. </span><span
+            class="clickable" id="1764.389"><br/><span class="t">Case study: eslint</span></span><span class="clickable"
+                                                                                                       id="1823.889">Let us measure with a profiler to see what is going on. </span><span
+            class="clickable" id="1847.964"><br/>What we have here is the modern chrome dev tools inside of chrome and we are talking directly to nodejs. </span><span
+            class="clickable" id="1864.713">There are no elements tab. </span><span class="clickable" id="1873.713">We go to the profiles tab. </span><span
+            class="clickable" id="1884.172">Let us run the program. </span><span class="clickable" id="1892.673">Use CMD + E to start and stop these </span><span
+            class="clickable" id="1908.672">We see a blame chart. </span><span class="clickable" id="1987.172"><br/>We clicked from profile and go to source. </span><span
+            class="clickable"
+            id="2005.833">The colors are line level annotations of all the performance work. </span><span
+            class="clickable" id="2014.808">Chrome shows perf info not just per function, but even per line - showing where in the function I am doing CPU work. </span><span
+            class="clickable" id="2093.386">So it looks like all the work is happening in the GlobSync. </span><span
+            class="clickable"
+            id="2116.885">Zooming out, we see that is starts in the listFilesToProcess function. </span><span
+            class="clickable" id="2146.668"><br/><i>Explanation figure</i></span><span class="clickable"
+                                                                                       id="2186.667"><br/>How to improve it? </span><span
+            class="clickable" id="2210.668"><br/>We call eslint with eslint ignore - it constructs this filter object - passes it to glob.sync and we get 30 files. </span><span
+            class="clickable" id="2240.183">Let us try it out and measure it. </span><span class="clickable"
+                                                                                           id="2252.18">Lets rerun our profile. </span><span
+            class="clickable" id="2358.93"><br/><span class="t">In Review</span></span><span class="clickable"
+                                                                                             id="2391.68">Let us know what you think. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>

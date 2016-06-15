@@ -157,6 +157,10 @@ function highlight(){
 }
 
 function playVideoAt(item) {
+    var ios = iOS();
+    if(ios){
+        alert(item.id);
+    }
     var pos = item.id;
     var innerText = item.innerText;
     window.location.hash = '#'+pos;
@@ -170,15 +174,36 @@ function playVideoAt(item) {
     var minutes = Math.floor(seconds/60);
     var time = "#t="+minutes+"m"+(seconds - (minutes * 60))+"s";
     var aLink = "https://www.youtube.com/watch?v="+$("#videoid").html()+time;
-    var aHref = "<a href='"+aLink+"'>"+innerText+"</a>";
+
+    var aHref = "<a href='"+aLink+"'><button class='btn btn-danger btn-xs'>Watch on YouTube</button></a>";
     try{
         //iOS devices don't execute this
         playerControl.seekTo(parseFloat(pos));
     }
     catch(ex){}
-    $("#linkText").html(aHref);
+    $("#linkText").html(innerText+'&nbsp;&nbsp;'+aHref);
     try {
         ga("send", "event", category, "JotClick", innerText);
     } catch (ex) {
     }
+}
+
+function iOS() {
+
+    var iDevices = [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+    ];
+
+    if (!!navigator.platform) {
+        while (iDevices.length) {
+            if (navigator.platform === iDevices.pop()){ return true; }
+        }
+    }
+
+    return false;
 }
