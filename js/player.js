@@ -157,8 +157,11 @@ function playVideoAt(item) {
     var pos = item.id;
     var innerText = item.innerText;
     window.location.hash = '#'+pos;
-    $("#shareRoundIcons").jsSocials("option","text",innerText);
-    $("#shareRoundIcons").jsSocials("option","url",window.location.href);
+    try{
+        $("#shareRoundIcons").jsSocials("option","text",innerText);
+        $("#shareRoundIcons").jsSocials("option","url",window.location.href);
+    }
+    catch(ex){}
     var category = $(".category").first().html();
     var seconds = Math.floor(parseFloat(pos));
     var minutes = Math.floor(seconds/60);
