@@ -157,10 +157,6 @@ function highlight(){
 }
 
 function playVideoAt(item) {
-    var ios = iOS();
-    if(ios){
-        alert(item.id);
-    }
     var pos = item.id;
     var innerText = item.innerText;
     window.location.hash = '#'+pos;
