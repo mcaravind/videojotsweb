@@ -163,9 +163,12 @@ function playVideoAt(item) {
     var minutes = Math.floor(seconds/60);
     var time = "#t="+minutes+"m"+(seconds - (minutes * 60))+"s";
     var aLink = "https://www.youtube.com/watch?v="+$("#videoid").html()+time;
-
+    var aHref = "<a href='"+aLink+"'>"+innerText+"</a>";
     jsSocials.Socials.prototype.text = $("#divShare").innerText;
+    $("#linkText").html(aHref);
     try {
+        $("#shareRoundIcons").jsSocials("option","text",innerText);
+        $("#shareRoundIcons").jsSocials("option","url",window.location.href);
         ga("send", "event", category, "JotClick", innerText);
     } catch (ex) {
     }
