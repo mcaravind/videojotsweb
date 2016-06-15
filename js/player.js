@@ -130,11 +130,14 @@ $(function(){
         $("#videoPlayer").height($("#playerBox").height());
         $("#videoPlayer").width($("#playerBox").width());
     });
-    $("#shareRoundIcons").jsSocials({
-        showLabel: false,
-        showCount: false,
-        shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-    });
+    try{
+        $("#shareRoundIcons").jsSocials({
+            showLabel: false,
+            showCount: false,
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+    }
+    catch(ex){}
 });
 
 function highlight(){
