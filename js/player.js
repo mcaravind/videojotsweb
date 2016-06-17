@@ -177,7 +177,7 @@ function playVideoAt(item) {
         playerControl.seekTo(parseFloat(pos));
     }
     catch(ex){}
-    $("#linkText").html(innerText+'&nbsp;&nbsp;'+aHref);
+    $("#linkText").html(innerText);
     try {
         ga("send", "event", category, "JotClick", innerText);
     } catch (ex) {

@@ -20,14 +20,21 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-78294929-1', 'auto');
         ga('send', 'pageview');
@@ -37,155 +44,180 @@
 
 <body>
 
-    <!-- Navigation -->
-    <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            &lt;!&ndash; /.navbar-collapse &ndash;&gt;
-        </div>
-        &lt;!&ndash; /.container &ndash;&gt;
-    </nav>-->
-
-    <!-- Page Content -->
+<!-- Navigation -->
+<!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-
-        <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
-            <h2><b>Add Table of Contents to your YouTube videos</b></h2>
-            <p>Most educational videos on YouTube are not searchable. The VideoJots platform can get your videos more views by making them easy to scan, quick to skim and simple to search.</p>
-            <p><a href="davos/kevin_spacey.html" class="btn btn-primary btn-large">Watch the Demo</a>
-            </p>
-        </header>
-
-        <hr>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Recent Videos</h3>
-            </div>
+        &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Start Bootstrap</a>
         </div>
-        <!-- /.row -->
+        &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        &lt;!&ndash; /.navbar-collapse &ndash;&gt;
+    </div>
+    &lt;!&ndash; /.container &ndash;&gt;
+</nav>-->
 
-        <!-- Page Features -->
-        <div class="row text-center">
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://img.youtube.com/vi/0SSI8liELJU/1.jpg" alt="">
-                    <div class="caption">
-                        <h3>Chrome Developers</h3>
-                        <p>Videos from Google Chrome Developers channel<br/><br/></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="chrome" class="btn btn-default">View All</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://img.youtube.com/vi/U8GBXvdmHT4/1.jpg" alt="">
-                    <div class="caption">
-                        <h3>GitHub</h3>
-                        <p>GitHub training videos<br/><br/><br/></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="github" class="btn btn-default">View All</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://img.youtube.com/vi/BMUiFMZr7vk/1.jpg" alt="">
-                    <div class="caption">
-                        <h3>JavaScript</h3>
-                        <p>JavaScript Functional programming videos from funfunfunction's channel<br/><br/></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="javascriptfunctionalprogramming" class="btn btn-default">View All</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://img.youtube.com/vi/qNTIo45bOu0/1.jpg" alt="">
-                    <div class="caption">
-                        <h3>Davos</h3>
-                        <p>Videos from the World Economic Forum<br/><br/></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="davos" class="btn btn-default">View All</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://img.youtube.com/vi/Ha17Wa3OMqM/1.jpg" alt="">
-                    <div class="caption">
-                        <h3>Baseball</h3>
-                        <p>Baseball rules<br/><br/><br/></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="baseball" class="btn btn-default">View All</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://img.youtube.com/vi/blN2ZjklC2E/1.jpg" alt="">
-                    <div class="caption">
-                        <h3>Microsoft Excel</h3>
-                        <p>Excel training videos<br/><br/><br/></p>
-                        <p>
-                            <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="excel" class="btn btn-default">View All</a>
-                        </p>
-                    </div>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron hero-spacer">
+        <h2><b>Add Table of Contents to your YouTube videos</b></h2>
+        <p>Most educational videos on YouTube are not searchable. The VideoJots platform can get your videos more views
+            by making them easy to scan, quick to skim and simple to search.</p>
+        <p><a href="davos/kevin_spacey.html" class="btn btn-primary btn-large">Watch the Demo</a>
+        </p>
+    </header>
+
+    <hr>
+
+    <!-- Title -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Recent Videos</h3>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Page Features -->
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/0SSI8liELJU/1.jpg" alt="">
+                <div class="caption">
+                    <h3>Chrome Developers</h3>
+                    <p>Videos from Google Chrome Developers channel<br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="chrome" class="btn btn-default">View
+                        All</a>
+                    </p>
                 </div>
             </div>
         </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; VideoJots 2016</p>
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/U8GBXvdmHT4/1.jpg" alt="">
+                <div class="caption">
+                    <h3>GitHub</h3>
+                    <p>GitHub training videos<br/><br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="github" class="btn btn-default">View
+                        All</a>
+                    </p>
                 </div>
             </div>
-        </footer>
+        </div>
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/BMUiFMZr7vk/1.jpg" alt="">
+                <div class="caption">
+                    <h3>JavaScript</h3>
+                    <p>JavaScript Functional programming videos from funfunfunction's channel<br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="javascriptfunctionalprogramming"
+                                                                                 class="btn btn-default">View All</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
 
     </div>
-    <!-- /.container -->
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/ny_nMWXcbNs/1.jpg" alt="">
+                <div class="caption">
+                    <h3>Currently Inked</h3>
+                    <p>Currently Inked podcast<br/><br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="currentlyinked"
+                                                                                 class="btn btn-default">View All</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/qNTIo45bOu0/1.jpg" alt="">
+                <div class="caption">
+                    <h3>Davos</h3>
+                    <p>Videos from the World Economic Forum<br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="davos" class="btn btn-default">View
+                        All</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/Ha17Wa3OMqM/1.jpg" alt="">
+                <div class="caption">
+                    <h3>Baseball</h3>
+                    <p>Baseball rules<br/><br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="baseball"
+                                                                                 class="btn btn-default">View All</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row text-center">
+        <div class="col-md-3 col-sm-6 hero-feature">
+            <div class="thumbnail">
+                <img src="http://img.youtube.com/vi/blN2ZjklC2E/1.jpg" alt="">
+                <div class="caption">
+                    <h3>Microsoft Excel</h3>
+                    <p>Excel training videos<br/><br/><br/></p>
+                    <p>
+                        <!--<a href="#" class="btn btn-primary">Latest</a> --><a href="excel" class="btn btn-default">View
+                        All</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
 
-    <!-- jQuery -->
-    <script src="js/template_jquery.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; VideoJots 2016</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/template_bootstrap.min.js"></script>
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="js/template_jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/template_bootstrap.min.js"></script>
 
 </body>
 
