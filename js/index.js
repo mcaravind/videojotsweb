@@ -414,6 +414,13 @@ function keyUpEvent(e) {
     if (text.endsWith('/r//')) {
         player.playVideo();
         tb.value = text.slice(0, -4);
+        //if the textbox is empty at this point, you can use the current time as the jot time
+        //would be useful for producing pure transcripts
+        if(tb.value.trim()===''){
+            window.currPosition = Math.ceil(player.getCurrentTime()*1000);
+            $("#spnNextJot").text('Next jot at position ' + window.currPosition + ' s');
+            isClear = false;
+        }
     }
     if (text.endsWith('//')) {
         var textBefore = text.substring(0, text.length - 2);
