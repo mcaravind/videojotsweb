@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Facades: Java Design Patterns Part 18</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.css"/>
+    <link type="text/css" rel="stylesheet"
+          href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-classic.css"/>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }
+
+    .jssocials-share-link {
+        border-radius: 50%;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">OAruZGOO4ZE</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Java Design Patterns</a></li>
+        <li class="active">Facades: Java Design Patterns Part 18</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control"><br/>
+
+        <div class="Java Design Patterns" id="adOAruZGOO4ZE"></div>
+        <div id="playerBox">
+            <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+            <div id="videoPlayer"></div>
+        </div>
+    </div><br/><span class="label label-danger">Click on text below to jump to specific point in the video. Click and drag lower right corner to resize video. </span> <br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    } </style><div class="resizable"><br/><span class="clickable"
+                                                id="2.145">This is John from caveofprogramming.com. </span><span
+            class="clickable" id="5.663">In this tutorial we are going to look at the facade pattern. </span><span
+            class="clickable" id="10.089">A facade pattern just means using a class, typically that provides you with a <i>simpler
+        interface</i> to some other classes. </span><span class="clickable" id="18.28">In other words, a facade. </span><span
+            class="clickable"
+            id="20.921"><br/><br/>In Eclipse, I have a class called App with a main method. </span><span
+            class="clickable" id="36.952">The idea here is I am simulating a little game. </span><span class="clickable"
+                                                                                                       id="45.262">If you write a game what you typically do is you will have part of program called the game loop, which is just a massive loop which will go on forever. </span><span
+            class="clickable" id="63.772"><br/><br/>I will just have an infinite loop for simplicity here and then use it within the game where you get some sort of user input. </span><span
+            class="clickable"
+            id="74.721">Then you update game object, in other words, player and bad guys and so on. </span><span
+            class="clickable" id="87.012">And then finally you draw the game object to the screen. This is a typical pattern in a game. </span><span
+            class="clickable" id="96.179"><br/><br/>And I have created some dummy objects we might use. </span><span
+            class="clickable"
+            id="99.223">Here I have got an InputSystem class which is a dummy implementation. </span><span
+            class="clickable" id="106.726">The idea is that this class will get the input from the user. </span><span
+            class="clickable" id="110.087">They we have got a GameObjects class which contains different objects in the game - bad guys, good guys etc. </span><span
+            class="clickable" id="129.751">And we have a GameConsole object whose responsibility is to take the list of objects and draw them to the screen so the user can see them. </span><span
+            class="clickable"
+            id="139.62">To actually run our game, we need some objects - let us instantiate those. </span><span
+            class="clickable" id="147.179">We have InputSystem object. </span><span class="clickable" id="159.68">We will need a GameObject. </span><span
+            class="clickable" id="167.68">We will need a class to represent the screen - GameConsole class. </span><span
+            class="clickable" id="187.429"><br/><br/>Now if we were not using facade pattern, we would say input.getInput() to get input from user. </span><span
+            class="clickable" id="206.758">Then we use this information to update the game object. </span><span
+            class="clickable" id="223.182">And finally, we will draw the game object using screen.draw. </span><span
+            class="clickable" id="232.437"><br/><br/>This is not using facade, and the idea behind the facade pattern is that we can simplify these with another class. </span><span
+            class="clickable" id="232.508">This is not using the facade pattern. </span><span class="clickable"
+                                                                                              id="242.013">Let us create a new class called Game. </span><span
+            class="clickable" id="250.756">This is going to be our facade class. </span><span class="clickable"
+                                                                                              id="262.755">Instead of having the GameObjects in main, let us have them as instance variables in the Game class. </span><span
+            class="clickable" id="282.218">And we can just have one single method here - call it update(). </span><span
+            class="clickable" id="292.598">Now we can cut all the code from main into the update method. </span><span
+            class="clickable" id="304.848">Now in our main method, we can simplify the game loop a lot.</span><span
+            class="clickable" id="316.134">We will have a Game object. </span><span class="clickable" id="320.871">And call game.update(). </span><span
+            class="clickable" id="320.993"><br/><br/>This is just one possible simple example of a facade type pattern and there is no really fixed definition of what facade means. </span><span
+            class="clickable" id="331.267">It is a general idea of simplifying code into a bunch of different objects like we have here. </span><span
+            class="clickable" id="343.611">And creating a simplified API to those objects. </span><span
+            class="clickable" id="352.786">We have hidden the complexity of the different objects.</span><span
+            class="clickable"
+            id="355.61">We have simplified it to this game object and this Game class is our facade. </span><span
+            class="clickable" id="371.456"><br/><br/>Thats the facade pattern - very simple. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>
+    </div></span></div>
+</div>
+</body>
+</html>
