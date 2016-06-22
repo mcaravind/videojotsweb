@@ -305,8 +305,8 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEdita
         var playerID = videoID.replace(/-/g, "");
         var category = $("#txtCategory").val();
         var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
-        var htmlInfo = '<br/><i>Click on text below to jump to specific point in the video</i><br/><br/>';
-        videoPlayerHTML = '<br/><div id="control"><div id="linkText"></div><div id="shareRoundIcons"></div><div class="'+$("#txtCategoryName").val()+'" id="ad'+window.currVideoID+'"></div><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div id="videoPlayer"></div></div></div>'+htmlInfo;
+        var htmlInfo = '<br/><span class="label label-danger">Click on text below to jump to specific point in the video (except iOS)</span><br/><br/>';
+        videoPlayerHTML = '<br/><div id="control"><br/><div class="'+$("#txtCategoryName").val()+'" id="ad'+window.currVideoID+'"></div><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div id="videoPlayer"></div></div></div>'+htmlInfo;
         playerHTML = scriptHTML+htmlInfo;
     }
     if(sourceText === ''){
@@ -323,7 +323,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEdita
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
     var style = clickableStyle+ $("#txtCSS").val();
     var endScopedStyle = '</style>';
-    var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>';
+    var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a href="../ios_device.html">iOS devices</a> you cannot jump to video location by clicking on the outline. </span><br/>';
     var htmlPost = '</span></div></div>';
     var htmlFromSource = '';
     //$.each(lines, function (index, value) {
@@ -928,7 +928,7 @@ function generateHtmlFromSource() {
     var bootstrapScript = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
     var analyticsScript = "<script>if (document.location.hostname.search('videojots.com') !== -1) {(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-78294929-1', 'auto');ga('send', 'pageview');}</script>";
-    var cssInline = '<style>#segrip {width: 10px;height: 10px;background-color: #ffffff;border: 1px solid #000000;bottom: -5px;right: -5px;}.jssocials-share-link { border-radius: 50%; }</style>';
+    var cssInline = '<style>#segrip {width: 10px;height: 10px;background-color: #ffffff;border: 1px solid #000000;bottom: -5px;right: -5px;}</style>';
     var head = '<head>' + title +bootstrapScript + mathjaxScript + jqueryUiScript+ playerScript+ analyticsScript+cssInline+'</head>';
 
     var body = '<body>' + $("#txtSavedOutput").val()+'</body>';
