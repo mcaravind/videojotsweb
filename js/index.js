@@ -27,7 +27,6 @@ $(function () {
     window.textAreaBeingEdited = null;
     //initialize controls
     $("#btnInsertLineBreak").prop('disabled', true);
-    $("#saveLink").prop('disabled',true);
     $("#saveHtml").prop('disabled',true);
     //create event handlers
     $('#selectClasses').change(function () {
@@ -93,11 +92,9 @@ function toggleSavePageButtonState(){
     var key = $("#txtKey").val();
     if(window.pageName.trim()==='' || key.trim()===''){
         $("#saveHtml").prop('disabled',true);
-        $("#saveLink").prop('disabled',true);
     }
     else{
         $("#saveHtml").prop('disabled',false);
-        $("#saveLink").prop('disabled',false);
     }
     updateOutput();
 }
