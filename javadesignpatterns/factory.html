@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Factory Pattern: Java Design Patterns Part 17</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">TBAKKulJTJ4</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Java Design Patterns</a></li>
+        <li class="active">Factory Pattern: Java Design Patterns Part 17</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><div id="control"><br/>
+        <div class="Java Design Patterns" id="adTBAKKulJTJ4"></div>
+        <div id="playerBox">
+            <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+            <div id="videoPlayer"></div>
+        </div>
+    </div><br/><span
+            class="label label-danger">Click on text below to jump to specific point in the video (except iOS)</span><br/><br/><style
+            scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    } </style><div class="resizable"><br/><span class="clickable"
+                                                id="0.337">This is John from caveofprogramming.com. </span><span
+            class="clickable" id="5.282">And this is a tutorial on the factory pattern in Java. </span><span
+            class="clickable" id="10.494">I am in Eclipse and I have a main method set up already here. </span><span
+            class="clickable" id="39.252"><br/><br/>This is basically for use in a situation where you want to create lots of objects. </span><span
+            class="clickable" id="50.935">Or you want to create one of several possible objects which <i>all implement
+        the same interface or derive from the same parent</i>.</span><span class="clickable" id="79.036">It is complicated to create these objects since you have to make some kind of complex choice when deciding which of these objects to instantiate. </span><span
+            class="clickable" id="97.765">A good example - <b>lots of constructor parameters</b>. </span><span
+            class="clickable" id="122.014">If it is possible to categorize the objects or specify in a simple way, use factory pattern. </span><span
+            class="clickable" id="145.265"><br/><br/>Let us look at some examples.&nbsp;</span><span class="clickable"
+                                                                                                     id="181.265"><br/><br/>This is a very very important pattern and often in interviews and exams you often get asked about the factory pattern. </span><span
+            class="clickable" id="208.366">The DAO pattern often uses the dao factory. </span><span class="clickable"
+                                                                                                    id="221.615">It is not so easy to find the factory pattern in the Java API but one which comes to mind is BorderFactory. </span><span
+            class="clickable" id="229.585">If you have used Swing, you know what this is. </span><span class="clickable"
+                                                                                                       id="239.835">If you have a Swing application which has borders around them and the borders could be described in different ways. </span><span
+            class="clickable" id="264.571">BorderFactory has factory methods which you call and they return something that implements the Border Interface. </span><span
+            class="clickable" id="284.187">These factory methods are <b>manufacturing objects</b> that all implement this interface. </span><span
+            class="clickable" id="356.561"><br/><br/>Let us take a look at a simple example of implementing the Factory pattern. </span><span
+            class="clickable" id="362.461">I will consider a somewhat silly examples. </span><span class="clickable"
+                                                                                                   id="374.198">We are modeling a bunch of different animals in software. </span><span
+            class="clickable" id="402.198">Create an interface called Animal and let us specify some methods like speak(). </span><span
+            class="clickable" id="432.448">I will have a couple of objects which implement them. </span><span
+            class="clickable"
+            id="450.198">Let us start with Dog class which implements Animal and add the speak method. </span><span
+            class="clickable" id="476.198">I will also have a Cat class. </span><span class="clickable" id="509.198">Now these are very simple to construct and don't have any overloaded constructors. </span><span
+            class="clickable" id="524.421">Imagine that this class requires lots of configuration before use e.g. via constructor parameters. </span><span
+            class="clickable" id="554.882"><br/><br/>We can simplify this using the Factory pattern. </span><span
+            class="clickable" id="566.382">Let us create a new class called AnimalFactory. </span><span
+            class="clickable" id="589.382">We can make the class abstract (optional). </span><span class="clickable"
+                                                                                                   id="603.383">Let us have a method createAnimal(). </span><span
+            class="clickable" id="628.132">In the BorderFactory example, we see that it has lots of different methods, and sometimes they take parameters. </span><span
+            class="clickable" id="667.326"><br/><br/>Sometimes one method in your Factory which takes an int or enum to specify what object you are creating. </span><span
+            class="clickable" id="696.326">Often you see that the Factory pattern using public static final int to configure the method, not enum. </span><span
+            class="clickable" id="731.352">We can make createAnimal take an int and switch on the type and create the objects. </span><span
+            class="clickable" id="756.602">This will usually be more complex in a real example - maybe making a tricky decision. </span><span
+            class="clickable" id="790.904">Now to use this I go to my App and call Animal animal = AnimalFactory.createAnimal(AnimalFactory.CAT)</span><span
+            class="clickable" id="876.904"><br/><br/>Thats the basic idea behind factory pattern - there are lots of variations on this. </span><span
+            class="clickable" id="882.323">The basic idea is just sort of static method which takes some parameter and it goes through a decision process and returns an object of the appropriate type. </span><span
+            class="clickable" id="932.897">It is common to make the class name AbstractAnimal. </span><span
+            class="clickable" id="1063.002"><br/>We will look at further patterns later in the series. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a
+            href="../ios_device.html">iOS
+        devices</a> you cannot jump to video location by clicking on the outline. </span><br/></div></span></div>
+</div>
+</body>
+</html>
