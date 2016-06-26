@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Alexander Kagoshima: A Data Science Operationalization Framework</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">Mb038zOz2fM</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Data Science PyData</a></li>
+        <li class="active">Alexander Kagoshima: A Data Science Operationalization Framework</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><span class="label label-danger">Click on text below to jump to the corresponding location in the video (except iOS)</span><br/><div
+            id="control"><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div
+            id="videoPlayer"></div></div><div class="Data Science PyData" id="adMb038zOz2fM"></div></div><br/><br/><style
+            scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="12.01">Speaker introduction. </span><span
+            class="clickable"
+            id="37.256">My name is Alex Kagoshima and I work as a data scientist at Pivotal. </span><span
+            class="clickable" id="46.625">Pivotal has a couple of big data platform, we have an open source PaaS platform and app development and data science. </span><span
+            class="clickable" id="67.567">I don't work on internal data, I help customers realize use cases to get value out of their data. </span><span
+            class="clickable"
+            id="90.649">I develop models on top of their data to show what we can do with big data. </span><span
+            class="clickable" id="95.379"><br/><span class="t">Data Science Engagements Today</span></span><span
+            class="clickable" id="128.637">Customer has a lot of siloed data sources and siloed systems. </span><span
+            class="clickable" id="158.89">Their landscape is often complex. </span><span class="clickable" id="185.386">We pull their data and put it in some kind of distributed big data platform usually Hadoop. </span><span
+            class="clickable" id="194.869">Within the big data platform, I do the data extract and develop models on top of it, analyzing historical data, gathering intelligence. </span><span
+            class="clickable"
+            id="227.752">Then I create results of my model and show what it can do for their business. </span><span
+            class="clickable" id="306.503"><br/><br/>The big data frameworks like Spark etc are very good at taking the data and producing results, but there are no principled ways of getting results back into the customers' existing systems. </span><span
+            class="clickable" id="325.805">This is a big problem that we as data scientists should really work on, otherwise we are stuck in the hype cycle. </span><span
+            class="clickable" id="352.298"><br/><span class="t">Data science engagements today - 2</span></span><span
+            class="clickable" id="357.415">-We have scripting instead of production ready models</span><span
+            class="clickable" id="382.916"><br/>-training required on how to run created scripts</span><span
+            class="clickable" id="394.915"><br/>-long setup times, especially if it is on premise</span><span
+            class="clickable" id="422.915"><br/>-bad way of encapsulating our work for others to reuse</span><span
+            class="clickable" id="429.16"><br/>-operationalizing</span><span class="clickable" id="438.161"><br/><span
+            class="t">Try it differently</span></span><span class="clickable" id="444.661">We need an easy way to attach our models to existing legacy systems. </span><span
+            class="clickable" id="464.41">As data scientists, we might choose the fancy algorithm instead of the simple one. But the simple one is easier to operationalize. </span><span
+            class="clickable" id="488.653">I leveraged Cloud Foundry to spin up environments quickly. </span><span
+            class="clickable" id="502.651"><br/><span
+            class="t">DS Operationalization Framework Prototype</span></span><span class="clickable" id="506.847">I created a small framework. </span><span
+            class="clickable" id="523.085">Think of it as exposing an API. </span><span class="clickable" id="538.336">I used Flask as server framework. Send data as JSON, results are sent in JSON. </span><span
+            class="clickable" id="549.107">I used redis as model and data storage backend. </span><span
+            class="clickable" id="579.564"><br/>I implemented two models to show how it works - linear regression and online linear regression which is deployable to Cloud Foundry. </span><span
+            class="clickable" id="600.321"><br/><span class="t">What is cloud foundry?</span></span><span
+            class="clickable" id="603.325">Think of it as Heroku, but you can set up your own Heroku. </span><span
+            class="clickable"
+            id="603.326">This is really good for enterprises as they don't want to use the cloud. </span><span
+            class="clickable" id="633.237">It is open source. </span><span class="clickable" id="665.248"><br/><span
+            class="t">Framework prototype</span></span><span class="clickable" id="680.25">You have an API you can talk to. </span><span
+            class="clickable" id="683.619">You send JSON requests creating a model. </span><span class="clickable"
+                                                                                                 id="690.121">In the backend it creates a model and stores it in Redis. </span><span
+            class="clickable" id="693.708">You can then send data to the model as JSON, API will ingest the data and kick off retraining. </span><span
+            class="clickable" id="726.696">There is also some visualization tools. </span><span class="clickable"
+                                                                                                id="748.34">The idea is to have an encapsulated model. </span><span
+            class="clickable" id="775.39">We can do a demo with this. </span><span class="clickable"
+                                                                                   id="819.391"><br/><span class="t">Demo</span></span><span
+            class="clickable" id="831.637">To create a model, do the curl request with data. </span><span
+            class="clickable" id="964.891">Then we send data to the model. </span><span class="clickable" id="1088.639">After 10 data points, the model has been trained. </span><span
+            class="clickable" id="1110.39">I created a visualization which looks a little bit better. </span><span
+            class="clickable" id="1143.137">This shows the last 100 data points sent in. </span><span class="clickable"
+                                                                                                      id="1157.389">The blue line is the trained model which it is learning. </span><span
+            class="clickable"
+            id="1169.889">But the underlying behavior can change, and the model adapts to that. </span><span
+            class="clickable" id="1248.641"><br/><span class="t">Advantages of this approach</span></span><span
+            class="clickable" id="1252.492">-API provides a simple way to expose models to other software</span><span
+            class="clickable" id="1274.987"><br/>-Framework can free the data scientist from tedious work - keeping track of results for different modelling, keeping track of model performance after retraining</span><span
+            class="clickable" id="1330.988"><br/>-dynamically create new model instances via API, e.g. for different classes in the data or different versions of current models</span><span
+            class="clickable" id="1371.485"><br/><span class="t">Framework prototype - model</span></span><span
+            class="clickable" id="1382.736">The model is a class that needs to implement three functions: train(), score() and get_parameters()</span><span
+            class="clickable" id="1420.24"><br/><span class="t">Data Science in the Future?</span></span><span
+            class="clickable"
+            id="1428.993">You can expand a framework like this to work in the enterprise landscape. </span><span
+            class="clickable" id="1442.487">You need additional modules like data ingest, cleaning, transformation, aggregation. </span><span
+            class="clickable"
+            id="1467.4">You also need a proper big data store - redis is not that scalable. </span><span
+            class="clickable" id="1482.238">The nice thing about PaaS is that you can get some kind of data exploration module in there. </span><span
+            class="clickable" id="1573.239"><br/><span class="t">Open questions</span></span><span class="clickable"
+                                                                                                   id="1585.736">-deploy the trainer and scorer on the same instance or on different?</span><span
+            class="clickable" id="1606.216"><br/>-where and how can we use automatic scaling abilities of a PaaS?</span><span
+            class="clickable" id="1634.465"><br/>-automatically spin up multiple instances for multiple classes in the data?</span><span
+            class="clickable" id="1642.349"><br/>-should the framework be able to do feature transformation/feature engineering? </span><span
+            class="clickable"
+            id="1658.042"><br/>-what about future generators and models that only work in batches?</span><span
+            class="clickable" id="1671.159"><br/>-if real time data for scoring was sent to the framework, how to send a label to that data later?</span><span
+            class="clickable" id="1693.78"><br/><span class="t">Similar projects</span></span><span class="clickable"
+                                                                                                    id="1703.785">-Velox. From the people who developed Spark. </span><span
+            class="clickable" id="1714.833"><br/>-Google Prediction API</span><span class="clickable"
+                                                                                    id="1721.084"><br/>-Prediction IO - most similar to what I did</span><span
+            class="clickable" id="1754.084"><br/><span class="t">Questions</span></span><span class="clickable"
+                                                                                              id="1770.587"><span
+            class="t">Give us a real life example and how we can use it?</span></span><span class="clickable"
+                                                                                            id="1784.686">I worked on an engagement recently for detecting malware communication within proxy logs. </span><span
+            class="clickable"
+            id="1796.23">We analyzed the domain name, and we can use the framework for that. </span><span
+            class="clickable" id="1844.234"><br/><span class="t">In the API, you were sending label directly. Would it not make sense to decouple the data and the model?</span></span><span
+            class="clickable" id="1879.233">Yes, you can do that. I invite to do a pull request. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a
+            href="../ios_device.html">iOS devices</a> you cannot jump to video location by clicking on the outline. </span><br/></div></span>
+    </div>
+</div>
+</body>
+</html>
