@@ -301,9 +301,9 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEdita
     if (includeVideo) {
         var playerID = videoID.replace(/-/g, "");
         var category = $("#txtCategory").val();
-        var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
-        var htmlInfo = '<br/><span class="label label-danger">Click on text below to jump to specific point in the video (except iOS)</span><br/><br/>';
-        videoPlayerHTML = '<br/><div id="control"><br/><div class="'+$("#txtCategoryName").val()+'" id="ad'+window.currVideoID+'"></div><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div id="videoPlayer"></div></div></div>'+htmlInfo;
+        var scriptHTML = '<br/><div id="control"><br/><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(item){var pos = item.id;player'+playerID+'.seekTo(parseFloat(pos));var innerText = item.innerText;try{ga("send","event","'+category+'","JotClick",innerText);}catch(ex){}};</script>';
+        var htmlInfo = '<br/><br/>';
+        videoPlayerHTML = '<br/><span class="label label-danger">Click on text below to jump to the corresponding location in the video (except iOS)</span><br/><div id="control"><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div id="videoPlayer"></div></div><div class="'+$("#txtCategoryName").val()+'" id="ad'+window.currVideoID+'"></div></div>'+htmlInfo;
         playerHTML = scriptHTML+htmlInfo;
     }
     if(sourceText === ''){
@@ -618,6 +618,18 @@ function keyPressEvent(e) {
     }
 }
 
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+':'+minutes+':'+seconds;
+}
+
 function updateOutputForIndexPage(data){
     var fileName = $("#txtPageName").val();
     var divRow = $('<div>').addClass("row");
@@ -631,11 +643,13 @@ function updateOutputForIndexPage(data){
     var h3 = $('<h3>').append(player.getVideoData().title);
     var publishedAt = null;
     var description = null;
+    var duration = null;
     publishedAt = data.items[0].snippet.publishedAt;
     description = data.items[0].snippet.description;
+    duration = ' ['+player.getDuration().toString().toHHMMSS()+']';
     var h4 = $('<h4>');
     if(publishedAt !==null){
-        h4.append(new Date(publishedAt).toLocaleDateString());
+        h4.append(new Date(publishedAt).toLocaleDateString()+duration);
     }
     var p = $('<p>');
     if(description !== null){
