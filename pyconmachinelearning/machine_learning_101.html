@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Kyle Kastner - Machine Learning 101 - PyCon 2015</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">r-1XJBHot58</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">PyCon Machine Learning</a></li>
+        <li class="active">Kyle Kastner - Machine Learning 101 - PyCon 2015</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><span class="label label-danger">Click on text below to jump to the corresponding location in the video (except iOS)</span><br/><div
+            id="control"><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div
+            id="videoPlayer"></div></div><div class="PyCon Machine Learning" id="adr-1XJBHot58"></div></div><br/><br/><style
+            scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="15.186">My name is Kyle Kastner. </span><span
+            class="clickable" id="24.778">I am here to talk about the basics of machine learning. </span><span
+            class="clickable" id="57.143"><br/><span class="t">What is machine learning?</span></span><span
+            class="clickable" id="62.423">I break it into two topics - automation and data analysis. </span><span
+            class="clickable" id="62.424">The two approaches you see are people who want to automate - and people who want to inspect their processes and figure out what is making them tick and how to be more efficient and productive. </span><span
+            class="clickable" id="96.551"><br/><span class="t">Applications</span></span><span class="clickable"
+                                                                                               id="102.019">The applications for machine learning have exploded in the last 5 years. </span><span
+            class="clickable"
+            id="105.048">Hardware has caught up with ideas from the 80s and the future is very bright. </span><span
+            class="clickable" id="111.621"><br/>Speech processing</span><span class="clickable" id="125.119"><br/>Image processing</span><span
+            class="clickable" id="137.122"><br/>Natural language processing</span><span class="clickable"
+                                                                                        id="149.123"><br/>Advertising</span><span
+            class="clickable" id="157.618"><br/>Recommendations</span><span class="clickable" id="209.357"><br/><span
+            class="t">Automation spectrum</span></span><span class="clickable"
+                                                             id="213.723">-hand crafted rules</span><span
+            class="clickable" id="256.222"><br/>-Statistics</span><span class="clickable" id="275.471"><br/>-machine learning proper</span><span
+            class="clickable" id="291.222"><br/>-deep learning</span><span class="clickable" id="303.222"><br/><span
+            class="t">A test</span></span><span class="clickable" id="339.222">Classifying a point</span><span
+            class="clickable" id="361.722"><br/>The manifold hypothesis</span><span class="clickable" id="441.731"><br/><span
+            class="t">Classification</span></span><span class="clickable"
+                                                        id="461.484">Drawing a boundary in some space. </span><span
+            class="clickable" id="484.73"><br/><span class="t">Regression</span></span><span class="clickable"
+                                                                                             id="490.984">You are trying to predict what something will do - not merely classifying into a group of labels</span><span
+            class="clickable" id="534.233"><br/><span class="t">Learning functions</span></span><span class="clickable"
+                                                                                                      id="549.482">The core of machine learning is about learning functions. </span><span
+            class="clickable" id="672.233"><br/><span class="t">Train - valid - test</span></span><span
+            class="clickable" id="700.553">On the left we have the red data - on the right blue data. </span><span
+            class="clickable" id="721.047">You split a chunk of the red data and say it is the fake information I am going to test against. </span><span
+            class="clickable" id="738.407">We really want our systems to work on new data. </span><span
+            class="clickable" id="770.157"><br/><span class="t">What should I use?</span></span><span class="clickable"
+                                                                                                      id="778.661">Anaconda and Canopy. </span><span
+            class="clickable" id="788.659">They have all the packages installed for you already. </span><span
+            class="clickable" id="812.093"><br/><span class="t">Examples</span></span><span class="clickable"
+                                                                                            id="873.342"><span
+            class="t">Recommender systems</span></span><span class="clickable" id="899.593">The goal is - people rate some stuff and not other stuff. </span><span
+            class="clickable" id="919.093">The goal is to automatically rate the stuff which has not been rated. </span><span
+            class="clickable" id="941.341"><br/>The example goes through a list of jokes. </span><span class="clickable"
+                                                                                                       id="973.842"><br/><i>Tip: Use pandas to read Excel files</i>. </span><span
+            class="clickable" id="1071.846"><br/>I implemented an algorithm called probabilistic matrix factorization. </span><span
+            class="clickable" id="1096.36"><br/>Validation mean absolute error definition. </span><span
+            class="clickable" id="1139.86"><br/>What the Recommender system reconstructs. The matrices tell us something - users are not completely unique. You can group them together. </span><span
+            class="clickable" id="1195.61"><br/><span class="t">Spam classification</span></span><span class="clickable"
+                                                                                                       id="1291.312">We use tf-idf vectorizer and bernoulli naive bayes. </span><span
+            class="clickable" id="1338.61"><br/><span class="t">Digits</span></span><span class="clickable"
+                                                                                          id="1344.112">Shows the manifold structure we talked about. </span><span
+            class="clickable" id="1416.86"><br/><span class="t">Object detection</span></span><span class="clickable"
+                                                                                                    id="1424.609">This uses deep neural networks. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a
+            href="../ios_device.html">iOS devices</a> you cannot jump to video location by clicking on the outline. </span><br/></div></span>
+    </div>
+</div>
+</body>
+</html>
