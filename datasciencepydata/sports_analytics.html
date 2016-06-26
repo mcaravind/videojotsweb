@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Peadar Coyle: Probabilistic Programming in Sports Analytics</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">ntw6HgflqtM</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Data Science PyData</a></li>
+        <li class="active">Peadar Coyle: Probabilistic Programming in Sports Analytics</li>
+    </ol>
+    <div style=""><span class="videojots"><br/><span class="label label-danger">Click on text below to jump to the corresponding location in the video (except iOS)</span><br/><div
+            id="control"><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div
+            id="videoPlayer"></div></div><div class="Data Science PyData" id="adntw6HgflqtM"></div></div><br/><br/><style
+            scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable"
+                                               id="11.685">I am going to talk about rugby analytics. </span><span
+            class="clickable" id="21.688">The agenda is not rugby the sport but probabilistic programming and how you can use this to build a predictive model for an interesting problem. </span><span
+            class="clickable" id="27.274"><br/><span class="t">Who am I?</span></span><span class="clickable"
+                                                                                            id="51.891">I am a data analytics professional based on Luxembourg. </span><span
+            class="clickable" id="81.891"><br/><span
+            class="t">Contents: Probabilistic programming applied to rugby</span></span><span class="clickable"
+                                                                                              id="105.743"><span
+            class="t">Standard xkcd cartoon</span></span><span class="clickable"
+                                                               id="117.994">Sports commentary</span><span
+            class="clickable" id="135.49"><br/><span class="t">How can statistic help with sports?</span></span><span
+            class="clickable" id="138.383">-fundamentally rugby is a simulatable event</span><span class="clickable"
+                                                                                                   id="141.111"><br/>-how do we generate a model to predict the outcome of a tournament?</span><span
+            class="clickable" id="145.515"><br/>-how do we quantify our uncertainty in our model?</span><span
+            class="clickable" id="151.721"><br/><span class="t">What influenced me on this?</span></span><span
+            class="clickable" id="162.967">Quantopian talk</span><span class="clickable" id="172.219"><br/><span
+            class="t">What's wrong with statistics</span></span><span class="clickable" id="192.966">Models should not be built for mathematical convenience, but to accurately model the data. </span><span
+            class="clickable" id="245.722"><br/><span class="t">What is Bayesian statistics?</span></span><span
+            class="clickable" id="256.968">Implies that we have a prior belief about the world. Bayesian statistics is a formula to update our beliefs after having observed data. </span><span
+            class="clickable" id="274.517"><br/><span class="t">Bayesian rugby</span></span><span class="clickable"
+                                                                                                  id="282.015">Based on an original paper by Baio and Blangiardo</span><span
+            class="clickable" id="300.107"><br/><span class="t">What Zalando did</span></span><span class="clickable"
+                                                                                                    id="310.86">They used it for automatic weight estimations for items</span><span
+            class="clickable" id="321.23"><br/><span class="t">So why Bayesians?</span></span><span class="clickable"
+                                                                                                    id="327.732">Probabilistic programming is a new paradigm. </span><span
+            class="clickable" id="343.23">I will be comparing blackbox machine learning with scikit-learn. </span><span
+            class="clickable" id="357.485"><br/><span class="t">Blackbox machine learning</span></span><span
+            class="clickable" id="360.871">Predictions based on a blackbox</span><span class="clickable"
+                                                                                       id="361.335"><br/><span
+            class="t">Limitations of machine learning</span></span><span class="clickable" id="368.335">The models being blackbox is in itself a limitation - hard to explain to customers</span><span
+            class="clickable" id="372.628"><span class="t"></span></span><span class="clickable" id="373.308"><span
+            class="t">Probabilistic programming</span></span><span class="clickable" id="383.561">Openbox modes. </span><span
+            class="clickable" id="388.308">Blackbox inference engine. </span><span class="clickable"
+                                                                                   id="390.018"><br/><span class="t">Probabilistic programming - what's the big deal?</span></span><span
+            class="clickable" id="392.619">We are able to use data and our prior beliefs to generate a model. Generating a model is extremely powerful, and we can tell a story. </span><span
+            class="clickable" id="404.085"><br/><span class="t">Six nations rugby</span></span><span class="clickable"
+                                                                                                     id="451.588"><span
+            class="t">Motivation</span></span><span class="clickable" id="460.082">Your estimate of the strength of a team depends on your estimates of others' strengths. </span><span
+            class="clickable" id="504.697"><br/><span class="t">Results from previous years</span></span><span
+            class="clickable" id="519.451"><span class="t">Preparing model for PyMC</span></span><span class="clickable"
+                                                                                                       id="529.695"><span
+            class="t">What do we want to infer?</span></span><span class="clickable" id="543.946">We want to infer the team strengths. </span><span
+            class="clickable" id="556.947">We want to infer latent parameters. </span><span class="clickable"
+                                                                                            id="565.446">Probabilistic programming allows us to get these latent parameters. </span><span
+            class="clickable" id="590.459"><br/><span class="t">MCMC samples</span></span><span class="clickable"
+                                                                                                id="617.198"><span
+            class="t">What do we want?</span></span><span class="clickable" id="625.447">We want to quantify the uncertainty, to use this to generate a model, and we want answers as distributions and not point estimates. </span><span
+            class="clickable" id="631.744"><br/><span class="t">What assumptions do we know?</span></span><span
+            class="clickable" id="641.742">Finite number of team. </span><span class="clickable" id="646.492">We have data from last year, and sports scoring is modeled as a Poisson distribution. </span><span
+            class="clickable" id="649.257"><br/><span class="t">The model</span></span><span class="clickable"
+                                                                                             id="684.507">Home advantage is taken into account. </span><span
+            class="clickable" id="724.757"><br/>Key assumption: home effect is an advantage in sports. Bayesian models allow you to incorporate these beliefs into your model. </span><span
+            class="clickable" id="738.738"><br/><span
+            class="t">Digression: why the flat priors were picked</span></span><span class="clickable" id="758.985">It made no statistical difference</span><span
+            class="clickable" id="764.883"><br/><span class="t">A prior distribution is non-informative if the prior is flat relative to the likelihood function</span></span><span
+            class="clickable"
+            id="769.017">Often in Bayesian modelling it doesn't matter what your priors are. </span><span
+            class="clickable"
+            id="779.543">Even bad guesses will give enough information to find an interesting answer. </span><span
+            class="clickable" id="805.225"><br/><span class="t">Let us run the model</span></span><span
+            class="clickable" id="825.729"><span class="t">Diagnostics</span></span><span class="clickable"
+                                                                                          id="839.228">The plot indicates that the model converges. </span><span
+            class="clickable" id="845.942"><br/>The home advantage gives about 0.55 points advantage. </span><span
+            class="clickable" id="886.534"><br/><span class="t">Simulating a season</span></span><span class="clickable"
+                                                                                                       id="913.29">We are going to simulate 1000 seasons. </span><span
+            class="clickable"
+            id="971.038">So the model predicted Ireland would win most of the time 4 games. </span><span
+            class="clickable" id="984.753">We can also see how many points they score. </span><span class="clickable"
+                                                                                                    id="994.337"><br/><span
+            class="t">What happened in reality?</span></span><span class="clickable" id="1009.504">Shrinkage: Fundamentally all models are wrong, but some are useful. </span><span
+            class="clickable" id="1012.262"><br/><span
+            class="t">What are the predictions of the model?</span></span><span class="clickable" id="1021.266">Let us look at the winning team on average.</span><span
+            class="clickable" id="1063.677"><br/><span class="t">What actually happened</span></span><span
+            class="clickable" id="1076.93">We need to investigate like scientists. </span><span class="clickable"
+                                                                                                id="1092.198"><br/><span
+            class="t">Ireland won the six nations</span></span><span class="clickable" id="1118.199"><span class="t">Conclusion</span></span><span
+            class="clickable" id="1125.446"><span class="t">Learn more</span></span><span class="clickable"
+                                                                                          id="1146.949">Probabilistic programming for hackers</span><span
+            class="clickable" id="1155.951"><br/>Doing Bayesian data analysis</span><span class="clickable"
+                                                                                          id="1188.699"><br/><span
+            class="t">Questions</span></span><span class="clickable" id="1193.698"><span class="t">Can we sell this tool as a compliance tool for FIFA?</span></span><span
+            class="clickable" id="1212.24">Never going to happen.</span><span class="clickable"
+                                                                              id="1219.24">Maybe. </span><span
+            class="clickable" id="1241.487"><br/><span
+            class="t">Why don't you use nested sampling instead of MCMC?</span></span><span class="clickable"
+                                                                                            id="1282.98">The PyMC3 project has a few more samplers. </span><span
+            class="clickable" id="1299.232">You can submit a pull request to add it yourself. </span><span
+            class="clickable" id="1338.483"><br/><span
+            class="t">PyMC2 vs PyMC3. Can you tell us why you chose PyMC 2?</span></span><span class="clickable"
+                                                                                               id="1360.98">At the time I did it, the documentation for PyMC 3 was not that good. </span><span
+            class="clickable" id="1388.481">I will probably port it to PyMC3 at some point. </span><br/><span
+            style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a
+            href="../ios_device.html">iOS devices</a> you cannot jump to video location by clicking on the outline. </span><br/></div></span>
+    </div>
+</div>
+</body>
+</html>
