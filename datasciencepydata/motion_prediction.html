@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Paul Balzer: Running, walking, sitting or biking? - Motion prediction with acceleration and
+    rotation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/player.js"></script>
+    <script>if (document.location.hostname.search('videojots.com') !== -1) {
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-78294929-1', 'auto');
+        ga('send', 'pageview');
+    }</script>
+    <style>#segrip {
+        width: 10px;
+        height: 10px;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        bottom: -5px;
+        right: -5px;
+    }</style>
+</head>
+<body>
+<div style="margin: 0 auto;width:70%">
+    <div id="videoid" style="visibility: hidden">xVC9naY4LsQ</div>
+    <br/>
+    <ol class="breadcrumb">
+        <li><a href="../">Home</a></li>
+        <li><a href="./" class="category">Data Science PyData</a></li>
+        <li class="active">Paul Balzer: Running, walking, sitting or biking? - Motion prediction with acceleration and
+            rotation
+        </li>
+    </ol>
+    <div style=""><span class="videojots"><br/><span class="label label-danger">Click on text below to jump to the corresponding location in the video (except iOS)</span><br/><div
+            id="control">
+        <div id="playerBox">
+            <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+            <div id="videoPlayer"></div>
+        </div>
+        <div class="Data Science PyData" id="adxVC9naY4LsQ"></div>
+    </div><br/><br/><style scoped>.clickable {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .clickable:hover {
+        background: yellow;
+    }
+
+    .t {
+        font-weight: bold;
+    }
+
+    .t:before {
+        content: "\A";
+        white-space: pre;
+    }
+
+    .t:after {
+        content: "\A";
+        white-space: pre;
+    }</style><div class="resizable"><br/><span class="clickable" id="36.643">We try to predict with machine learning whether the device is running, walking, sitting or biking. </span><span
+            class="clickable" id="38.82">The iPhone has now eight motion processors. </span><span class="clickable"
+                                                                                                  id="63.803">It is measuring acceleration and rotation rate and predicting your action. </span><span
+            class="clickable"
+            id="65.781">The device is in your pocket and we will predict what the device is doing. </span><span
+            class="clickable" id="123.018">The code is on github. </span><span class="clickable" id="133.767"><br/><br/>The talk is about feature engineering and not basics of machine learning. </span><span
+            class="clickable" id="155.768">I have prepared a log file named activitydata.csv. </span><span
+            class="clickable" id="166.53">I created the file with my smartphone. </span><span class="clickable"
+                                                                                              id="180.018">Now I have the labelled activities. </span><span
+            class="clickable" id="194.768">The devices have six degrees of freedom - 3 axes and 2 rotation axes. </span><span
+            class="clickable" id="238.286">So I have this motion data with labelled activity, so it is supervised learning. </span><span
+            class="clickable" id="251.428">We have some description for everything. </span><span class="clickable"
+                                                                                                 id="259.677"><br/><br/>The first feature I want to introduce is <b>absolute
+        acceleration</b>. </span><span class="clickable" id="278.426">Take all three accelerations to calculate absolute acceleration. </span><span
+            class="clickable" id="291.679">The first feature is absolute acceleration - you can see the differences between different actions. </span><span
+            class="clickable" id="329.677">It is maybe a good feature to use. </span><span class="clickable"
+                                                                                           id="339.932">We calculate difference of max-min. </span><span
+            class="clickable" id="347.927">The rolling max and rolling min (using pandas) of absolute acceleration is used. </span><span
+            class="clickable" id="372.178">(Demo of charts for the feature)</span><span class="clickable" id="392.178">The scatterplot of the features - there is clear difference between sitting and running, but walking and biking you cannot separate. </span><span
+            class="clickable" id="415.275"><br/><br/>We need a second feature - the <b>rotation rate</b> of the device. </span><span
+            class="clickable" id="427.274">Rotation rate means how fast device turns. </span><span class="clickable"
+                                                                                                   id="440.025">The values while walking and biking show a good difference. </span><span
+            class="clickable"
+            id="460.274">Engineers know what to do with periodic signals - you have the FFT algorithm. </span><span
+            class="clickable" id="470.502">You can throw a value in a get a frequency back. </span><span
+            class="clickable" id="504.846">We fire this FFT algorithm on the whole dataset. </span><span
+            class="clickable" id="518.596">We can see difference between biking and walking. </span><span
+            class="clickable"
+            id="522.032">So it is the second and most important feature to separate all activities. </span><span
+            class="clickable" id="528.043"><br/><br/>Now we come to the machine learning part - I did my best to work out how to estimate activities. </span><span
+            class="clickable" id="572.291">The two features produce four clusters of features for four different activities - looks like an easy one. </span><span
+            class="clickable" id="623.791">If the accuracy score is 100% you did something wrong, but I don't know if I did something wrong. </span><span
+            class="clickable" id="646.466">The SVC figured out boundaries for every activity. </span><span
+            class="clickable" id="708.541">Let us try a real example. </span><span class="clickable" id="734.54">The TinkerForge - I am connecting to it - and loading the classifier. I calculate the features from the raw data. </span><span
+            class="clickable" id="748.68">Then I am firing everything through the predictor. </span><span
+            class="clickable" id="840.446"><br/><br/><span class="i">Live demo</span></span><span class="clickable"
+                                                                                                  id="913.98"><br/><br/>Not really 100 percent, but if you look at your Apple device it does detect every action you are doing. </span><span
+            class="clickable" id="947.403"><br/><span class="t">Questions</span></span><span class="clickable"
+                                                                                             id="967.903">(Questions are Inaudible)</span><br/><span
+            style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a
+            href="../ios_device.html">iOS
+        devices</a> you cannot jump to video location by clicking on the outline. </span><br/></div></span></div>
+</div>
+</body>
+</html>
