@@ -26,7 +26,7 @@ $(function () {
     window.outputFormat = 'bounded';
     window.textAreaBeingEdited = null;
     $.ajax({
-        url: 'http://www.videojots.com/create/wordcount.txt',
+        url: 'http://www.videojots.com/create/wordcount.json',
         dataType: "jsonp",
         jsonpCallback: 'callback',
         success: function(data) {
@@ -841,7 +841,7 @@ function updateWordCount(){
     var wordCountJson = JSON.parse(window.json);
     wordCountJson[window.currVideoID]=window.totalCount;
     var wordCountblob = new Blob([JSON.stringify(wordCountJson)], { type: "text/plain;charset=utf-8" });
-    saveAs(wordCountblob, "wordcount.txt");
+    saveAs(wordCountblob, "wordcount.json");
 }
 
 function renderSource() {
