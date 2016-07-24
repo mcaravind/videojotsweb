@@ -25,6 +25,15 @@ $(function () {
     window.currVideoID = 'unknown';
     window.outputFormat = 'bounded';
     window.textAreaBeingEdited = null;
+    $.ajax({
+        url: 'http://www.videojots.com/create/wordcount.txt',
+        dataType: "jsonp",
+        jsonpCallback: 'callback',
+        success: function(data) {
+            console.log(data);
+            loadWordCount(data);
+        }
+    });
     //initialize controls
     $("#btnInsertLineBreak").prop('disabled', true);
     $("#saveHtml").prop('disabled',true);
@@ -85,9 +94,7 @@ $(function () {
     });
     document.getElementById('file-input')
   .addEventListener('change', readSingleFile, false);
-    jQuery.getJSON('wordcount.txt', function(data){
-        loadWordCount(data);
-    });
+
 });
 
 function loadWordCount(data){
