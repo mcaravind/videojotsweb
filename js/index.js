@@ -85,7 +85,14 @@ $(function () {
     });
     document.getElementById('file-input')
   .addEventListener('change', readSingleFile, false);
+    jQuery.getJSON('wordcount.txt', function(data){
+        loadWordCount(data);
+    });
 });
+
+function loadWordCount(data){
+    window.json = data;
+}
 
 function toggleSavePageButtonState(){
     window.pageName = $("#txtPageName").val();
@@ -108,6 +115,13 @@ function highlightCurrentSelection(){
         $(elem).css("background-color","white");
         $(elem).removeAttr("tabindex");
     },2000);
+}
+
+function countWords(s) {
+    s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
+    s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
+    s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
+    return s.split(' ').length;
 }
 
 function saveChanges(){
@@ -194,12 +208,22 @@ function loadFile(contents) {
         }
     }
     loadVideoInPlayer(videoid);
+    countWordsFromJSON(source);
     $("#txtSource1").val(source);
     $("#txtCSS").val(style);
     $("#divTitle").html(title);
     $("#txtCategoryName").val(category);
     $("#txtPageName").val(pageName);
     updateOutput();
+}
+
+function countWordsFromJSON(json){
+
+    window.totalCount = 0;
+    jsonText = JSON.parse(json);
+    jsonText.forEach(function(item){
+        window.totalCount += countWords(item.text);
+    });
 }
 
 function insertLineBreak() {
@@ -492,8 +516,10 @@ function sortJotsByPosition() {
     var allText = sourceText;
     var lines = JSON.parse(allText);
     var sorted = [];
+    window.totalCount = 0;
     lines.forEach(function(item){
         var textVal = item.text;
+        window.totalCount += countWords(textVal);
         var pos = parseFloat(item.pos);
         var obj = {};
         obj.pos = pos;
@@ -721,6 +747,9 @@ function updateOutput() {
         })(i),false);
     }
     renderSource();
+    if(window.totalCount){
+        $("#lblCount").html(window.totalCount.toString());
+    }
 }
 
 function getAllRules() {
@@ -799,6 +828,13 @@ function saveFile() {
     };
     var blob = new Blob([JSON.stringify(json)], { type: "text/plain;charset=utf-8" });
     saveAs(blob, currVideoID+".txt");
+}
+
+function updateWordCount(){
+    var wordCountJson = JSON.parse(window.json);
+    wordCountJson[window.currVideoID]=window.totalCount;
+    var wordCountblob = new Blob([JSON.stringify(wordCountJson)], { type: "text/plain;charset=utf-8" });
+    saveAs(wordCountblob, "wordcount.txt");
 }
 
 function renderSource() {

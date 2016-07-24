@@ -111,8 +111,9 @@
                                 <div role="tabpanel" class="tab-pane" id="raw">
                                     <div id="divTitle"></div>
                                     <textarea id="txtPageName"></textarea>
-                                    <button onclick=" saveHtml() " id="saveHtml" class="btn btn-primary">Save as web page</button>&nbsp;&nbsp;
-                                    <button onclick=" saveFile() " id="saveLink" class="btn btn-primary">Save source file</button><br/>
+                                    <button onclick=" saveHtml() " id="saveHtml" class="btn btn-primary btn-xs">Save as web page</button>&nbsp;&nbsp;
+                                    <button onclick=" saveFile() " id="saveLink" class="btn btn-primary btn-xs">Save source file</button>&nbsp;&nbsp;
+                                    <button onclick=" updateWordCount() " id="updateWordCount" class="btn btn-primary btn-xs">Update Word Count</button><br/>
                                     <span class="label label-success">Load from local file:</span><br/>
                                     <input type="file" id="file-input"/><br/>
                                     <select class="form-control" id="selectCategory" onchange="updateCategory()">
@@ -154,7 +155,7 @@
                         </div>
                     </div>
                     <div style="width: 95%;" class="panel panel-default">
-                        <div class="panel-heading">Output</div>
+                        <div class="panel-heading">Output<label id="lblCount"></label></div>
                         <div style="height: 220px;overflow-y:auto" class="panel-body" id="pnlNotes">
                         </div>
                     </div>
