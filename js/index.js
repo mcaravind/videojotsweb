@@ -25,14 +25,11 @@ $(function () {
     window.currVideoID = 'unknown';
     window.outputFormat = 'bounded';
     window.textAreaBeingEdited = null;
-    $.ajax({
-        url: 'http://www.videojots.com/create/wordcount.json',
-        dataType: "jsonp",
-        jsonpCallback: 'callback',
-        success: function(data) {
-            console.log(data);
-            loadWordCount(data);
-        }
+    $.getJSON("http://www.videojots.com/create/wordcount.json?jsoncallback=?",function(result){
+        window.json = result;
+    }).error(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("incoming Text " + jqXHR.responseText);
     });
     //initialize controls
     $("#btnInsertLineBreak").prop('disabled', true);
