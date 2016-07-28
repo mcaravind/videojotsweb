@@ -25,12 +25,27 @@ $(function () {
     window.currVideoID = 'unknown';
     window.outputFormat = 'bounded';
     window.textAreaBeingEdited = null;
-    $.getJSON("http://www.videojots.com/create/wordcount.json?jsoncallback=?",function(result){
-        window.json = result;
-    }).error(function(jqXHR, textStatus, errorThrown) {
-        console.log("error " + textStatus);
-        console.log("incoming Text " + jqXHR.responseText);
-    });
+    /*Papa.parse("http://www.videojots.com/create/wordcount.csv", {
+        download: true,
+        delimiter: "",	// auto-detect
+        newline: "",	// auto-detect
+        header: false,
+        dynamicTyping: false,
+        preview: 0,
+        encoding: "",
+        worker: false,
+        comments: false,
+        step: undefined,
+        complete: function(results){
+
+        },
+        error: undefined,
+        skipEmptyLines: false,
+        chunk: undefined,
+        fastMode: undefined,
+        beforeFirstChunk: undefined,
+        withCredentials: undefined
+    });*/
     //initialize controls
     $("#btnInsertLineBreak").prop('disabled', true);
     $("#saveHtml").prop('disabled',true);
