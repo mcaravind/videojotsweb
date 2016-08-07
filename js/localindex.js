@@ -105,7 +105,11 @@ $(function () {
             }
 
             var fileURL = URL.createObjectURL(file)
-            player.src = fileURL
+            player.src = fileURL;
+            var myVideoPlayer = document.getElementById('videoPlayer');
+            myVideoPlayer.addEventListener('durationchange', function() {
+                window.currVideoDuration = myVideoPlayer.duration;
+            });
         }
         var inputNode = document.querySelector('#btnFileSelect');
         inputNode.addEventListener('change', playSelectedFile, false);
@@ -137,6 +141,14 @@ $(function () {
 
 });
 
+
+function renderInputBoxes(duration){
+    //for each 3 second segment, display second, a play icon, and then the input box
+    //when a box receives focus, the corresponding audio plays, for the given number
+    //of seconds, and stops
+    //typing /n// will play the next segment and then stop, /r// will replay the current segment, /b// will play segment before
+    
+}
 
 function readSingleFile(e) {
     var file = e.target.files[0];
