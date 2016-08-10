@@ -1,27 +1,40 @@
 /**
  * Created by aravindmc on 5/2/2016.
  */
+
+/*
+ Useful stuff
+ jQuery('<div/>', {
+ id: 'foo',
+ href: 'http://google.com',
+ title: 'Become a Googler',
+ rel: 'external',
+ text: 'Go to Google!'
+ }).appendTo('#mySelector');
+ */
+
 var S_PAUSE = '/p/';
 var S_RESUME = '/r/';
 var S_NEWLINE = '/n/';
 var S_POP = '//';
 var isClear = true;
 
-var CMDTEXT={};
+var CMDTEXT = {};
 CMDTEXT[S_PAUSE] = 'Pause';
 CMDTEXT[S_RESUME] = 'Resume';
 CMDTEXT[S_NEWLINE] = 'Next line';
 CMDTEXT[S_POP] = 'Close last open tag';
 
-var COMMAND= {
+var COMMAND = {
     PAUSE: "pause",
     RESUME: "resume",
     NEWLINE: "newline",
-    POP:"pop",
-    NONE:"none"
+    POP: "pop",
+    NONE: "none"
 }
 
 $(function () {
+    window.segLength = 4;
     window.player = document.getElementById('videoPlayer');
 
     //initialize globals
@@ -38,7 +51,7 @@ $(function () {
         var getSelection = get_selection(window.textAreaBeingEdited).text;
         var selectedVal = $(this).find(':selected').val().toString();
         var replaceStr = '';
-        if ($.inArray(selectedVal,predefined)>-1) {
+        if ($.inArray(selectedVal, predefined) > -1) {
             replaceStr = '<' + selectedVal + '>' + getSelection + '</' + selectedVal + '>';
         } else {
             replaceStr = '<span class="' + selectedVal + '">' + getSelection + '</span>';
@@ -85,7 +98,7 @@ $(function () {
             element.innerHTML = message
             element.className = isError ? 'error' : 'info'
         }
-        var jumpToPos = function(event){
+        var jumpToPos = function (event) {
             var videoNode = document.querySelector('video')
             videoNode.currentTime = 300
         }
@@ -107,47 +120,91 @@ $(function () {
             var fileURL = URL.createObjectURL(file)
             player.src = fileURL;
             var myVideoPlayer = document.getElementById('videoPlayer');
-            myVideoPlayer.addEventListener('durationchange', function() {
+            myVideoPlayer.addEventListener('durationchange', function () {
                 window.currVideoDuration = myVideoPlayer.duration;
+                renderInputBoxes(window.currVideoDuration);
+                window.currentSegment = 1;
+                window.startTime = new Date();
+                window.beginning = new Date();
+                playSegment(window.currentSegment);
             });
         }
         var inputNode = document.querySelector('#btnFileSelect');
         inputNode.addEventListener('change', playSelectedFile, false);
 
 
-
         /*Object.prototype.seekTo = function(pos){
-            video.currentTime = pos;
-        }
+         video.currentTime = pos;
+         }
 
-        Object.prototype.playVideo = function(pos){
-            video.play();
-        }
+         Object.prototype.playVideo = function(pos){
+         video.play();
+         }
 
-        Object.prototype.pauseVideo = function(pos){
-            video.pause();
-        }
+         Object.prototype.pauseVideo = function(pos){
+         video.pause();
+         }
 
-        Object.prototype.getCurrentTime = function(){
-            return video.currentTime;
-        }
+         Object.prototype.getCurrentTime = function(){
+         return video.currentTime;
+         }
 
-        Object.prototype.getDuration = function(){
-            return video.duration;
-        }*/
+         Object.prototype.getDuration = function(){
+         return video.duration;
+         }*/
 
     })()
 
 
 });
 
+function playSegment(index) {
+    player.currentTime = (index-1) * window.segLength;
+    player.play();
+    var tid = setTimeout(playVideoTill, 100);
+    function playVideoTill(){
+        if (player.currentTime > (index * window.segLength)+0.3) {
+            player.pause();
+            clearInterval(tid);
+        }
+        else
+            setTimeout(playVideoTill,100);
+    }
+}
 
-function renderInputBoxes(duration){
+
+
+function renderInputBoxes(duration) {
     //for each 3 second segment, display second, a play icon, and then the input box
     //when a box receives focus, the corresponding audio plays, for the given number
     //of seconds, and stops
     //typing /n// will play the next segment and then stop, /r// will replay the current segment, /b// will play segment before
-    
+    $("#divSegments").html('');
+    var numSegs = Math.ceil(duration / window.segLength);
+    for (var i = 1; i <= numSegs; i++) {
+        var time = '@'+ (i*window.segLength).toString().toHHMMSS();
+        var div = jQuery('<div/>', {
+            class: "form-group"
+        }).appendTo('#divSegments');
+        jQuery('<label/>', {
+            id: 'seglabel_' + i,
+            text: time
+        }).appendTo(div);
+        //<span class="glyphicon glyphicon-play" aria-hidden="true">
+        jQuery('<span/>', {
+            class: 'glyphicon glyphicon-play',
+            'aria-hidden': true
+        }).appendTo(div);
+        jQuery('<input/>', {
+            type: "text",
+            class: "form-control",
+            width: 250,
+            id: "segtext_" + i
+        }).appendTo(div);
+        jQuery('<label/>', {
+            id: 'seglabelduration_' + i
+        }).appendTo(div);
+    }
 }
 
 function readSingleFile(e) {
@@ -161,6 +218,18 @@ function readSingleFile(e) {
         loadFile(contents);
     };
     reader.readAsText(file);
+}
+
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+':'+minutes+':'+seconds;
 }
 
 function loadFile(contents) {
@@ -203,14 +272,14 @@ function updateSentence(pos, newValue, newPos) {
     var sourceText = window.textSource;
     var textToSearch = '{|' + pos + '|#|';
     var indexOfItem = sourceText.indexOf(textToSearch);
-    var indexOfMiddlePipe = sourceText.indexOf('|#|', indexOfItem+2);
-    var indexOfEnd = sourceText.indexOf('|}', indexOfMiddlePipe+3);
+    var indexOfMiddlePipe = sourceText.indexOf('|#|', indexOfItem + 2);
+    var indexOfEnd = sourceText.indexOf('|}', indexOfMiddlePipe + 3);
     var newString = sourceText.substr(0, indexOfMiddlePipe + 3) + newValue + sourceText.substr(indexOfEnd);
     var newPosString = newString;
     if (newPos !== pos) {
         indexOfItem = newString.indexOf(textToSearch);
         indexOfMiddlePipe = newString.indexOf('|#|', indexOfItem + 4);
-        newPosString = newString.substr(0, indexOfItem+2) + newPos + newString.substr(indexOfMiddlePipe);
+        newPosString = newString.substr(0, indexOfItem + 2) + newPos + newString.substr(indexOfMiddlePipe);
     }
     window.textSource = newPosString;
     $("#txtSource").val(window.textSource);
@@ -273,7 +342,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
         //var scriptHTML = '<br/><div id="control"><div id="' + videoID + '"></div></div><script>var tag=document.createElement("script");tag.src="https://www.youtube.com/iframe_api";var firstScriptTag=document.getElementsByTagName("script")[0];firstScriptTag.parentNode.insertBefore(tag,firstScriptTag);var player' + playerID + ';function onYouTubeIframeAPIReady(){player' + playerID + '=new YT.Player("' + videoID + '",{height:"390",width:"640",videoId:"' + videoID + '",playerVars:{autostart:0,autoplay:0,controls:1},events:{onReady:onPlayerReady,onStateChange:onPlayerStateChange}})}function onPlayerReady(a){var elems = document.getElementsByClassName("clickable");for (var i = 0; i < elems.length; i++) {elems[i].addEventListener("click",(function(i) {return function() {playVideoAt(this.id);document.getElementById("control").scrollIntoView();}})(i),false);}}var done=!1;function onPlayerStateChange(a){}function playVideo(){player' + playerID + '.playVideo()}function pauseVideo(){player'+playerID+'.pauseVideo()}function stopVideo(){player'+playerID+'.stopVideo()}function loadVideoById(a){player'+playerID+'.loadVideoById(a,0,"large")}function playVideoAt(pos){player'+playerID+'.seekTo(parseFloat(pos))};</script>';
         var scriptHTML = '<style>#videoPlayer{object-fit: initial;width: 500px;height: 400px;}</style><script src="helper.js"></script><div id="message"></div><input type="file" value="Open local video file..." accept="video/*" id="btnFileSelect"/><video controls autoplay id="videoPlayer"></video>';
         var htmlInfo = '<br/><b>Click on text below to jump to specific point in the video</b>';
-        playerHTML = scriptHTML+htmlInfo;
+        playerHTML = scriptHTML + htmlInfo;
     }
     var allText = sourceText;
     var lines = allText.split("{|");
@@ -281,7 +350,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
     var htmlPre = '<div style="margin: 0 auto;width:70%" ><div style=""><span class="videojots">';
     var startScopedStyle = '<style scoped>';
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
-    var style = clickableStyle+ $("#txtCSS").val();
+    var style = clickableStyle + $("#txtCSS").val();
     var endScopedStyle = '</style>';
     var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a target="_blank" href="http://www.videojots.com">VideoJots</a></span><br/>';
     var htmlPost = '</span></div></div>';
@@ -341,7 +410,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
         }
     }
     htmlFromSource = '<div ' + styleAttr + ' class="resizable"><br/>' + htmlFromSource + footer + '</div>';
-    html = htmlPre + playerHTML+ startScopedStyle + style + endScopedStyle + htmlFromSource + htmlPost;
+    html = htmlPre + playerHTML + startScopedStyle + style + endScopedStyle + htmlFromSource + htmlPost;
     return html;
 }
 
@@ -353,8 +422,12 @@ function getRulesFromText(cssRulesText) {
 }
 
 
-
 function keyUpEvent(e) {
+    var currentTime = new Date();
+    var totalTimeElapsed = currentTime - window.beginning;
+    var totalTimeOfAudioPlay = player.currentTime;
+    var factor = (totalTimeElapsed/(totalTimeOfAudioPlay * 1000)).toFixed(2);
+    $("#lblAverageSpeed").html(factor+'x');
     var tb = document.getElementById("tbNotes");
     var text = tb.value;
     if (text.endsWith('/p//')) {
@@ -363,8 +436,7 @@ function keyUpEvent(e) {
         tb.value = text.slice(0, -4);
     }
     if (text.endsWith('/r//')) {
-        //player.playVideo();
-        player.play();
+        playSegment(window.currentSegment);
         tb.value = text.slice(0, -4);
     }
     if (text.endsWith('//')) {
@@ -384,7 +456,8 @@ function keyUpEvent(e) {
     }
     if (text.length === 1 && isClear) {
         //window.currPosition = Math.ceil(player.getCurrentTime()*1000);
-        window.currPosition = Math.ceil(player.currentTime*1000);
+        window.currPosition = Math.ceil(player.currentTime * 1000);
+        window.startTime = new Date();
         $("#spnNextJot").text('Next jot at position ' + window.currPosition + ' s');
         isClear = false;
     }
@@ -454,7 +527,9 @@ function sortJotsByPosition() {
             sorted.push(obj);
         }
     });
-    sorted = _.sortBy(sorted, function (o) { return o.pos; });
+    sorted = _.sortBy(sorted, function (o) {
+        return o.pos;
+    });
     var sortedText = '';
     $.each(sorted, function (index, value) {
         var currObj = value;
@@ -489,9 +564,11 @@ function addToSource(text, position) {
     lastObj.pos = position;
     lastObj.text = text;
     sorted.push(lastObj);
-    sorted = _.sortBy(sorted, function (o) { return o.pos; });
+    sorted = _.sortBy(sorted, function (o) {
+        return o.pos;
+    });
     var sortedText = '';
-    $.each(sorted, function(index, value) {
+    $.each(sorted, function (index, value) {
         var currObj = value;
         sortedText += '{|' + currObj.pos + '|#|' + currObj.text + '|}';
     });
@@ -501,7 +578,7 @@ function addToSource(text, position) {
 }
 
 function updateCurrentJot(text) {
-    var htmlJot = convertSourceToOutput('{|'+0+'|#|'+text+'|}',false,0);
+    var htmlJot = convertSourceToOutput('{|' + 0 + '|#|' + text + '|}', false, 0);
     $("#spnCurrentJot").html(htmlJot);
 }
 
@@ -576,10 +653,24 @@ function keyPressEvent(e) {
             }
         }
         if (!doNotDisplay && encodedText.trim() !== '') {
+            var segTextID = '#segtext_'+window.currentSegment;
+            $(segTextID).val(encodedText);
+            window.currPosition = 1000 * ((window.currentSegment - 1)*window.segLength);
             addToSource(encodedText, window.currPosition);
             updateOutput();
         }
+        window.endTime = new Date();
+        var timeElapsed = window.endTime - window.startTime;
+        var totalTimeElapsed = window.endTime - window.beginning;
+        var segLabelDurationID = '#seglabelduration_'+window.currentSegment;
+        $(segLabelDurationID).html(timeElapsed);
+        var averageSpeed = (totalTimeElapsed/(window.currentSegment*1000));
+        var factor = (averageSpeed/window.segLength).toFixed(2);
+        $("#lblAverageSpeed").html(factor+'x');
         tb.value = '';
+        window.currentSegment +=1;
+        playSegment(window.currentSegment);
+        window.startTime = new Date();
         isClear = true;
         $("#spnNextJot").text('');
         return false;
@@ -589,7 +680,7 @@ function keyPressEvent(e) {
 function updateOutput() {
     sortJotsByPosition();
     displayOutlineProgress();
-    var output = convertSourceToOutput($("#txtSource").val(), false,0);
+    var output = convertSourceToOutput($("#txtSource").val(), false, 0);
     var outputWithPlayer = convertSourceToOutput($("#txtSource").val(), true, 0);
     $("#pnlNotes").html('');
     $("#pnlNotes").html(output);
@@ -600,10 +691,10 @@ function updateOutput() {
     $("#pnlNotes").scrollTop($("#pnlNotes")[0].scrollHeight);
     var allrules = getAllRules();
     $("#selectClasses").html('');
-    $.each(allrules, function(index, value) {
+    $.each(allrules, function (index, value) {
         $("#selectClasses").append($('<option/>', {
             value: value,
-            text:value
+            text: value
         }));
     });
     renderSource();
@@ -636,14 +727,14 @@ function displayOutlineProgress() {
     var tr = $('<tr/>', {});
     for (var i = 0; i < 100; i++) {
         var cell = $('<td/>', {
-            id:'cell_'+i
+            id: 'cell_' + i
         });
         cell.css('width', '1%');
         tr.append(cell);
     }
     table.append(tr);
     $("#outlineProgress").append(table);
-    $.each(lines, function(index, value) {
+    $.each(lines, function (index, value) {
         if (value !== '') {
             var items = value.split('|#|');
             var pos = parseFloat(items[0]);
@@ -656,7 +747,7 @@ function displayOutlineProgress() {
 
 function saveHtml() {
     var fullHtml = generateHtmlFromSource();
-    var blob = new Blob([fullHtml], { type: "text/plain;charset=utf-8" });
+    var blob = new Blob([fullHtml], {type: "text/plain;charset=utf-8"});
     saveAs(blob, currVideoID + ".html");
 }
 
@@ -665,7 +756,7 @@ function saveHtmlWithGA() {
         alert('No Google Analytics code was input!');
     } else {
         var fullHtml = generateHtmlFromSourceWithGA();
-        var blob = new Blob([fullHtml], { type: "text/plain;charset=utf-8" });
+        var blob = new Blob([fullHtml], {type: "text/plain;charset=utf-8"});
         saveAs(blob, currVideoID + ".html");
     }
 }
@@ -677,9 +768,9 @@ function saveFile() {
     var json = {
         "text": textToWrite,
         "css": cssToWrite,
-        "duration":currDuration
+        "duration": currDuration
     };
-    var blob = new Blob([JSON.stringify(json)], { type: "text/plain;charset=utf-8" });
+    var blob = new Blob([JSON.stringify(json)], {type: "text/plain;charset=utf-8"});
     saveAs(blob, "output.txt");
 }
 
@@ -693,7 +784,7 @@ function renderSource() {
                 $('#btnInsertLineBreak').prop('disabled', false);
                 var taId = '#txt_' + pos.toString();
                 $(taId).prop('readonly', false);
-                window.textAreaBeingEdited = 'txt_'+pos.toString();
+                window.textAreaBeingEdited = 'txt_' + pos.toString();
                 this.textContent = 'Save';
                 var curPos = parseFloat(pos) / 1000;
                 //player.seekTo(curPos);
@@ -705,7 +796,7 @@ function renderSource() {
                     value: curPos,
                     min: curPos - 10,
                     max: curPos + 10,
-                    step:0.1,
+                    step: 0.1,
                     slide: function (event, ui) {
                         $('#txtEditPos_' + pos).val(ui.value);
                         //player.seekTo(ui.value);
@@ -720,7 +811,7 @@ function renderSource() {
                 var taId = '#txt_' + pos.toString();
                 var newValue = $(taId).val();
                 var newPos = $('#txtEditPos_' + pos).val() * 1000;
-                updateSentence(pos, newValue,newPos);
+                updateSentence(pos, newValue, newPos);
                 this.textContent = 'Edit';
                 $("#slider").hide();
                 $("#sliderMessage").hide();
@@ -751,10 +842,10 @@ function renderSourceData() {
             var text = items[1].split('|}')[0];
             var tr = $('<tr/>', {});
             var textAreaPos = $('<textarea/>', {
-                id:'txtEditPos_'+pos.toString()
+                id: 'txtEditPos_' + pos.toString()
             });
             $(textAreaPos).prop('readonly', true);
-            $(textAreaPos).text(pos/1000);
+            $(textAreaPos).text(pos / 1000);
             var tdTextAreaPos = $('<td/>', {});
             $(tdTextAreaPos).css('width', '10%');
             $(tdTextAreaPos).append(textAreaPos);
@@ -803,8 +894,8 @@ function renderSourceData() {
 
 function displayTagArray() {
     $("#tagArray").html('&nbsp;');
-    $.each(window.tagArray, function(index, value) {
-        $("#tagArray").append(value+' > ');
+    $.each(window.tagArray, function (index, value) {
+        $("#tagArray").append(value + ' > ');
     });
 }
 
@@ -833,7 +924,7 @@ function generateHtmlFromSourceWithGA() {
     var bootstrapScript = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/><script src="http://code.jquery.com/jquery-2.1.4.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>';
     var mathjaxScript = '<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [[\'$\',\'$\'], [\'\\\\(\',\'\\\\)\']]}});</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
     var gaScript = "<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', '" + $("#tbGA").val() + "', 'auto');ga('send', 'pageview');</script>";
-    var head = '<head>'+title+bootstrapScript+mathjaxScript+gaScript+'</head>';
+    var head = '<head>' + title + bootstrapScript + mathjaxScript + gaScript + '</head>';
     var body = '<body>' + $("#txtOutputHTML").val() + '</body>';
     var fullHtml = '<html>' + head + body + '</html>';
     return fullHtml;
@@ -845,7 +936,7 @@ function get_selection(theId) {
     //Mozilla and DOM 3.0
     if ('selectionStart' in e) {
         var l = e.selectionEnd - e.selectionStart;
-        return { start: e.selectionStart, end: e.selectionEnd, length: l, text: e.value.substr(e.selectionStart, l) };
+        return {start: e.selectionStart, end: e.selectionEnd, length: l, text: e.value.substr(e.selectionStart, l)};
     }
     //IE
     else if (document.selection) {
@@ -855,14 +946,14 @@ function get_selection(theId) {
         var tr2 = tr.duplicate();
         tr2.moveToBookmark(r.getBookmark());
         tr.setEndPoint('EndToStart', tr2);
-        if (r === null || tr === null) return { start: e.value.length, end: e.value.length, length: 0, text: '' };
+        if (r === null || tr === null) return {start: e.value.length, end: e.value.length, length: 0, text: ''};
         var textPart = r.text.replace(/[\r\n]/g, '.'); //for some reason IE doesn't always count the \n and \r in the length
         var textWhole = e.value.replace(/[\r\n]/g, '.');
         var theStart = textWhole.indexOf(textPart, tr.text.length);
-        return { start: theStart, end: theStart + textPart.length, length: textPart.length, text: r.text };
+        return {start: theStart, end: theStart + textPart.length, length: textPart.length, text: r.text};
     }
     //Browser not supported
-    else return { start: e.value.length, end: e.value.length, length: 0, text: '' };
+    else return {start: e.value.length, end: e.value.length, length: 0, text: ''};
 }
 
 function replace_selection(theId, replaceStr) {
@@ -872,7 +963,7 @@ function replace_selection(theId, replaceStr) {
     var endPos = startPos + replaceStr.length;
     e.value = e.value.substr(0, startPos) + replaceStr + e.value.substr(selection.end, e.value.length);
     set_selection(theId, startPos, endPos);
-    return { start: startPos, end: endPos, length: replaceStr.length, text: replaceStr };
+    return {start: startPos, end: endPos, length: replaceStr.length, text: replaceStr};
 }
 
 function set_selection(theId, startPos, endPos) {

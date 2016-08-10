@@ -68,11 +68,11 @@
 
                 <div class="col-md-8">
                     <br/>
-                    <div id="playerBox" style="width: 800px; height: 600px;">
+                    <div id="playerBox" style="width: 800px; height: 450px;">
                         <div id="message"></div>
                         <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
                         <!--<div id="player"></div>-->
-                        <input type="file" accept="video/*" id="btnFileSelect" />
+                        <input type="file" accept="audio/*,video/*" id="btnFileSelect" />
                         <video controls autoplay id="videoPlayer"></video>
                     </div>
                     <div id="sliderSpace" style="display: none;"><br /></div>
@@ -81,7 +81,7 @@
                     <div style="width: 97%;" class="form-group">
                         <div id="tagArray">&nbsp;</div>
                         <label>Notes:</label>
-                        <input type="text" class="form-control" id="tbNotes" onkeypress=" return keyPressEvent(event) " onkeyup=" return keyUpEvent(event) ">
+                        <input class="form-control" type="text" id="tbNotes" onkeypress=" return keyPressEvent(event) " onkeyup=" return keyUpEvent(event) ">
                         <span id="spnAlert" class="label label-danger"></span><br/>
                         <span id="spnNextJot" class="label label-warning"></span><br/>
                         <span id="spnCurrentJot"></span>
@@ -90,6 +90,10 @@
                 <div class="col-md-4">
                     <div style="height: 350px; width: 95%" class="panel panel-default">
                         <div class="panel-heading">Segments</div>
+                        <div class="panel-body">
+                            <label id="lblAverageSpeed"></label>
+                            <div id="divSegments" style="height:300px;overflow-y: scroll;"></div>
+                        </div>
                     </div>
                     <div style="height: 350px; width: 95%" class="panel panel-default">
                         <div class="panel-heading">Source</div>
