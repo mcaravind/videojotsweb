@@ -159,13 +159,15 @@ $(function () {
 });
 
 function playSegment(index) {
+    if(window.tid) clearInterval(window.tid);
     player.currentTime = (index-1) * window.segLength;
     player.play();
-    var tid = setTimeout(playVideoTill, 100);
+    window.tid = setTimeout(playVideoTill, 100);
     function playVideoTill(){
+        index = window.currentSegment;
         if (player.currentTime > (index * window.segLength)+0.3) {
             player.pause();
-            clearInterval(tid);
+            clearInterval(window.tid);
         }
         else
             setTimeout(playVideoTill,100);
@@ -668,6 +670,7 @@ function keyPressEvent(e) {
         var factor = (averageSpeed/window.segLength).toFixed(2);
         $("#lblAverageSpeed").html(factor+'x');
         tb.value = '';
+        clearInterval(window.tid);
         window.currentSegment +=1;
         playSegment(window.currentSegment);
         window.startTime = new Date();

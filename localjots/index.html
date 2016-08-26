@@ -81,6 +81,7 @@
                     <div style="width: 97%;" class="form-group">
                         <div id="tagArray">&nbsp;</div>
                         <label>Notes:</label>
+                        <label id="lblTimer"></label>
                         <input class="form-control" type="text" id="tbNotes" onkeypress=" return keyPressEvent(event) " onkeyup=" return keyUpEvent(event) ">
                         <span id="spnAlert" class="label label-danger"></span><br/>
                         <span id="spnNextJot" class="label label-warning"></span><br/>
@@ -92,7 +93,8 @@
                         <div class="panel-heading">Segments</div>
                         <div class="panel-body">
                             <label id="lblAverageSpeed"></label>
-                            <div id="divSegments" style="height:300px;overflow-y: scroll;"></div>
+
+                            <div id="divSegments" style="height:250px;overflow-y: scroll;"></div>
                         </div>
                     </div>
                     <div style="height: 350px; width: 95%" class="panel panel-default">
