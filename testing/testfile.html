@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div id="videoid" style="visibility: hidden">4eJhcxfYR4I</div>
+    <br/><span class="videojots"><br/><span class="label label-danger">Click on text below to jump to the corresponding location in the video (except iOS)</span><br/><div
+        id="control"><div id="playerBox"><div class="ui-resizable-handle ui-resizable-se" id="segrip"></div><div
+        id="videoPlayer"></div></div><div class="Apache Spark" id="ad4eJhcxfYR4I"></div></div><br/><br/><style
+        scoped>.clickable {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.clickable:hover {
+    background: yellow;
+}
+
+.t {
+    font-weight: bold;
+}
+
+.t:before {
+    content: "\A\A";
+    white-space: pre;
+}
+
+.t:after {
+    content: "\A";
+    white-space: pre;
+}</style><div class="resizable"><br/><span class="clickable" id="15.239">What I want to do today is share with you couple of major trends I have seen in deep learning. </span><span
+        class="clickable" id="21.585">And then we will zoom out from the technology to talk a little bit about how AI technology will impact teams. </span><span
+        class="clickable" id="27.774">And zoom out further to talk about how AI will impact industry. </span><span
+        class="clickable" id="50.038"><br/><br/>Baidu loves Spark. </span><span class="clickable" id="59.366"><span
+        class="t">Spark at Baidu</span></span><span class="clickable" id="68.584">We do the data preprocessing on Spark and send it off to our deep learning platform. </span><span
+        class="clickable" id="76.657"><span class="t">Deep learning: neural networks</span></span><span
+        class="clickable" id="81.31">The ideas of neural networks have been around for many decades. </span><span
+        class="clickable" id="83.732">They have only really taken off in the last 5 years. Why is that? </span><span
+        class="clickable" id="95.152"><span class="t">Why is deep learning taking off?</span></span><span
+        class="clickable" id="99.958">Analogy:&nbsp;</span><span class="clickable"
+                                                                 id="102.424">Space rockets. </span><span
+        class="clickable" id="122.196">You need a huge engine and lots of fuel. </span><span class="clickable"
+                                                                                             id="124.613">The analogy with deep learning is that rocket engines are the huge neural networks and huge amounts of data that we now have is the fuel. </span><span
+        class="clickable" id="134.919"><span class="t">Speech recognition</span></span><span class="clickable"
+                                                                                             id="142.084">The first project I partnered with at Google. </span><span
+        class="clickable" id="169.916">We blew away decades of hand engineered systems and replaced them with neural networks. </span><span
+        class="clickable" id="187.296"><span class="t">Speech dataset</span></span><span class="clickable" id="208.711">We now routinely train with 45000 hours of speech, far more data than what was used before at academia. </span><span
+        class="clickable" id="217.619"><br/>Today our speech recognition system outperforms human transcription. </span><span
+        class="clickable" id="230.465"><br/><br/>Many people don't understand the difference between 95 and 99% accuracy. </span><span
+        class="clickable" id="235.365">I think that's not an incremental 4% improvement, its the difference between most of us barely using speech recognition, versus all of us using it all the time and not even thinking about it. </span><span
+        class="clickable" id="247.673">The whole world is moving to mobile devices. Humans weren't designed to communicate by poking at things with your fingers. </span><span
+        class="clickable" id="269.077"><span class="t">Baidu speech recognition</span></span><span class="clickable"
+                                                                                                   id="275.198">Our speech systems have seen a reduction in speech recognition error, and seen a corresponding growth in users. </span><span
+        class="clickable" id="279.86"><span class="t">Major trend #1: Scale drives AI progress</span></span><span
+        class="clickable" id="297.797">Lot of hype about deep learning. </span><span class="clickable" id="306.715">This is one chart I hope you remember from this presentation. </span><span
+        class="clickable" id="326.369">The performance of algorithms using large NN is now approaching optimality with larger amounts of data. </span><span
+        class="clickable" id="364.171"><span class="t">Scaling computation</span></span><span class="clickable"
+                                                                                              id="373.073">Many years ago we used CPU. </span><span
+        class="clickable" id="378.601">We moved to GPUs in 2008. </span><span class="clickable" id="384.498">2011, we started to use Google's cloud to scale this up. </span><span
+        class="clickable" id="398.453">More recently, first at Stanford and then Baidu, we are trying to build even bigger systems. </span><span
+        class="clickable" id="419.585"><span class="t">HPC GPU scaling for training</span></span><span class="clickable"
+                                                                                                       id="433.33">Supercomputing team - gives almost linear speedups. </span><span
+        class="clickable" id="459.453"><span
+        class="t">Traditional CPU architecture for inference (deployment)</span></span><span class="clickable" id="462">CPU server runs 20 threads, say. </span><span
+        class="clickable" id="484.933">This did not scale. </span><span class="clickable" id="500.953">With GPUs, one of the tricks we develop is called batch dispatch, where instead of serving users one at a time, we might wait a little while until we have 4 users give us their data. </span><span
+        class="clickable" id="515.235">Then we take the 4 users data and stack them into a big matrix. </span><span
+        class="clickable" id="518.613">With 4 users simultaneously in the GPU we can make very good use of SIMD parallelism. </span><span
+        class="clickable" id="528.178">You separate it back out and get the same results as if you had done four different separate computations. </span><span
+        class="clickable" id="548.619"><span class="t">Major trend #2: learning complex outputs</span></span><span
+        class="clickable" id="559.596">The second major trend is learning complex outputs. </span><span
+        class="clickable" id="569.054">We used spam classification - 0 or 1. </span><span class="clickable"
+                                                                                          id="582.051">One of the recent developments is that the deep learning algorithms can learn much richer outputs. </span><span
+        class="clickable" id="584.25">Speech recognition was one - outputting a transcript directly. </span><span
+        class="clickable" id="596.126"><span class="t">Image captioning</span></span><span class="clickable"
+                                                                                           id="609.949">Second major driver - outputting much richer things like regular English sentences. </span><span
+        class="clickable" id="630.529">Major limitation of all of this - you need lots of labeled data. </span><span
+        class="clickable" id="665.844"><span class="t">AI is the new electricity</span></span><span class="clickable"
+                                                                                                    id="674.354">Just as electricity transformed so many segments of our industry, I think that AI will transform many industries. </span><span
+        class="clickable" id="784.756"><span class="t">DuLight project: helping the visually impaired</span></span><span
+        class="clickable" id="793.163">Incorporates computer vision, face recognition and speech. </span><span
+        class="clickable" id="841.746"><span class="t">Healthcare: Helping doctors and patients</span></span><span
+        class="clickable" id="855.427">Free text entry of question/symptoms. </span><span class="clickable"
+                                                                                          id="882.768">We output suggested reading based on text entry. </span><span
+        class="clickable" id="899.444"><span class="t">Autonomous driving</span></span><span class="clickable"
+                                                                                             id="914.527">1. Start with small autonomy enabled regions, grow those regions</span><span
+        class="clickable" id="927.647"><br/>2. Modest changes to road infrastructure</span><span class="clickable"
+                                                                                                 id="936.467"><br/>3. Visually distinctive cars: set appropriate expectations</span><span
+        class="clickable"
+        id="1011.657"><br/><br/>Predictability is more important than cleverness for safety.</span><span
+        class="clickable" id="1046.221"><span class="t">And many more...</span></span><span class="clickable"
+                                                                                            id="1059.592">Web search, advertising</span><span
+        class="clickable" id="1065.325"><br/>Consumer finance</span><span class="clickable" id="1069.894"><br/>Fraud detection</span><span
+        class="clickable" id="1074.402"><br/><br/>This is why I think AI will go beyond helping tech companies and transform many industries. </span><span
+        class="clickable" id="1091.004"><span class="t">Using AI to help people and businesses</span></span><span
+        class="clickable" id="1093.963">I want to make some predictions about the future of AI. </span><span
+        class="clickable"
+        id="1107.774"><br/><br/>In the early days of electricity, they would hire a VP electricity. </span><span
+        class="clickable" id="1126.275">"Sprinkle on some electricity": add individual electric motors. </span><span
+        class="clickable" id="1149.831">Over time, they redesigned manufacturing plant to use electricity. </span><span
+        class="clickable" id="1157.594">And then you get larger gains. </span><span class="clickable"
+                                                                                    id="1160.389"><span class="t">Upcoming trends in AI</span></span><span
+        class="clickable" id="1164.104">I think we are now in the VP electricity phase of AI. </span><span
+        class="clickable" id="1164.105"><br/>Short term: hire a VP AI or Chief Data Officer. </span><span
+        class="clickable" id="1185.147"><br/>Long term: deeply incorporate AI into business. </span><span
+        class="clickable" id="1199.718"><br/>Novel business strategies that incorporate AI - e.g. data is the defensible barrier, strategies for organizing and acquiring data. </span><span
+        class="clickable" id="1323.566"><span class="t">We have superpowers</span></span><span class="clickable"
+                                                                                               id="1340.206">Challenge: think of an industry which won't be transformed by AI in the next decade. </span><br/><span
+        style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>.</span><br/></div></span>
+</div>
+</div>
+
+</body>
+</html>
