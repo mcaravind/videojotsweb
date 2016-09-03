@@ -337,7 +337,7 @@ function clearPage() {
     isClear = true;
 }
 
-function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEditable, forSave) {
+function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEditable, forSave, saveForWP) {
     var playerHTML = '';
     var videoPlayerHTML = '';
     var videoID = window.currVideoID;
@@ -359,13 +359,23 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEdita
     var currTitle = $("#divTitle").html();
     var sTitle = htmlEncode(currTitle);
     var htmlPre = '<div style="margin: 0 auto;width:70%" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./" class="category">'+sCategoryName+'</a></li><li class="active">'+sTitle+'</li></ol><div style=""><span class="videojots">';
+    if(saveForWP){
+        htmlPre = '<div style="margin: 0 auto;" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><span class="videojots">';
+    }
     var startScopedStyle = '<style scoped>';
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
     var style = clickableStyle+ $("#txtCSS").val();
     var endScopedStyle = '</style>';
     var footer = '<br/><span style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>. Click and drag lower right corner to resize video. On <a href="../ios_device.html">iOS devices</a> you cannot jump to video location by clicking on the outline. </span><br/>';
+    if(saveForWP){
+        footer = '<br/><span style="font-size:xx-small;">Video outline created using <a href="http://www.videojots.com">VideoJots</a>.</span><br/>';
+    }
     var htmlPost = '</span></div></div>';
+    if(saveForWP){
+        htmlPost = '</span></div>';
+    }
     var htmlFromSource = '';
+    var allCssRules = getRulesFromText($("#txtCSS").val());
     //$.each(lines, function (index, value) {
     lines.forEach(function(item){
         /*if (value.trim() !== '') {
@@ -397,7 +407,7 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEdita
             lineText = lineText.replace(underlineRegexp, '<ins>$1</ins>');
             var strikethroughRegexp = /\/s\/([^\/]*)\//g;
             lineText = lineText.replace(strikethroughRegexp, '<del>$1</del>');
-            var allCssRules = getRulesFromText($("#txtCSS").val());
+
             for (var x = 0; x < allCssRules.length; x++) {
                 var className = allCssRules[x].selectorText;
                 var classActualName = className.substring(1);
@@ -581,7 +591,7 @@ function addToSource(text, position) {
 }
 
 function updateCurrentJot(text) {
-    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0,1,0);
+    var htmlJot = convertSourceToOutput('{[pos:"0",text:"'+text+'"]}',false,0,1,0,0);
     $("#spnCurrentJot").html(htmlJot);
 }
 
@@ -654,7 +664,7 @@ function keyPressEvent(e) {
         }
         if (!doNotDisplay && encodedText.trim() !== '') {
             addToSource(encodedText, window.currPosition);
-            updateOutput();
+            //updateOutput();
         }
         tb.value = '';
         isClear = true;
@@ -734,10 +744,12 @@ function updateOutput() {
 
     }
     catch(ex){}
-    var output = convertSourceToOutput($("#txtSource1").val(), false,0,1,0);
-    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0,0,0);
-    var outputForSave = convertSourceToOutput($("#txtSource1").val(), true, 0,0,1);
+    var output = convertSourceToOutput($("#txtSource1").val(), false,0,1,0,0);
+    var outputWithPlayer = convertSourceToOutput($("#txtSource1").val(), true, 0,0,0,0);
+    var outputForSave = convertSourceToOutput($("#txtSource1").val(), true, 0,0,1,0);
+    var outputForWP = convertSourceToOutput($("#txtSource1").val(), true, 0,0,1,1);
     $("#txtSavedOutput").text(outputForSave);
+    $("#txtForWordPress").text(outputForWP);
     $("#pnlNotes").html('');
     $("#pnlNotes").html(output);
     $("#viewoutput").html('');
