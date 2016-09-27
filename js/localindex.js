@@ -34,7 +34,7 @@ var COMMAND = {
 }
 
 $(function () {
-    window.segLength = 4;
+    window.segLength = 1;
     window.player = document.getElementById('videoPlayer');
 
     //initialize globals
@@ -165,7 +165,8 @@ function playSegment(index) {
     window.tid = setTimeout(playVideoTill, 100);
     function playVideoTill(){
         index = window.currentSegment;
-        if (player.currentTime > (index * window.segLength)+0.3) {
+        //original buffer = 0.3
+        if (player.currentTime > (index * window.segLength)) {
             player.pause();
             clearInterval(window.tid);
         }
@@ -361,6 +362,8 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight) {
         if (value.trim() !== '') {
             var location = parseFloat(value.split("|#|")[0]);
             var lineText = value.split("|#|")[1].split("|}")[0];
+            //comment this out for regular use
+            lineText = '/n/'+lineText;
             var htmlRaw = lineText;
             if (lineText === '/n/') {
                 htmlRaw = '<br/>';
