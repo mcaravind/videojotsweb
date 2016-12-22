@@ -358,9 +358,9 @@ function convertSourceToOutput(sourceText, includeVideo, divHeight, includeEdita
     var sCategoryName = $("#txtCategoryName").val();
     var currTitle = $("#divTitle").html();
     var sTitle = htmlEncode(currTitle);
-    var htmlPre = '<div style="margin: 0 auto;width:70%" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./" class="category">'+sCategoryName+'</a></li><li class="active">'+sTitle+'</li></ol><div style=""><span class="videojots">';
+    var htmlPre = '<div style="margin: 0 auto;width:70%" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><ol class="breadcrumb"><li><a href="../">Home</a></li><li><a href="./" class="category">'+sCategoryName+'</a></li><li class="active">'+sTitle+'</li></ol><div style=""><span id="container" class="videojots">';
     if(saveForWP){
-        htmlPre = '<div style="margin: 0 auto;" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><span class="videojots">';
+        htmlPre = '<div style="margin: 0 auto;" ><div id="videoid" style="visibility: hidden">'+videoID+'</div><br/><span id="container" class="videojots">';
     }
     var startScopedStyle = '<style scoped>';
     var clickableStyle = '.clickable{cursor:pointer;cursor:hand;}.clickable:hover{background:yellow;} ';
