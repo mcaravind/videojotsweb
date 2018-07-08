@@ -1,0 +1,45 @@
+{
+  "id": "c7066ed8-1d5d-4a7a-9944-465874c6e811",
+  "timestamp": "2017-11-09T13:26:27.722Z",
+  "lang": "en",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "I have four apples",
+    "action": "",
+    "actionIncomplete": false,
+    "parameters": {
+      "number": 4
+    },
+    "contexts": [
+      {
+        "name": "dummy",
+        "parameters": {
+          "number": 4,
+          "number.original": "four"
+        },
+        "lifespan": 1
+      }
+    ],
+    "metadata": {
+      "intentId": "68d68bec-5c43-4fad-aced-ba126b1830ff",
+      "webhookUsed": "false",
+      "webhookForSlotFillingUsed": "false",
+      "intentName": "Apples"
+    },
+    "fulfillment": {
+      "speech": "You have four apples",
+      "messages": [
+        {
+          "type": 0,
+          "speech": "You have four apples"
+        }
+      ]
+    },
+    "score": 0.9100000262260437
+  },
+  "status": {
+    "code": 200,
+    "errorType": "success"
+  },
+  "sessionId": "13cce4bf-df2c-44c0-a22e-7d88e2c3efc3"
+}

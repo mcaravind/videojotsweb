@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=yes">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+    <script src="turtle.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid" style="width:90%;">
+    <!--<div class="row">
+
+        <div class="form-group">
+            <label for="cat">Client Access Token:</label>
+            <input type="text" class="form-control" id="cat">
+        </div>
+    </div>-->
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Bot Responses</div>
+            <div style="height: 300px;overflow-y:auto;" class="panel-body" id="chatbox"></div>
+        </div>
+        <div>
+            <label for="userMessage">Type your message:</label>
+            <input type="text" id="userMessage" style="width:50%;">
+            <button id="btnSendMessage" type="button" class="btn btn-primary">Send</button>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;"></canvas>
+    </div>
+</div>
+
+</body>
+</html>
